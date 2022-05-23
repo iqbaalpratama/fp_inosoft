@@ -18,4 +18,6 @@
 - composer install
 - php artisan migrate:fresh --seed
 - php artisan key:generate
+- npm install
+- npm run dev, watch, hot, prod (optional choose your own style)
 - php artisan serve 
