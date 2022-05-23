@@ -19,3 +19,4 @@
 - php artisan migrate:fresh --seed
 - php artisan key:generate
 - php artisan serve 
+- if update is exist use your own branch, make sure your branch is uptodate with main
