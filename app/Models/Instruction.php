@@ -14,7 +14,7 @@ class Instruction extends Model
         'vendor_name',
         'vendor_addres',
         'attention_of',
-        'quatation_of',
+        'quatation_no',
         'invoice.name',
         'invoice.status',
         'desc',

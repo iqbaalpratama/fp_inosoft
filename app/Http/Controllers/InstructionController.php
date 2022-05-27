@@ -26,7 +26,7 @@ class InstructionController extends Controller
             'invoice.total',
             'charge' => 'required',
             'notes',
-            // 'attachtment' => 'required|mimes:doc,docx,pdf,txt,csv|max:2048',
+            'attachtment' => 'required|mimes:doc,docx,pdf,txt,csv|max:2048',
             'link' => 'required'
 
         ]);
@@ -41,8 +41,8 @@ class InstructionController extends Controller
             'instruction_type' => $request->instruction_type,
             'vendor_name' => $request->vendor_name,
             'vendor_addres' => $request->vendor_addres,
-            'attention_of' => $request->quatation_no,
-            'quatation_of' => $request->customer_addres,
+            'attention_of' => $request->attention_of,
+            'quatation_no' => $request->quatation_no,
             'invoice.name' => $request->invoice_name,
             'invoice.status' => "progress",
             'desc' => $request->desc,
@@ -53,21 +53,21 @@ class InstructionController extends Controller
             'invoice.total' => $request->qty*$request->unit_price,
             'charge' => $request->charge,
             'notes' => $request->notes,
-            // 'attachtment' => $request->attachtment,
+            'attachtment' => $request->attachtment,
             'link' => $request->link
 
          ]);
 
-        //  if ($file = $request->file('attachtment')) 
-        //     $path = $file->store('public/files'); 
-        //     $name = $file->getClientOriginalName();
-        //     //store your file into directory and db
-        //     $save = new Instruction();
-        //     $save->$name = $file;
-        //     $save-> store_path = $path;
-        //     $save->save();
+         if ($file = $request->file('attachtment')) 
+            $path = $file->store('public/files'); 
+            $name = $file->getClientOriginalName();
+            //store your file into directory and db
+            $save = new Instruction();
+            $save->$name = $file;
+            $save-> store_path = $path;
+            $save->save();
         
             
-            return response()->json(["created succses",$instruction]);    
+            return response()->json(["created succses",$file]);    
         }
 }

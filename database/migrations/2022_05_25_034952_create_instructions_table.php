@@ -21,7 +21,7 @@ class CreateInstructionsTable extends Migration
             $collection->string('vendor_name');
             $collection->string('vendor_addres');
             $collection->string('attention_of');
-            $collection->string('quatation_of');
+            $collection->string('quatation_no');
             $collection->string('invoice.name');
             $collection->string('invoice.status');
             $collection->string('desc');
@@ -30,7 +30,7 @@ class CreateInstructionsTable extends Migration
             $collection->integer('unit_price');
             $collection->integer('disc');
             $collection->integer('tax');
-            $collection->integer('invoice.total');
+            $collection->double('invoice.total');
             $collection->string('charge');
             $collection->string('notes');
             $collection->string('attachtment');
