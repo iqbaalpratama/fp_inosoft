@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateInstructionsTable extends Migration
@@ -18,12 +17,14 @@ class CreateInstructionsTable extends Migration
         Schema::create('instructions', function ($collection) {
             $collection->id();
             $collection->string('instruction_type');
-            $collection->string('vendor_name');
-            $collection->string('vendor_addres');
+            $collection->string('associates.vendor_name');
+            $collection->string('associates.vendor_addres');
             $collection->string('attention_of');
             $collection->string('quatation_no');
             $collection->string('invoice.name');
             $collection->string('invoice.status');
+            $collection->string('associates.customer_contract');
+            $collection->string('associates.customer_po_no');
             $collection->string('desc');
             $collection->integer('qty');
             $collection->string('uom');

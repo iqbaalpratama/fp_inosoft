@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAssociatesTable extends Migration
 {
+    protected $collection = 'associates';
+
     /**
      * Run the migrations.
      *
@@ -13,9 +15,13 @@ class CreateAssociatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('associates', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('associates', function ($collection) {
+            $collection->id();
+            $collection->string("vendor_name");
+            $collection->string("vendor_address");
+            $collection->string("customer_contract");
+            $collection->string("customer_po_no");
+            $collection->timestamps();
         });
     }
 
