@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+import Vuetify from './plugins/vuetify';
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -28,5 +28,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
+    vuetify: Vuetify,
     el: '#app',
 });
