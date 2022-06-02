@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('instruction', [InstructionController::class, 'getAll']);
 
-Route::get('instruction/{id}', [InstructionController::class, 'getById']);
+Route::get('instruction/{id}', [InstructionController::class, 'getDetail']);
 
 Route::post('instruction', [InstructionController::class, 'store']);
 

@@ -3,8 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Instruction;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 
 class InstructionRepository
 {
@@ -24,9 +22,42 @@ class InstructionRepository
 
     public function getById($id)
     {
-        $instruction = $this->instruction->find($id);
+        $instruction = Instruction::where('_id', $id)->get();
+
+        $allProducts = $instruction->map(function ($instruction)  {
+            return [
+                'id' => $instruction->id,
+                'instruction_id'=> $instruction->instruction_id,
+                'intruction_type' => $instruction->instruction_type,
+                'assigned_vendor' => $instruction->vendor_name,
+                'attention_of' => $instruction->attention_of,
+                'quotation_no' => $instruction->quatation_no,
+                'invoice_to' =>	$instruction->invoice_name,
+                'vendor_address' =>	$instruction->vendor_addres,
+                'customer_contract' => $instruction->customer_contract,
+                'customer_po_no' => $instruction->customer_po_no,
+                'cost_detail'=>[
+                    'description' => $instruction->desc,
+                    'quantity' => $instruction->qty,
+                    'uom' => $instruction->uom,
+                    'unit_price' => $instruction->unit_price,
+                    'discount' => $instruction->disc,
+                    'gst_vat' => $instruction->tax,
+                    'currency' => $instruction->curenncy,
+                    'vat_amount' => $instruction->invoice_total*$instruction->tax/100,
+                    'sub_total' => $instruction->qty*$instruction->unit_price,
+                    'total' => $instruction->invoice_total,
+                    'charge_to' => $instruction->charge,
+                ],
+                'notes' => $instruction->notes,
+                'attachtment' => $instruction->attachtment,
+                'link' => $instruction->link,
+                'invoice_status' => $instruction->invoice_status,
+            ];
+        });
         
-        return($instruction);
+        
+        return($allProducts);
     }
 
     public function addInstruction($data)
@@ -34,11 +65,9 @@ class InstructionRepository
         $id = Instruction::count();
         $idcount = ++$id;
 
-        $instruction = new $this->instruction;
-
-        
+        $instruction = new $this->instruction;     
         $instruction->instruction_type = $data['instruction_type'];
-        $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").$idcount;
+        $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").str_pad($idcount, 4, "0", STR_PAD_LEFT);
         $instruction->vendor_name = $data['vendor_name'];
         $instruction->vendor_addres = $data['vendor_addres'];
         $instruction->attention_of = $data['attention_of'];
@@ -53,13 +82,16 @@ class InstructionRepository
         $instruction->unit_price = $data['unit_price'];
         $instruction->disc = $data['disc'];
         $instruction->tax = $data['tax'];
-        $instruction->invoice_total =($total=$instruction->qty*$instruction->unit_price)+($total*$instruction->tax/100)-($total*$instruction->disc/100);
+        $instruction->curenncy = $data['curenncy'];
+        $instruction->invoice_total =( $instruction->curenncy == 'usd'|| $instruction->curenncy == "USD") ? ($total=$instruction->qty*$instruction->unit_price)+($total*$instruction->tax/100)-($total*$instruction->disc/100) : (($total=$instruction->qty*$instruction->unit_price)+($total*$instruction->tax/100)-($total*$instruction->disc/100))*3.67 ;
         $instruction->charge = $data['charge'];
         $instruction->notes = $data['notes'];
         $instruction->attachtment = $data['attachtment'];
         $instruction->link = $data['link'];
+
         $instruction->save();
 
+        
 
         return $instruction->fresh();
     }
@@ -71,7 +103,7 @@ class InstructionRepository
         $instruction = $this->instruction->find($id);
 
         $instruction->instruction_type = $data['instruction_type'];
-        $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").$idcount;
+        $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").str_pad($idcount, 4, "0", STR_PAD_LEFT);
         $instruction->vendor_name = $data['vendor_name'];   
         $instruction->vendor_addres = $data['vendor_addres'];
         $instruction->attention_of = $data['attention_of'];
@@ -86,7 +118,8 @@ class InstructionRepository
         $instruction->unit_price = $data['unit_price'];
         $instruction->disc = $data['disc'];
         $instruction->tax = $data['tax'];
-        $instruction->invoice_total = ($total=$instruction->qty*$instruction->unit_price)+($total*$instruction->tax/100)-($total*$instruction->disc/100);
+        $instruction->curenncy = $data['curenncy'];
+        $instruction->invoice_total =( $instruction->curenncy == "usd" || "USD") ? ($total=$instruction->qty*$instruction->unit_price)+($total*$instruction->tax/100)-($total*$instruction->disc/100) : (($total=$instruction->qty*$instruction->unit_price)+($total*$instruction->tax/100)-($total*$instruction->disc/100))*3.67 ;
         $instruction->charge = $data['charge'];
         $instruction->notes = $data['notes'];
         $instruction->attachtment = $data['attachtment'];

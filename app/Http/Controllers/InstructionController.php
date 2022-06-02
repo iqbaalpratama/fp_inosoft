@@ -32,7 +32,7 @@ class InstructionController extends Controller
         return response()->json($result, $result['status']);
     }
 
-    public function getById($id)
+    public function getDetail($id)
     {
         $result = ['status' => 200];
 
@@ -65,6 +65,7 @@ class InstructionController extends Controller
         'unit_price',
         'disc',
         'tax',
+        'curenncy',
         'invoice.total',
         'charge' ,
         'notes',
@@ -92,7 +93,7 @@ class InstructionController extends Controller
             ];
         }
 
-
+        // dd($result);
 
         return response()->json($result, $result['status']);        
     }

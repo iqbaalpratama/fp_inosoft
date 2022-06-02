@@ -32,7 +32,8 @@ class CreateInstructionsTable extends Migration
             $collection->integer('unit_price');
             $collection->integer('disc');
             $collection->integer('tax');
-            $collection->double('invoice.total');
+            $collection->string('curenncy');
+            $collection->float('invoice.total');
             $collection->string('charge');
             $collection->string('notes');
             $collection->string('attachtment');

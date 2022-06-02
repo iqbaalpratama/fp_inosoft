@@ -41,10 +41,11 @@ class InstructionServices
             'unit_price' => 'required',
             'disc',
             'tax',
+            'curenncy' => 'required',
             'invoice.total',
             'charge' => 'required',
             'notes',
-            'attachtment' => 'required|mimes:doc,docx,pdf,txt,csv|max:204',
+            'attachtment' => 'required',
             'link' => 'required'
 
         ]);
@@ -79,6 +80,7 @@ class InstructionServices
             'unit_price' => 'required',
             'disc',
             'tax',
+            'curenncy' => 'required',
             'invoice.total',
             'charge' => 'required',
             'notes',
