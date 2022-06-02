@@ -11,36 +11,65 @@ class InstructionController extends Controller
 {
     protected $instructionServices;
 
-        public function __construct(InstructionServices $instructionServices)
-        {
-            $this->instructionServices = $instructionServices;
+    public function __construct(InstructionServices $instructionServices)
+    {
+        $this->instructionServices = $instructionServices;
+    }
+
+    public function getAll()
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->instructionServices->getAll();
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
         }
+
+        return response()->json($result, $result['status']);
+    }
+
+    public function getById($id)
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->instructionServices->getById($id);
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+        return response()->json($result, $result['status']);
+    }
 
     public function store(Request $request)
     {
-        
-
         $data = $request->only([
-            'instruction_type',
-            'associates.vendor_name',
-            'associates.vendor_addres',
-            'attention_of',
-            'quatation_no',
-            'invoice.name',
-            'invoice.status',
-            'associates.customer_contract',
-            'associates.customer_po_no',
-            'desc',
-            'qty',
-            'uom',
-            'unit_price',
-            'disc',
-            'tax',
-            'invoice.total',
-            'charge' ,
-            'notes',
-            'attachtment',
-            'link' 
+        'instruction_type',
+        'vendor_name',
+        'vendor_addres',
+        'attention_of',
+        'quatation_no',
+        'invoice_name',
+        'invoice_status',
+        'customer_contract',
+        'customer_po_no',
+        'desc',
+        'qty',
+        'uom',
+        'unit_price',
+        'disc',
+        'tax',
+        'invoice.total',
+        'charge' ,
+        'notes',
+        'attachtment',
+        'link' 
 
         ]);
 
@@ -53,9 +82,6 @@ class InstructionController extends Controller
         $save->save();
         
         
-        // dd ($data['associates']['vendor_name']);
-        // dd($a);
-        
         try {
             $result = ['status' => 200];
             $result['data'] = $this->instructionServices->saveInstruction($data);
@@ -66,9 +92,56 @@ class InstructionController extends Controller
             ];
         }
 
-        return response()->json($result, $result['status']);
-        
-        
-            
+
+
+        return response()->json($result, $result['status']);        
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $request->only([
+            'instruction_type',
+            'vendor_name',
+            'vendor_addres',
+            'attention_of',
+            'quatation_no',
+            'invoice_name',
+            'invoice_status',
+            'customer_contract',
+            'customer_po_no',
+            'desc',
+            'qty',
+            'uom',
+            'unit_price',
+            'disc',
+            'tax',
+            'invoice.total',
+            'charge' ,
+            'notes',
+            'attachtment',
+            'link' 
+    
+            ]);
+    
+            if ($file = $request->file('attachtment')) 
+            $path = $file->store('public/files'); 
+            $name = $file->getClientOriginalName();
+            $save = new Instruction();
+            $save->$name = $file;
+            $save-> store_path = $path;
+            $save->save();
+                     
+            try {
+                $result = ['status' => 200];
+                $result['data'] = $this->instructionServices->editInstruction($id,$data);
+            } catch (Exception $e) {
+                $result = [
+                    'status' => 500,
+                    'error' => $e->getMessage()
+                ];
+            }
+
+        return response()->json($result, $result['status']);        
+    
     }
 }

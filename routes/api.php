@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InstructionController;
+use App\Repositories\InstructionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('instruction', [InstructionController::class, 'getAll']);
+
+Route::get('instruction/{id}', [InstructionController::class, 'getById']);
+
 Route::post('instruction', [InstructionController::class, 'store']);
+
+Route::put('instruction/{id}', [InstructionController::class, 'update']);
+
 

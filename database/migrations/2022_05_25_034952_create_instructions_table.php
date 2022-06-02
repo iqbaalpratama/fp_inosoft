@@ -16,15 +16,16 @@ class CreateInstructionsTable extends Migration
     {
         Schema::create('instructions', function ($collection) {
             $collection->id();
+            $collection->string('instruction_id');
             $collection->string('instruction_type');
-            $collection->string('associates.vendor_name');
-            $collection->string('associates.vendor_addres');
+            $collection->string('vendor_name');
+            $collection->string('vendor_addres');
             $collection->string('attention_of');
             $collection->string('quatation_no');
             $collection->string('invoice.name');
             $collection->string('invoice.status');
-            $collection->string('associates.customer_contract');
-            $collection->string('associates.customer_po_no');
+            $collection->string('customer_contract');
+            $collection->string('customer_po_no');
             $collection->string('desc');
             $collection->integer('qty');
             $collection->string('uom');

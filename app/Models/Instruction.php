@@ -13,6 +13,7 @@ class Instruction extends Model
 
 
     protected $fillable = [
+        'instruction_id',
         'instruction_type',
         'associates.vendor_name',
         'associates.vendor_addres',
