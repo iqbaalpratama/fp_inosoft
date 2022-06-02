@@ -20,7 +20,8 @@
     </head>
     <body class="antialiased">
         <div id="app">
-            <header-component></header-component>    
+                <router-view></router-view>
+            </v-app>    
         </div>
     <script src="../js/app.js"></script>
     </body>

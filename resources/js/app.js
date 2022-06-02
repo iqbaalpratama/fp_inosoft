@@ -1,12 +1,10 @@
 import VueRouter from "vue-router";
 import {routes} from './routes';
 import store from './store';
-import Vuetify from './plugins/vuetify';
-require('./bootstrap');
-
+import vuetify from './plugins/vuetify';
 window.Vue = require('vue').default;
 
-Vue.component('header-component', require('./components/Header/HeaderComponent.vue').default);
+Vue.component('header-component', require('./layout/components/Header/HeaderComponent.vue').default);
 
 
 // Vue Router Configuration
@@ -17,7 +15,7 @@ const router = new VueRouter({
 });
 
 const app = new Vue({
-    vuetify: Vuetify,
+    vuetify,
     el: '#app',
     store,
     router

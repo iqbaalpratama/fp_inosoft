@@ -1,10 +1,9 @@
 <template>
   <v-app-bar
-    class="main-header"
-    height="64"
-    fixed
+    height="62"
     color='primary'
-    dark>
+    dark
+    app>
     <v-toolbar-title class="ml-4">Vue Material Admin</v-toolbar-title>
     <v-spacer></v-spacer>
 
@@ -24,7 +23,7 @@
               style="font-size: 30px"
               :color="config.light.iconColor">mdi-account</v-icon>
           </v-btn>
-          <v-toolbar-title class="mr-3 text-subtitle-1">Winata Admin</v-toolbar-title>
+          <v-toolbar-title class="mr-3 subtitle-1">Winata Admin</v-toolbar-title>
       </template>
         <v-list >
           <div class="d-flex justify-center my-3">
@@ -43,7 +42,7 @@
 </template>
 
 <script>
-  import config from '../../config';
+  import config from '../../../config';
   export default {
     name: 'Header',
     data: () => ({
