@@ -1,0 +1,12 @@
+[
+    {
+        "_id": "61dd1a09cb4f16436544f7ed7",
+        "customer_id": "ADNOC",
+        "customer_contract_name": "Hail & Gasha"
+    },
+    {
+        "_id": "16436544f7ed761dd1a09cb4f",
+        "customer_id": "ABSOX",
+        "customer_contract_name": "Sour Gas"
+    }
+]
