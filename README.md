@@ -21,3 +21,6 @@
 - npm install
 - npm run dev, watch, hot, prod (optional choose your own style)
 - php artisan serve 
+- if update is exist use your own branch (git checkout -b ... change ... with your own branch to switch into new branch for    update)
+- make sure your branch is up to date with main (git merge origin main)
+- after update and push into your own branch do pull request and add iqbal pratama as a reviewers
