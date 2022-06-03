@@ -1,0 +1,17 @@
+[
+    {
+        "_id": "61dd1a09cb4f16436544f7ed7",
+        "vendor_name": "Amarit & Associates Logistic Co Ltd",
+        "vendor_address": [
+            "1 SOI PRIDI PHANOMYONG 28 (THANIPATTANA) SUKHUMVIT 71 ROAD, KWAENG KLONGTON NUA, KHET WATTANA"
+        ]
+    },
+    {
+        "_id": "16436544f7ed761dd1a09cb4f",
+        "vendor_name": "Alphatrans Pte. Ltd.",
+        "vendor_address": [
+            "217 Henderson Rd, #04-07, Singapore 159555",
+            "1 SOI PRIDI PHANOMYONG 28 (THANIPATTANA) SUKHUMVIT 71 ROAD, KWAENG KLONGTON NUA, KHET WATTANA"
+        ]
+    }
+]
