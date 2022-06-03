@@ -18,14 +18,14 @@ class CreateInstructionsTable extends Migration
             $collection->id();
             $collection->string('instruction_id');
             $collection->string('instruction_type');
-            $collection->string('vendor_name');
-            $collection->string('vendor_addres');
+            $collection->string('associates_vendor_name');
+            $collection->string('associates_vendor_addres');
             $collection->string('attention_of');
             $collection->string('quatation_no');
             $collection->string('invoice.name');
             $collection->string('invoice.status');
-            $collection->string('customer_contract');
-            $collection->string('customer_po_no');
+            $collection->string('associates_customer_contract');
+            $collection->string('associates_customer_po_no');
             $collection->string('desc');
             $collection->integer('qty');
             $collection->string('uom');

@@ -68,14 +68,14 @@ class InstructionRepository
         $instruction = new $this->instruction;     
         $instruction->instruction_type = $data['instruction_type'];
         $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").str_pad($idcount, 4, "0", STR_PAD_LEFT);
-        $instruction->vendor_name = $data['vendor_name'];
-        $instruction->vendor_addres = $data['vendor_addres'];
+        $instruction->vendor_name = $data['associates_vendor_name'];
+        $instruction->vendor_addres = $data['associates_vendor_addres'];
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
         $instruction->invoice_status = 'progress';
-        $instruction->customer_contract = $data['customer_contract'];
-        $instruction->customer_po_no = $data['customer_po_no'];
+        $instruction->customer_contract = $data['associates_customer_contract'];
+        $instruction->customer_po_no = $data['associates_customer_po_no'];
         $instruction->desc = $data['desc'];
         $instruction->qty = $data['qty'];
         $instruction->uom = $data['uom'];
@@ -104,14 +104,14 @@ class InstructionRepository
 
         $instruction->instruction_type = $data['instruction_type'];
         $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").str_pad($idcount, 4, "0", STR_PAD_LEFT);
-        $instruction->vendor_name = $data['vendor_name'];   
-        $instruction->vendor_addres = $data['vendor_addres'];
+        $instruction->vendor_name = $data['associates_vendor_name'];   
+        $instruction->vendor_addres = $data['associates_vendor_addres'];
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
         $instruction->invoice_status = 'progress';
-        $instruction->customer_contract = $data['customer_contract'];
-        $instruction->customer_po_no = $data['customer_po_no'];
+        $instruction->customer_contract = $data['associates_customer_contract'];
+        $instruction->customer_po_no = $data['associates_customer_po_no'];
         $instruction->desc = $data['desc'];
         $instruction->qty = $data['qty'];
         $instruction->uom = $data['uom'];
@@ -125,8 +125,6 @@ class InstructionRepository
         $instruction->attachtment = $data['attachtment'];
         $instruction->link = $data['link'];
         $instruction->update();
-
-
         return $instruction;
     }
 
