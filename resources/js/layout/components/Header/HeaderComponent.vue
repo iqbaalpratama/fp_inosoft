@@ -1,7 +1,7 @@
 <template>
   <v-app-bar
     height="62"
-    color='primary'
+    color='navColor'
     dark
     app>
     <v-toolbar-title class="ml-4">Vue Material Admin</v-toolbar-title>
@@ -31,7 +31,7 @@
               width="80%"
               large
               outlined
-              color="primary"
+              color="navColor"
               class="text-capitalize"
               @click="logOut">Sign Out
             </v-btn>
