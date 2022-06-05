@@ -17,7 +17,40 @@ class InstructionRepository
     public function getAll(){
         $instruction = Instruction::all();
 
-        return($instruction);
+        $allProducts = $instruction->map(function ($instruction)  {
+            return [
+                'instruction_id'=> $instruction->instruction_id,
+                'link' => $instruction->link,
+                'intruction_type' => $instruction->instruction_type,
+                'assigned_vendor' => $instruction->vendor_name,
+                'attention_of' => $instruction->attention_of,
+                'quotation_no' => $instruction->quatation_no,
+                'customer_po_no' => $instruction->customer_po_no,
+                'status'=> $instruction->invoice_status
+            ];
+        });
+        
+        
+        return($allProducts);
+    }
+
+    public function getCompleted()
+    {
+        $instruction = Instruction::where('invoice_status','completed')->get();
+
+        $allProducts = $instruction->map(function ($instruction)  {
+            return [
+                'instruction_id'=> $instruction->instruction_id,
+                'link' => $instruction->link,
+                'intruction_type' => $instruction->instruction_type,
+                'assigned_vendor' => $instruction->vendor_name,
+                'attention_of' => $instruction->attention_of,
+                'quotation_no' => $instruction->quatation_no,
+                'customer_po_no' => $instruction->customer_po_no,
+                'status'=> $instruction->invoice_status
+            ];
+        });
+        return($allProducts);
     }
 
     public function getById($id)
@@ -64,7 +97,7 @@ class InstructionRepository
     {
         $id = Instruction::count();
         $idcount = ++$id;
-
+        
         $instruction = new $this->instruction;     
         $instruction->instruction_type = $data['instruction_type'];
         $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").str_pad($idcount, 4, "0", STR_PAD_LEFT);
@@ -73,7 +106,7 @@ class InstructionRepository
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
-        $instruction->invoice_status = 'progress';
+        $instruction->invoice_status = 'canceled';
         $instruction->customer_contract = $data['associates_customer_contract'];
         $instruction->customer_po_no = $data['associates_customer_po_no'];
         $instruction->desc = $data['desc'];
@@ -97,13 +130,12 @@ class InstructionRepository
     }
 
     public function update($id,$data){
-        $count = Instruction::count();
-        $idcount = ++$count;
+        // $count = Instruction::count();
+        // $idcount = ++$count;
         
         $instruction = $this->instruction->find($id);
 
         $instruction->instruction_type = $data['instruction_type'];
-        $instruction->instruction_id = $instruction->instruction_type.("-").date("Y").("-").str_pad($idcount, 4, "0", STR_PAD_LEFT);
         $instruction->vendor_name = $data['associates_vendor_name'];   
         $instruction->vendor_addres = $data['associates_vendor_addres'];
         $instruction->attention_of = $data['attention_of'];
