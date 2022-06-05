@@ -7,6 +7,7 @@ use App\Services\InstructionServices;
 use Exception;
 use Illuminate\Http\Request;
 
+
 class InstructionController extends Controller
 {
     protected $instructionServices;
@@ -49,30 +50,7 @@ class InstructionController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->only([
-        'instruction_type',
-        'associates_vendor_name',
-        'associates_vendor_addres',
-        'attention_of',
-        'quatation_no',
-        'invoice_name',
-        'invoice_status',
-        'associates_customer_contract',
-        'associates_customer_po_no',
-        'desc',
-        'qty',
-        'uom',
-        'unit_price',
-        'disc',
-        'tax',
-        'curenncy',
-        'invoice.total',
-        'charge' ,
-        'notes',
-        'attachtment',
-        'link' 
-
-        ]);
+        $data = json_encode($request->all());
 
         if ($file = $request->file('attachtment')) 
         $path = $file->store('public/files'); 
@@ -116,6 +94,7 @@ class InstructionController extends Controller
             'unit_price',
             'disc',
             'tax',
+            'curenncy',
             'invoice.total',
             'charge' ,
             'notes',
@@ -124,23 +103,23 @@ class InstructionController extends Controller
     
             ]);
     
-            if ($file = $request->file('attachtment')) 
-            $path = $file->store('public/files'); 
-            $name = $file->getClientOriginalName();
-            $save = new Instruction();
-            $save->$name = $file;
-            $save-> store_path = $path;
-            $save->save();
+        if ($file = $request->file('attachtment')) 
+        $path = $file->store('public/files'); 
+        $name = $file->getClientOriginalName();
+        $save = new Instruction();
+        $save->$name = $file;
+        $save-> store_path = $path;
+        $save->save();
                      
-            try {
-                $result = ['status' => 200];
-                $result['data'] = $this->instructionServices->editInstruction($id,$data);
-            } catch (Exception $e) {
-                $result = [
-                    'status' => 500,
-                    'error' => $e->getMessage()
-                ];
-            }
+        try {
+            $result = ['status' => 200];
+            $result['data'] = $this->instructionServices->editInstruction($id,$data);
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
 
         return response()->json($result, $result['status']);        
     

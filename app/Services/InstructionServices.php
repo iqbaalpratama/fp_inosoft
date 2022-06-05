@@ -24,7 +24,7 @@ class InstructionServices
     public function saveInstruction($data)
     {
 
-        $validator = Validator::make($data,[
+        $validator = Validator::make(($data),[
             'instruction_id',
             'instruction_type' => 'required',
             'associates_vendor_name' => 'required',
@@ -65,7 +65,6 @@ class InstructionServices
     {
         $validator = Validator::make($data,[
             'instruction_id',
-            'instruction_type' => 'required',
             'associates_vendor_name' => 'required',
             'associates_vendor_addres' => 'required',
             'attention_of' => 'required',
@@ -84,8 +83,9 @@ class InstructionServices
             'invoice.total',
             'charge' => 'required',
             'notes',
-            'attachtment' => 'required|mimes:doc,docx,pdf,txt,csv|max:204',
+            'attachtment' => 'required',
             'link' => 'required'
+            // |mimes:doc,docx,pdf,txt,csv|max:204
 
         ]);
         
