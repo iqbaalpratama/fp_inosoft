@@ -12,33 +12,6 @@ class CreateInstructionsTable extends Migration
      */
     public function up()
     {
-<<<<<<< HEAD
-        Schema::create('instructions', function ($collection) {
-            $collection->id();
-            $collection->string('instruction_id');
-            $collection->string('instruction_type');
-            $collection->string('associates_vendor_name');
-            $collection->string('associates_vendor_addres');
-            $collection->string('attention_of');
-            $collection->string('quatation_no');
-            $collection->string('invoice.name');
-            $collection->string('invoice.status');
-            $collection->string('associates_customer_contract');
-            $collection->string('associates_customer_po_no');
-            $collection->string('desc');
-            $collection->integer('qty');
-            $collection->string('uom');
-            $collection->integer('unit_price');
-            $collection->integer('disc');
-            $collection->integer('tax');
-            $collection->string('curenncy');
-            $collection->float('invoice.total');
-            $collection->string('charge');
-            $collection->string('notes');
-            $collection->string('attachtment');
-            $collection->string('link');
-            $collection->timestamps();
-=======
         Schema::create('instructions', function ($table) {
             $table->id();
             $table->string('instruction_types');
@@ -63,7 +36,6 @@ class CreateInstructionsTable extends Migration
             $table->string('status');
             $table->string('cancel_reason');
             $table->timestamps();
->>>>>>> fix/attachment
         });
     }
 
