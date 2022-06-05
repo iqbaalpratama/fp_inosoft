@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAssociatesTable extends Migration
 {
-    protected $collection = 'associates';
-
     /**
      * Run the migrations.
      *
@@ -15,13 +13,13 @@ class CreateAssociatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('associates', function ($collection) {
-            $collection->id();
-            $collection->string("vendor_name");
-            $collection->string("vendor_address");
-            $collection->string("customer_contract");
-            $collection->string("customer_po_no");
-            $collection->timestamps();
+        Schema::create('associates', function ($table) {
+            $table->id();
+            $table->string("vendor_name");
+            $table->string("vendor_address");
+            $table->string("customer_contract");
+            $table->string("customer_po_no");
+            $table->timestamps();
         });
     }
 
