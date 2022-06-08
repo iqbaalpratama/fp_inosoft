@@ -4,7 +4,7 @@
     color='navColor'
     dark
     app>
-    <v-toolbar-title class="ml-4">Vue Material Admin</v-toolbar-title>
+    <v-toolbar-title class="ml-4">Inosoft Bootcamp</v-toolbar-title>
     <v-spacer></v-spacer>
 
     <v-menu
