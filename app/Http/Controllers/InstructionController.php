@@ -31,6 +31,7 @@ class InstructionController extends Controller
         }
 
         return response()->json($result, $result['status']);
+
     }
 
     public function getDetail($id)
@@ -50,15 +51,19 @@ class InstructionController extends Controller
 
     public function store(Request $request)
     {
-        $data = json_encode($request->all());
+        $data = $request->all();
+
+        // function isJson($data) {
+        //     json_decode($data);
+        //     return json_last_error() === JSON_ERROR_NONE;
+        //  }
+         
+        // dd(isJson($data));
 
         if ($file = $request->file('attachtment')) 
         $path = $file->store('public/files'); 
         $name = $file->getClientOriginalName();
-        $save = new Instruction();
-        $save->$name = $file;
-        $save-> store_path = $path;
-        $save->save();
+        
         
         
         try {
@@ -78,30 +83,7 @@ class InstructionController extends Controller
 
     public function update(Request $request,$id)
     {
-        $data = $request->only([
-            'instruction_type',
-            'associates_vendor_name',
-            'associates_vendor_addres',
-            'attention_of',
-            'quatation_no',
-            'invoice_name',
-            'invoice_status',
-            'associates_customer_contract',
-            'associates_customer_po_no',
-            'desc',
-            'qty',
-            'uom',
-            'unit_price',
-            'disc',
-            'tax',
-            'curenncy',
-            'invoice.total',
-            'charge' ,
-            'notes',
-            'attachtment',
-            'link' 
-    
-            ]);
+        $data = $request->all();
     
         if ($file = $request->file('attachtment')) 
         $path = $file->store('public/files'); 
@@ -121,7 +103,6 @@ class InstructionController extends Controller
             ];
         }
 
-        return response()->json($result, $result['status']);        
-    
+        return response()->json($result, $result['status']); 
     }
 }

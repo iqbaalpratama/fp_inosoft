@@ -28,7 +28,6 @@ Route::post('instruction', [InstructionController::class, 'store']);
 
 Route::put('instruction/{id}', [InstructionController::class, 'update']);
 
-Route::get('instruction-test', [InstructionRepository::class, 'getCompleted']);
 
 
 
