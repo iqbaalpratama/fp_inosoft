@@ -76,21 +76,13 @@ class InstructionController extends Controller
             'cancel_reason', 
         ]);
 
-        if ($file = $request->file('attachtment')) 
-        $path = $file->store('public/files'); 
-        $name = $file->getClientOriginalName();
-        $save = new Instruction();
-        $save->$name = $file;
-        $save-> store_path = $path;
-        $save->save();
-        
-        
+
         // dd ($data['associates']['vendor_name']);
         // dd($a);
         
         try {
             $result = ['status' => 200];
-            $result['data'] = $this->instructionServices->saveInstruction($data);
+            $result['data'] = $this->instructionServices->terminateInstruction($data, $id);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
