@@ -13,7 +13,8 @@ class CreateInstructionsTable extends Migration
     public function up()
     {
         Schema::create('instructions', function ($table) {
-            $table->id();
+	    $table->id();
+	    $table->foreign('attachment_id')->references('id')->on('attachments');
             $table->string('instruction_types');
             $table->string('associates_vendor_name');
             $table->string('associates_vendor_addres');
