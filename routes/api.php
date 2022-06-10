@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('instruction', [InstructionController::class, 'store']);
+Route::post('cancel-instruction/{id}', [InstructionController::class, 'terminate']);
 

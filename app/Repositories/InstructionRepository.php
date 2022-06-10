@@ -46,7 +46,15 @@ class InstructionRepository
 
          return $instruction->fresh();
 
+    }
 
+    public function terminateInstruction($data, $id)
+    {
+        $instruction = $this->instruction->where('_id', $id)->first();
+        $instruction->status = "Cancelled";
+        $instruction->cancel_reason = $data['reason'];
+        $instruction->save();
+        return $instruction->fresh();
     }
 
     

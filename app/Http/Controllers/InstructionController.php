@@ -68,7 +68,36 @@ class InstructionController extends Controller
 
         return response()->json($result, $result['status']);
         
+    }
+
+    public function terminate(Request $request, $id){
+        $data = $request->only([
+            'attachtment',
+            'cancel_reason', 
+        ]);
+
+        if ($file = $request->file('attachtment')) 
+        $path = $file->store('public/files'); 
+        $name = $file->getClientOriginalName();
+        $save = new Instruction();
+        $save->$name = $file;
+        $save-> store_path = $path;
+        $save->save();
         
-            
+        
+        // dd ($data['associates']['vendor_name']);
+        // dd($a);
+        
+        try {
+            $result = ['status' => 200];
+            $result['data'] = $this->instructionServices->saveInstruction($data);
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
     }
 }
