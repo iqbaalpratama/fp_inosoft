@@ -59,11 +59,6 @@ class InstructionController extends Controller
         //  }
          
         // dd(isJson($data));
-
-        if ($file = $request->file('attachtment')) 
-        $path = $file->store('public/files'); 
-        $name = $file->getClientOriginalName();
-        
         
         
         try {

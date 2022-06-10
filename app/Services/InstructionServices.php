@@ -45,7 +45,7 @@ class InstructionServices
             'invoice.total',
             'charge' => 'required',
             'notes',
-            'attachtment' => 'required',
+            'attachtment',
             'link' => 'required'
 
         ]);
