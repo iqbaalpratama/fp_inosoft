@@ -5,6 +5,8 @@ class InstructionService{
     getAll(){
         return axios.get(API_URL + 'instruction');
     }
-    
+    Store(data){
+        return axios.post(API_URL + 'instruction', data)
+    }
 }
 export default new InstructionService();

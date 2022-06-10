@@ -21,6 +21,18 @@ const actions = {
                 console.log(error);
             }
         );
+    },
+
+    AddDataInstruction({dispatch},data){
+        InstructionService.Store(data).then(
+            response => {
+                console.log(response);
+            },
+            error => {
+                console.log(error);
+            }
+        );
+        dispatch('getAllInstruction')
     }
 };
 const getters = {

@@ -2,7 +2,7 @@
   <v-container fluid class="pr-15 pl-15 pt-10">
     <div class="text-h4">3rd Party Instruction</div>
 
-    <v-breadcrumbs :items="items" class="pl-0 pt-1 mb-10">
+    <v-breadcrumbs :items="mock.InvoiceInstruction.items" class="pl-0 pt-1 mb-10">
       <template v-slot:divider>
         <v-icon>mdi-chevron-right</v-icon>
       </template>
@@ -14,7 +14,7 @@
           <v-col cols="2">
             <v-select
               class="select"
-              :items="ItemsInstruction"
+              :items="mock.InvoiceInstruction.TypeInstruction"
               item-text="name"
               item-value="id"
               v-model="TypeInstruction"
@@ -45,7 +45,8 @@
                         <v-select
                           placeholder="Select Vendor"
                           class="select"
-                          :items="items"
+                          :items="mock.InvoiceInstruction.vendor_name"
+                          v-model="vendor_name"
                           dense
                           outlined
                           item-color="black"
@@ -63,6 +64,7 @@
                           placeholder="Enter Attention Of"
                           outlined
                           class="select"
+                          v-model="attention_of"
                           dense
                           item-color="black"
                           color="black"
@@ -77,7 +79,8 @@
                         </v-subheader>
                         <v-text-field
                           class="select"
-                          placeholder="Select Quotation"
+                          placeholder="Enter Quotation"
+                          v-model="quotation_no"
                           outlined
                           dense
                           item-color="black"
@@ -94,7 +97,9 @@
                         <v-select
                           placeholder="Select an Option"
                           class="select"
-                          :items="items"
+                          :items="mock.InvoiceInstruction.invoice_to"
+                          item-text="text"
+                          v-model="invoice_to"
                           dense
                           outlined
                           item-color="black"
@@ -111,7 +116,8 @@
                         <v-select
                           placeholder="Select Vendor Address"
                           class="select"
-                          :items="items"
+                          :items="mock.InvoiceInstruction.vendor_address"
+                          v-model="vendor_address"
                           dense
                           outlined
                           item-color="black"
@@ -136,7 +142,8 @@
                         <v-select
                           class="select"
                           placeholder="Select Customer"
-                          :items="items"
+                          :items="mock.InvoiceInstruction.customer_contract"
+                          v-model="customer_contract"
                           dense
                           outlined
                           item-color="black"
@@ -152,6 +159,7 @@
                         </v-subheader>
                         <v-text-field
                           class="select"
+                          v-model="customer_po_no"
                           placeholder="Enter Customer PO No."
                           outlined
                           dense
@@ -243,7 +251,7 @@
                     item-text="text"
                     item-value="text"
                     v-model="UOM"
-                    :items="ItemsUOM"
+                    :items="mock.InvoiceInstruction.ItemsUOM"
                     dense
                     outlined
                     item-color="black"
@@ -292,7 +300,7 @@
                     v-model="Currency"
                     class="select mt-5"
                     placeholder="Enter Customer PO"
-                    :items="ItemsCurrency"
+                    :items="mock.InvoiceInstruction.ItemsCurrency"
                     item-text="text"
                     item-value="text"
                     dense
@@ -309,7 +317,7 @@
                   <v-select
                     class="select mt-5"
                     placeholder="Enter Customer PO"
-                    :items="ItemsCharge"
+                    :items="mock.InvoiceInstruction.ItemsCharge"
                     item-text="text"
                     item-value="text"
                     v-model="ChargeTo"
@@ -349,13 +357,14 @@
         <v-row no-gutters class="pt-10">
           <v-col cols="5" class="pr-7">
             <h3>Attachment</h3>
-            <v-file-input accept="image/*" label="File input"></v-file-input>
+            <v-file-input label="File input" v-model="attachment"></v-file-input>
           </v-col>
           <v-col cols="7">
             <h3 class="pb-2">Notes</h3>
             <v-textarea
               outlined
               name="input-7-4"
+              v-model="notes"
               background-color="grey lighten-5"
             ></v-textarea>
           </v-col>
@@ -373,7 +382,7 @@
           <v-select
               placeholder="Select Item"
               class="select"
-              :items="ItemsLink"
+              :items="mock.InvoiceInstruction.ItemsLink"
               item-text="text"
               item-value="text"
               v-model="LinkTo"
@@ -406,6 +415,7 @@
     <v-btn
       depressed
       color="primary"
+      @click="submit"
     >
       Submit
     </v-btn>
@@ -414,10 +424,20 @@
   </v-container>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import mock from './mock'
 export default {
     name: "CreateInstruction",
     data(){
         return{
+        mock,
+        vendor_name:'',
+        attention_of:'',
+        quotation_no:'',
+        invoice_to:'',
+        vendor_address:'',
+        customer_contract:'',
+        customer_po_no:'',
         description: '',
         quantity: '0',
         UOM: 'SHP',
@@ -428,60 +448,8 @@ export default {
         ChargeTo: '',
         LinkTo: '',
         TypeInstruction:'',
-        ItemsInstruction:
-        [
-          {
-            id: 'LI',
-            name: 'Logistic Instruction'
-          },
-          {
-            id: 'SI',
-            name: 'Service Instruction'
-          },
-          
-        ],
-        ItemsLink:[
-          {
-            text: "ASL-DSL-001"
-          }
-        ],
-        ItemsUOM: [
-          {
-            text: "SHP",
-          },
-          {
-            text: "SDC"
-          }
-        ],
-        ItemsCurrency: [
-          {
-            text: "USD",
-          },
-          {
-            text: "AED"
-          }
-        ],
-        ItemsCharge:[
-          {
-            text: "MITME"
-          },
-          {
-            text: "Customer"
-          }
-        ],
-
-        items: [
-        {
-          text: 'Vendor Management',
-          disabled: true,
-          href: 'breadcrumbs_dashboard',
-        },
-        {
-          text: '3rd Party Instruction',
-          disabled: false,
-          href: 'breadcrumbs_link_1',
-        },
-      ],
+        attachment:null,
+        notes:''
 
         }
     },
@@ -504,7 +472,34 @@ export default {
     methods:{
       removeLink(){
         this.LinkTo = ''
-      }
+      },
+      submit(){
+        let formData = new FormData();
+        formData.append('instruction_type', this.TypeInstruction);
+        formData.append('associates_vendor_name',this.vendor_name);
+        formData.append('associates_vendor_addres',this.vendor_address);
+        formData.append('attention_of',this.attention_of);
+        formData.append('quatation_no',this.quotation_no);
+        formData.append('invoice_name',this.invoice_to);
+        formData.append('associates_customer_contract',this.customer_contract);
+        formData.append('associates_customer_po_no', this.customer_po_no);
+
+        formData.append('desc', this.description);
+        formData.append('qty', this.quantity);
+        formData.append('uom', this.UOM);
+        formData.append('unit_price', this.UnitPrice);
+        formData.append('disc', this.discount);
+        formData.append('tax', this.GSTVAT);
+        formData.append('curenncy', this.Currency);
+        formData.append('link',this.LinkTo);
+        formData.append('charge', this.ChargeTo);
+        formData.append('invoice_total', this.Total);
+        formData.append('notes', this.notes);
+        formData.append('attachtment', this.attachment);
+        console.log(this.attachment);
+        this.AddDataInstruction(formData);      
+      },
+      ...mapActions('instruction',['AddDataInstruction'])
     }
 }
 </script>

@@ -2338,6 +2338,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _mock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mock */ "./resources/js/layout/pages/CreateInstruction/mock.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2753,10 +2761,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateInstruction",
   data: function data() {
     return {
+      mock: _mock__WEBPACK_IMPORTED_MODULE_0__["default"],
+      vendor_name: '',
+      attention_of: '',
+      quotation_no: '',
+      invoice_to: '',
+      vendor_address: '',
+      customer_contract: '',
+      customer_po_no: '',
       description: '',
       quantity: '0',
       UOM: 'SHP',
@@ -2767,40 +2795,8 @@ __webpack_require__.r(__webpack_exports__);
       ChargeTo: '',
       LinkTo: '',
       TypeInstruction: '',
-      ItemsInstruction: [{
-        id: 'LI',
-        name: 'Logistic Instruction'
-      }, {
-        id: 'SI',
-        name: 'Service Instruction'
-      }],
-      ItemsLink: [{
-        text: "ASL-DSL-001"
-      }],
-      ItemsUOM: [{
-        text: "SHP"
-      }, {
-        text: "SDC"
-      }],
-      ItemsCurrency: [{
-        text: "USD"
-      }, {
-        text: "AED"
-      }],
-      ItemsCharge: [{
-        text: "MITME"
-      }, {
-        text: "Customer"
-      }],
-      items: [{
-        text: 'Vendor Management',
-        disabled: true,
-        href: 'breadcrumbs_dashboard'
-      }, {
-        text: '3rd Party Instruction',
-        disabled: false,
-        href: 'breadcrumbs_link_1'
-      }]
+      attachment: null,
+      notes: ''
     };
   },
   mounted: function mounted() {
@@ -2819,11 +2815,36 @@ __webpack_require__.r(__webpack_exports__);
       return this.Subtotal + this.VATAmount;
     }
   },
-  methods: {
+  methods: _objectSpread({
     removeLink: function removeLink() {
       this.LinkTo = '';
+    },
+    submit: function submit() {
+      var formData = new FormData();
+      formData.append('instruction_type', this.TypeInstruction);
+      formData.append('associates_vendor_name', this.vendor_name);
+      formData.append('associates_vendor_addres', this.vendor_address);
+      formData.append('attention_of', this.attention_of);
+      formData.append('quatation_no', this.quotation_no);
+      formData.append('invoice_name', this.invoice_to);
+      formData.append('associates_customer_contract', this.customer_contract);
+      formData.append('associates_customer_po_no', this.customer_po_no);
+      formData.append('desc', this.description);
+      formData.append('qty', this.quantity);
+      formData.append('uom', this.UOM);
+      formData.append('unit_price', this.UnitPrice);
+      formData.append('disc', this.discount);
+      formData.append('tax', this.GSTVAT);
+      formData.append('curenncy', this.Currency);
+      formData.append('link', this.LinkTo);
+      formData.append('charge', this.ChargeTo);
+      formData.append('invoice_total', this.Total);
+      formData.append('notes', this.notes);
+      formData.append('attachtment', this.attachment);
+      console.log(this.attachment);
+      this.AddDataInstruction(formData);
     }
-  }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('instruction', ['AddDataInstruction']))
 });
 
 /***/ }),
@@ -3029,6 +3050,78 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/layout/pages/CreateInstruction/mock.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/layout/pages/CreateInstruction/mock.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  InvoiceInstruction: {
+    vendor_name: [{
+      text: 'Amarit & Associates Logistic Co Ltd'
+    }, {
+      text: 'Alphatrans Pte. Ltd.'
+    }],
+    vendor_address: [{
+      text: '1 SOI PRIDI PHANOMYONG 28 (THANIPATTANA) SUKHUMVIT 71 ROAD, KWAENG KLONGTON NUA, KHET WATTANA'
+    }, {
+      text: '217 Henderson Rd, #04-07, Singapore 159555'
+    }],
+    invoice_to: [{
+      text: 'Marubeni-itochu Tubulars Asia Pte Ltd, 2 Shenton Way #07-02, SGX Centre 1, Singapore 068804'
+    }],
+    customer_contract: [{
+      id: 'ADNOC',
+      text: 'Hail & Gasha'
+    }, {
+      id: 'ABSOX',
+      text: 'Sour Gas'
+    }],
+    TypeInstruction: [{
+      id: 'LI',
+      name: 'Logistic Instruction'
+    }, {
+      id: 'SI',
+      name: 'Service Instruction'
+    }],
+    ItemsLink: [{
+      text: "ASL-DSL-001"
+    }],
+    ItemsUOM: [{
+      text: "SHP"
+    }, {
+      text: "SDC"
+    }],
+    ItemsCurrency: [{
+      text: "USD"
+    }, {
+      text: "AED"
+    }],
+    ItemsCharge: [{
+      text: "MITME"
+    }, {
+      text: "Customer"
+    }],
+    items: [{
+      text: 'Vendor Management',
+      disabled: true,
+      href: 'breadcrumbs_dashboard'
+    }, {
+      text: '3rd Party Instruction',
+      disabled: false,
+      href: 'breadcrumbs_link_1'
+    }]
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/plugins/vuetify.js":
 /*!*****************************************!*\
   !*** ./resources/js/plugins/vuetify.js ***!
@@ -3154,6 +3247,11 @@ var InstructionService = /*#__PURE__*/function () {
     value: function getAll() {
       return axios__WEBPACK_IMPORTED_MODULE_0___default().get(API_URL + 'instruction');
     }
+  }, {
+    key: "Store",
+    value: function Store(data) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post(API_URL + 'instruction', data);
+    }
   }]);
 
   return InstructionService;
@@ -3218,6 +3316,15 @@ var actions = {
     }, function (error) {
       console.log(error);
     });
+  },
+  AddDataInstruction: function AddDataInstruction(_ref2, data) {
+    var dispatch = _ref2.dispatch;
+    _services_instruction_service__WEBPACK_IMPORTED_MODULE_0__["default"].Store(data).then(function (response) {
+      console.log(response);
+    }, function (error) {
+      console.log(error);
+    });
+    dispatch('getAllInstruction');
   }
 };
 var getters = {
@@ -7136,7 +7243,7 @@ var render = function () {
       _vm._v(" "),
       _c("v-breadcrumbs", {
         staticClass: "pl-0 pt-1 mb-10",
-        attrs: { items: _vm.items },
+        attrs: { items: _vm.mock.InvoiceInstruction.items },
         scopedSlots: _vm._u([
           {
             key: "divider",
@@ -7167,7 +7274,7 @@ var render = function () {
                       _c("v-select", {
                         staticClass: "select",
                         attrs: {
-                          items: _vm.ItemsInstruction,
+                          items: _vm.mock.InvoiceInstruction.TypeInstruction,
                           "item-text": "name",
                           "item-value": "id",
                           dense: "",
@@ -7260,13 +7367,22 @@ var render = function () {
                                                 staticClass: "select",
                                                 attrs: {
                                                   placeholder: "Select Vendor",
-                                                  items: _vm.items,
+                                                  items:
+                                                    _vm.mock.InvoiceInstruction
+                                                      .vendor_name,
                                                   dense: "",
                                                   outlined: "",
                                                   "item-color": "black",
                                                   color: "black",
                                                   "background-color":
                                                     "grey lighten-4",
+                                                },
+                                                model: {
+                                                  value: _vm.vendor_name,
+                                                  callback: function ($$v) {
+                                                    _vm.vendor_name = $$v
+                                                  },
+                                                  expression: "vendor_name",
                                                 },
                                               }),
                                             ],
@@ -7308,6 +7424,13 @@ var render = function () {
                                                   "background-color":
                                                     "grey lighten-4",
                                                 },
+                                                model: {
+                                                  value: _vm.attention_of,
+                                                  callback: function ($$v) {
+                                                    _vm.attention_of = $$v
+                                                  },
+                                                  expression: "attention_of",
+                                                },
                                               }),
                                             ],
                                             1
@@ -7340,13 +7463,20 @@ var render = function () {
                                                 staticClass: "select",
                                                 attrs: {
                                                   placeholder:
-                                                    "Select Quotation",
+                                                    "Enter Quotation",
                                                   outlined: "",
                                                   dense: "",
                                                   "item-color": "black",
                                                   color: "black",
                                                   "background-color":
                                                     "grey lighten-4",
+                                                },
+                                                model: {
+                                                  value: _vm.quotation_no,
+                                                  callback: function ($$v) {
+                                                    _vm.quotation_no = $$v
+                                                  },
+                                                  expression: "quotation_no",
                                                 },
                                               }),
                                             ],
@@ -7381,13 +7511,23 @@ var render = function () {
                                                 attrs: {
                                                   placeholder:
                                                     "Select an Option",
-                                                  items: _vm.items,
+                                                  items:
+                                                    _vm.mock.InvoiceInstruction
+                                                      .invoice_to,
+                                                  "item-text": "text",
                                                   dense: "",
                                                   outlined: "",
                                                   "item-color": "black",
                                                   color: "black",
                                                   "background-color":
                                                     "grey lighten-4",
+                                                },
+                                                model: {
+                                                  value: _vm.invoice_to,
+                                                  callback: function ($$v) {
+                                                    _vm.invoice_to = $$v
+                                                  },
+                                                  expression: "invoice_to",
                                                 },
                                               }),
                                             ],
@@ -7422,13 +7562,22 @@ var render = function () {
                                                 attrs: {
                                                   placeholder:
                                                     "Select Vendor Address",
-                                                  items: _vm.items,
+                                                  items:
+                                                    _vm.mock.InvoiceInstruction
+                                                      .vendor_address,
                                                   dense: "",
                                                   outlined: "",
                                                   "item-color": "black",
                                                   color: "black",
                                                   "background-color":
                                                     "grey lighten-4",
+                                                },
+                                                model: {
+                                                  value: _vm.vendor_address,
+                                                  callback: function ($$v) {
+                                                    _vm.vendor_address = $$v
+                                                  },
+                                                  expression: "vendor_address",
                                                 },
                                               }),
                                             ],
@@ -7484,13 +7633,23 @@ var render = function () {
                                                 attrs: {
                                                   placeholder:
                                                     "Select Customer",
-                                                  items: _vm.items,
+                                                  items:
+                                                    _vm.mock.InvoiceInstruction
+                                                      .customer_contract,
                                                   dense: "",
                                                   outlined: "",
                                                   "item-color": "black",
                                                   color: "black",
                                                   "background-color":
                                                     "grey lighten-4",
+                                                },
+                                                model: {
+                                                  value: _vm.customer_contract,
+                                                  callback: function ($$v) {
+                                                    _vm.customer_contract = $$v
+                                                  },
+                                                  expression:
+                                                    "customer_contract",
                                                 },
                                               }),
                                             ],
@@ -7531,6 +7690,13 @@ var render = function () {
                                                   color: "black",
                                                   "background-color":
                                                     "grey lighten-4",
+                                                },
+                                                model: {
+                                                  value: _vm.customer_po_no,
+                                                  callback: function ($$v) {
+                                                    _vm.customer_po_no = $$v
+                                                  },
+                                                  expression: "customer_po_no",
                                                 },
                                               }),
                                             ],
@@ -7692,7 +7858,7 @@ var render = function () {
                                   attrs: {
                                     "item-text": "text",
                                     "item-value": "text",
-                                    items: _vm.ItemsUOM,
+                                    items: _vm.mock.InvoiceInstruction.ItemsUOM,
                                     dense: "",
                                     outlined: "",
                                     "item-color": "black",
@@ -7793,7 +7959,8 @@ var render = function () {
                                   staticClass: "select mt-5",
                                   attrs: {
                                     placeholder: "Enter Customer PO",
-                                    items: _vm.ItemsCurrency,
+                                    items:
+                                      _vm.mock.InvoiceInstruction.ItemsCurrency,
                                     "item-text": "text",
                                     "item-value": "text",
                                     dense: "",
@@ -7827,7 +7994,8 @@ var render = function () {
                                   staticClass: "select mt-5",
                                   attrs: {
                                     placeholder: "Enter Customer PO",
-                                    items: _vm.ItemsCharge,
+                                    items:
+                                      _vm.mock.InvoiceInstruction.ItemsCharge,
                                     "item-text": "text",
                                     "item-value": "text",
                                     dense: "",
@@ -7915,7 +8083,14 @@ var render = function () {
                       _c("h3", [_vm._v("Attachment")]),
                       _vm._v(" "),
                       _c("v-file-input", {
-                        attrs: { accept: "image/*", label: "File input" },
+                        attrs: { label: "File input" },
+                        model: {
+                          value: _vm.attachment,
+                          callback: function ($$v) {
+                            _vm.attachment = $$v
+                          },
+                          expression: "attachment",
+                        },
                       }),
                     ],
                     1
@@ -7932,6 +8107,13 @@ var render = function () {
                           outlined: "",
                           name: "input-7-4",
                           "background-color": "grey lighten-5",
+                        },
+                        model: {
+                          value: _vm.notes,
+                          callback: function ($$v) {
+                            _vm.notes = $$v
+                          },
+                          expression: "notes",
                         },
                       }),
                     ],
@@ -7976,7 +8158,7 @@ var render = function () {
                       staticClass: "select",
                       attrs: {
                         placeholder: "Select Item",
-                        items: _vm.ItemsLink,
+                        items: _vm.mock.InvoiceInstruction.ItemsLink,
                         "item-text": "text",
                         "item-value": "text",
                         dense: "",
@@ -8036,9 +8218,14 @@ var render = function () {
               [_vm._v("\n    Save as Draft\n  ")]
             ),
             _vm._v(" "),
-            _c("v-btn", { attrs: { depressed: "", color: "primary" } }, [
-              _vm._v("\n    Submit\n  "),
-            ]),
+            _c(
+              "v-btn",
+              {
+                attrs: { depressed: "", color: "primary" },
+                on: { click: _vm.submit },
+              },
+              [_vm._v("\n    Submit\n  ")]
+            ),
           ],
           1
         ),
