@@ -80,13 +80,6 @@ class InstructionController extends Controller
     {
         $data = $request->all();
     
-        if ($file = $request->file('attachtment')) 
-        $path = $file->store('public/files'); 
-        $name = $file->getClientOriginalName();
-        $save = new Instruction();
-        $save->$name = $file;
-        $save-> store_path = $path;
-        $save->save();
                      
         try {
             $result = ['status' => 200];

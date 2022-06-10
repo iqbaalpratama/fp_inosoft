@@ -135,7 +135,7 @@ class InstructionRepository
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
-        $instruction->invoice_status = "completed";
+        $instruction->invoice_status = "in proggres";
         $instruction->associates_customer_contract = $data['associates_customer_contract'];
         $instruction->associates_customer_po_no = $data['associates_customer_po_no'];
         $instruction->desc = $data['desc'];
@@ -164,7 +164,6 @@ class InstructionRepository
     public function update($id,$data)
     {
         $instruction = $this->instruction->find($id);
-        $instruction->instruction_type = $data['instruction_type'];
         $instruction->vendor_name = $data['associates_vendor_name'];   
         $instruction->vendor_addres = $data['associates_vendor_addres'];
         $instruction->attention_of = $data['attention_of'];
