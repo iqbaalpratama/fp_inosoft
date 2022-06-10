@@ -1,17 +1,39 @@
-import { InstructionService } from '../services/instruction.service';
+import  InstructionService  from '../services/instruction.service';
 
 const state = {
+    dataInstruction: []
+};
+
+
+const mutations = {
+    AllInstruction(state, payload){
+        state.dataInstruction = payload.data;
+    }
 };
 
 const actions = {
+    getAllInstruction({commit}){
+        InstructionService.getAll().then(
+            response => {
+                commit('AllInstruction', response.data);
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
 };
-
-const mutations = {
-    
-};
+const getters = {
+    FilteredDataInstruction: (state) => (status,status2=null) => {
+        return state.dataInstruction.filter(data => {
+            return data.status == status || data.status == status2 
+        })
+    }
+}
 
 export const instruction = {
     namespaced: true,
+    getters,
     state,
     actions,
     mutations
