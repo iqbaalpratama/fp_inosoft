@@ -38,13 +38,8 @@ class InstructionRepository
         $instruction->notes = $data['notes'];
         $instruction->attachtment = $data['attachtment'];
         $instruction->link = $data['link'];
-
-
-
-
-         $instruction->save();
-
-         return $instruction->fresh();
+        $instruction->save();
+        return $instruction->fresh();
 
     }
 
@@ -55,8 +50,6 @@ class InstructionRepository
         $instruction->cancel_reason = $data['reason'];
         $instruction->update();
         return $instruction;
-    }
-
-    
+    }   
 }
 
