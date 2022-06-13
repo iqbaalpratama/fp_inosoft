@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instruction;
+use App\Services\AttachmentServices;
 use App\Services\InstructionServices;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,9 +12,10 @@ class InstructionController extends Controller
 {
     protected $instructionServices;
 
-        public function __construct(InstructionServices $instructionServices)
+        public function __construct(InstructionServices $instructionServices, AttachmentServices $attachmentServices)
         {
             $this->instructionServices = $instructionServices;
+            $this->attachmentServices = $attachmentServices;
         }
 
     public function store(Request $request)
@@ -76,13 +78,12 @@ class InstructionController extends Controller
             'cancel_reason', 
         ]);
 
-
-        // dd ($data['associates']['vendor_name']);
-        // dd($a);
-        
         try {
             $result = ['status' => 200];
             $result['data'] = $this->instructionServices->terminateInstruction($data, $id);
+            if($request->hasFile('attachment')){
+                $this->attachmentServices->saveAttachment($data, $id, 'terminate');
+            }
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
