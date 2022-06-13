@@ -74,14 +74,14 @@ class InstructionController extends Controller
 
     public function terminate(Request $request, $id){
         $data = $request->only([
-            'attachtment',
+            'attachment',
             'cancel_reason', 
         ]);
 
         try {
             $result = ['status' => 200];
             $result['data'] = $this->instructionServices->terminateInstruction($data, $id);
-            if($request->hasFile('attachment')){
+            if($request->has('attachment')){
                 $this->attachmentServices->saveAttachment($data, $id, 'terminate');
             }
         } catch (Exception $e) {
@@ -93,4 +93,5 @@ class InstructionController extends Controller
 
         return response()->json($result, $result['status']);
     }
+
 }

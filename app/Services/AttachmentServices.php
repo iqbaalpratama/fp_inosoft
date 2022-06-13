@@ -17,8 +17,7 @@ class AttachmentServices
 
     public function saveAttachment($data, $id, $type){
         $validator = Validator::make($data,[
-            'attachtment' => 'mimes:doc,docx,pdf,txt,csv,jpg,mp4,png|max:2048',
-            'link'
+            'attachment' => 'mimes:doc,docx,pdf,txt,csv,jpg,mp4,png|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -27,4 +26,5 @@ class AttachmentServices
 
         $this->attachmentRepository->createMany($data, $id, $type);
     }
+
 }
