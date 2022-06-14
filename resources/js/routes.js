@@ -4,6 +4,8 @@ import Login from './layout/pages/Auth/Login'
 import TableOpenComponent from './layout/components/Content/TableOpenComponent'
 import TableCompleteComponent from './layout/components/Content/TableCompleteComponent'
 import CreateInstruction from './layout/pages/CreateInstruction/CreateInstruction'
+import DetailInstruction from './layout/pages/DetailsInstruction/DetailInstruction'
+
 
 
 export const routes = [
@@ -42,6 +44,11 @@ export const routes = [
             path: 'instruction/new',
             name: 'NewInstruction',
             component: CreateInstruction
+          },
+          {
+            path: 'instruction/detail/:id',
+            name: 'DetailInstruction',
+            component: DetailInstruction
           }       
         ],
       },
