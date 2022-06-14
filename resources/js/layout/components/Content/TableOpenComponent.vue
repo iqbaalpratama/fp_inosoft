@@ -21,6 +21,7 @@
       </div>
       
       <v-data-table
+        @click:row="rowClick"
         :headers="mock.TableOpen.headers"
         :items="dataInstructions"
         item-key="instruction_id"
@@ -68,7 +69,13 @@ export default {
     methods:{
         ...mapActions('instruction', {
             getAll: 'getAllInstruction'
-        })
+        }),
+        rowClick(item){
+          this.$router.push({
+            name: 'DetailInstruction', 
+            params: { id: item.id }
+          });
+        }
     }
 }
 </script>

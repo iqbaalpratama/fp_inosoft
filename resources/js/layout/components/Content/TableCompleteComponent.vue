@@ -4,6 +4,7 @@
         :headers="mock.TableCompleted.headers"
         :items="dataInstructions"
         item-key="instruction_id"
+        @click:row="rowClick"
       >
       </v-data-table>
 </v-container>
@@ -32,7 +33,13 @@ export default {
     methods:{
         ...mapActions('instruction', {
             getAll: 'getAllInstruction'
-        })
+        }),
+        rowClick(item){
+          this.$router.push({
+            name: 'DetailInstruction', 
+            params: { id: item.id }
+          });
+        }
     }
 }
 </script>

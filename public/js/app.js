@@ -2187,6 +2187,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2221,9 +2222,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.getAll();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('instruction', {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('instruction', {
     getAll: 'getAllInstruction'
-  }))
+  })), {}, {
+    rowClick: function rowClick(item) {
+      this.$router.push({
+        name: 'DetailInstruction',
+        params: {
+          id: '62a28f618e70d9ea3a079ae6'
+        }
+      });
+    }
+  })
 });
 
 /***/ }),
@@ -7758,6 +7768,7 @@ var render = function () {
           items: _vm.dataInstructions,
           "item-key": "instruction_id",
         },
+        on: { "click:row": _vm.rowClick },
       }),
     ],
     1
