@@ -6,7 +6,6 @@ use App\Models\Instruction;
 
 class InstructionRepository
 {
-
     public string $path;
     public string $dimension;
     protected $instruction;

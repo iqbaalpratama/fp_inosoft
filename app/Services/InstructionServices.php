@@ -102,6 +102,7 @@ class InstructionServices
         return $this->instructionRepository->getAll();
     }
 
+
     public function terminateInstruction($data, $id){
         $validator = Validator::make($data,[
             'attachtment' => 'mimes:doc,docx,pdf,txt,csv|max:2048',
