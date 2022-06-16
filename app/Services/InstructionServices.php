@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Repositories as Repository;
 use App\Traits\Instruction;
+use Illuminate\Support\Facades\Validator ;
+use InvalidArgumentException;
 
 class InstructionServices
 {
@@ -51,9 +53,27 @@ class InstructionServices
         return $this->instructionRepository->getAll();
     }
 
+
     public function reciveInvoice()
     {
         # code...
+    }
+
+    public function terminateInstruction($data, $id){
+        $validator = Validator::make($data,[
+            'attachtment' => 'mimes:doc,docx,pdf,txt,csv|max:2048',
+            'cancel_reason'
+        ]);
+        
+
+        if ($validator->fails()) {
+            throw new InvalidArgumentException($validator->errors()->first());
+        }
+
+
+        $result = $this->instructionRepository->terminateInstruction($data, $id);
+
+        return $result;
     }
 
 }

@@ -26,6 +26,7 @@ Route::get('instruction', [InstructionController::class, 'getAll']);
 Route::get('instruction/{id}', [InstructionController::class, 'getDetail']);
 
 Route::post('instruction', [InstructionController::class, 'store']);
+Route::post('cancel-instruction/{id}', [InstructionController::class, 'terminate']);
 
 Route::put('reciveInvocie/{id}', [InstructionRepository::class, 'reciveInvoice']);
 
