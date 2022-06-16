@@ -4,15 +4,105 @@
 
     <v-breadcrumbs
       :items="mock.DetailInstruction.items"
-      class="pl-0 pt-1 mb-10"
+      class="pl-0 pt-1 mb-7"
     >
       <template v-slot:divider>
         <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
 
+    <div style="width:100%;text-align: right" class="mb-2">
+        <v-btn style="background-color: white" outlined color="grey lighten-2"> <v-icon color="primary" left>mdi-email-fast</v-icon><span style="color:black">Send Email</span></v-btn>
+        <v-btn style="background-color: white" outlined color="grey lighten-2" > <v-icon left color="primary">mdi-file-outline</v-icon><span style="color:black">Export</span></v-btn>
+    </div>
     <v-card class="pa-3">
-      <v-container class="container-custom">
+      <v-row no-gutters>
+        <v-col cols="auto">
+          <v-btn text @click="BackClick">
+            <v-icon left>mdi-chevron-left</v-icon>Back
+          </v-btn>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col cols="auto">
+          <v-dialog v-if="StatusChecker"
+            v-model="dialogTerminated"
+            persistent
+            max-width="600px"
+            >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                text
+                >
+              <v-icon left>mdi-delete</v-icon>Terminated
+              </v-btn>
+            </template>
+      <v-card>
+        <v-card-title class="text-center">
+          <span class="text-h5 text-center">Reason Of Cancellation</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
+              Cancelled By
+            </v-subheader>
+            <h4>
+              Winata Admin
+            </h4>
+              </v-col>
+              <v-col cols="12">
+                <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
+              Description
+            </v-subheader>
+                <v-textarea
+                  readonly
+                  outlined
+                  name="input-7-4"
+                  background-color="grey lighten-5"
+                ></v-textarea>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
+              Attachment
+            </v-subheader>
+<v-file-input
+                  label="File input"
+                ></v-file-input>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialogTerminated = false"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialogTerminated = false"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+          <v-btn text @click="ModifyClick" v-if="StatusChecker">
+            <v-icon left>mdi-pencil</v-icon>Modify
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-container class="container-custom mt-10">
         <v-row no-gutters>
           <v-col cols="2" class="pa-3">
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
@@ -169,7 +259,7 @@
                 <h3>Attachment</h3>
                 <v-file-input
                   label="File input"
-                  v-model="attachment"
+                  v-model="data.attachment"
                 ></v-file-input>
               </v-col>
               <v-col cols="7">
@@ -187,13 +277,14 @@
         </v-container>
         
           <v-data-table
+
             :headers="headers"
             :items="desserts"
             disable-sort
             disable-pagination
             disable-filtering
             :hide-default-footer="true"
-            class="elevation-1 mt-5"
+            class="elevation-1 mt-5 mb-5"
           >
             <template v-slot:top>
               <v-toolbar flat>
@@ -201,7 +292,7 @@
 
                 <v-spacer></v-spacer>
 
-                <v-dialog v-model="dialog" max-width="500px">
+                <v-dialog v-model="dialog" max-width="500px" v-if="StatusChecker">
 
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
@@ -290,7 +381,7 @@
             </template>
 
           </v-data-table>
-          <v-row no-gutters class="mt-5 mb-10">
+          <v-row no-gutters class="mb-10" v-if="StatusChecker">
             <v-col cols="6" class="text-right pr-2">
               <p class="text-body-2">
               Click the button if all vendor invoices <br>
@@ -316,6 +407,7 @@ export default {
         return{
         mock,
         data: null,
+        dialogTerminated: false,
 
         dialog: false,
         dialogDelete: false,
@@ -337,11 +429,11 @@ export default {
           attachment: '',
           supporting_document: 0,
         },
-
+        StatusChecker: null
         }
     },
-    mounted(){
-        InstructionService.getDetail(this.$route.params.id).then(
+    async mounted(){
+        await InstructionService.getDetail(this.$route.params.id).then(
             response => {
                 this.data = response.data.data[0];
                 console.log(this.data);
@@ -350,12 +442,21 @@ export default {
                 console.log(error);
             }
         );
-        this.initialize()
+        this.initialize();
+        this.StatusCheck();
+
     },
     computed: {
+      StatusCheck(){
+        if(this.data.invoice_status == 'completed'){
+          this.StatusChecker = false
+        }else{
+          this.StatusChecker = true
+        }
+      },
       formTitle () {
         return this.editedIndex === -1 ? 'Add Vendor Invoice' : 'Edit Vendor Invoice'
-      },
+      }
     },
     watch: {
       dialog (val) {
@@ -366,6 +467,21 @@ export default {
       },
     },
     methods: {
+      BackClick(){
+        this.$router.push('/instruction');
+      },
+      ModifyClick(){
+        this.$router.push({
+          name: 'ModifyInstruction',
+          params:{
+            id: this.$route.params.id
+          }
+        })
+      },
+      TerminatedClick(){
+
+      },
+
       // Initialize()
       // get data invoice vendor
       initialize () {
@@ -434,9 +550,6 @@ export default {
 .container-custom {
   border: 2px solid #bac0c5;
   border-radius: 0;
-}
-.container-custom:nth-child(2) {
-  border-top: none;
 }
 .line {
   border: 1px dashed;
