@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instruction;
+use App\Services\AttachmentServices;
 use App\Services\InstructionServices;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,10 +12,12 @@ use Illuminate\Http\Request;
 class InstructionController extends Controller
 {
     protected $instructionServices;
+    protected $attachmentServices;
 
-    public function __construct(InstructionServices $instructionServices)
+    public function __construct(InstructionServices $instructionServices, AttachmentServices $attachmentServices)
     {
         $this->instructionServices = $instructionServices;
+        $this->attachmentServices = $attachmentServices;
     }
 
     public function getAll()
@@ -93,4 +96,27 @@ class InstructionController extends Controller
 
         return response()->json($result, $result['status']); 
     }
+
+    public function terminate(Request $request, $id){
+        $data = $request->only([
+            'attachment',
+            'cancel_reason', 
+        ]);
+
+        try {
+            $result = ['status' => 200];
+            $result['data'] = $this->instructionServices->terminateInstruction($data, $id);
+            if($request->has('attachment')){
+                $this->attachmentServices->saveAttachment($data, $id, 'terminate');
+            }
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
+    }
+
 }

@@ -193,6 +193,13 @@ class InstructionRepository
         return $instruction;
     }
 
-    
+    public function terminateInstruction($data, $id)
+    {
+        $instruction = $this->instruction->find($id);
+        $instruction->status = "Cancelled";
+        $instruction->cancel_reason = $data['reason'];
+        $instruction->update();
+        return $instruction;
+    }   
 }
 
