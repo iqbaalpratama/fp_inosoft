@@ -5,6 +5,7 @@ import TableOpenComponent from './layout/components/Content/TableOpenComponent'
 import TableCompleteComponent from './layout/components/Content/TableCompleteComponent'
 import CreateInstruction from './layout/pages/CreateInstruction/CreateInstruction'
 import DetailInstruction from './layout/pages/DetailsInstruction/DetailInstruction'
+import ModifyInstruction from './layout/pages/ModifyInstruction/ModifyInstruction'
 
 
 
@@ -49,7 +50,12 @@ export const routes = [
             path: 'instruction/detail/:id',
             name: 'DetailInstruction',
             component: DetailInstruction
-          }       
+          },
+          {
+            path: 'instruction/edit/:id',
+            name: 'ModifyInstruction',
+            component: ModifyInstruction
+          }      
         ],
       },
 ];
