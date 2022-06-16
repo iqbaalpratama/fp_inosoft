@@ -6,6 +6,16 @@
         item-key="instruction_id"
         @click:row="rowClick"
       >
+      <template v-slot:item.status="{ item }">
+          <v-row
+            justify="center"
+            align="center"
+          >
+            <v-chip draggable text-color="white" :color="ColorChipStatus(item.status)">
+            {{ item.status}}
+            </v-chip>
+          </v-row>
+          </template>
       </v-data-table>
 </v-container>
 </template>
@@ -34,6 +44,15 @@ export default {
         ...mapActions('instruction', {
             getAll: 'getAllInstruction'
         }),
+        ColorChipStatus(data){
+          if(data == 'completed'){
+            return 'green'
+          }else if(data == 'cancelled'){
+            return 'grey'
+          }else{
+            return ''
+          }
+        },
         rowClick(item){
           this.$router.push({
             name: 'DetailInstruction', 
@@ -43,3 +62,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.row-pointer >>> tbody tr :hover {
+  cursor: pointer;
+}
+</style>

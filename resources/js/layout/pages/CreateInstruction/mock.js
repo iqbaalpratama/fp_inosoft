@@ -34,11 +34,13 @@ export default {
         TypeInstruction: [
           {
             id: 'LI',
-            name: 'Logistic Instruction'
+            name: 'Logistic Instruction',
+            icon: 'mdi-truck'
           },
           {
             id: 'SI',
-            name: 'Service Instruction'
+            name: 'Service Instruction',
+            icon: 'mdi-human-male-board-poll',
           },      
         ],
         ItemsLink:[

@@ -2,7 +2,7 @@
   <v-container fluid class="pr-15 pl-15 pt-10">
     <div class="text-h4">3rd Party Instruction</div>
 
-    <v-breadcrumbs :items="mock.InvoiceInstruction.items" class="pl-0 pt-1 mb-10">
+    <v-breadcrumbs :items="mock.InvoiceInstruction.items" class="pl-0 pt-1 mb-7">
       <template v-slot:divider>
         <v-icon>mdi-chevron-right</v-icon>
       </template>
@@ -23,7 +23,20 @@
               item-color="black"
               color="black"
               background-color="grey lighten-4"
-            ></v-select>
+            >
+              <template slot="selection" slot-scope="data">
+                      <v-icon left size="20" color="primary">{{data.item.icon}}</v-icon>
+                      {{data.item.name}}
+              </template>
+              <template slot="item" slot-scope="data">
+                <v-list-item-icon style="margin-right: 0">
+                  <v-icon left color="primary">{{data.item.icon}}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="data.item.name"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </v-select>
           </v-col>
           <v-col cols="10">
             <v-row no-gutters>

@@ -8,12 +8,13 @@
             dark
             v-bind="attrs"
             v-on="on"
-          >
+          ><v-icon left>mdi-plus</v-icon>
             Create 3rd Party Instruction
           </v-btn>
         </template>
         <v-list>
           <v-list-item v-for="(item, index) in items" :key="index" :to="item.link">
+            <v-icon left color="primary">{{ item.icon }}</v-icon>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -24,8 +25,19 @@
         @click:row="rowClick"
         :headers="mock.TableOpen.headers"
         :items="dataInstructions"
+        class="row-pointer"
         item-key="instruction_id"
       >
+         <template v-slot:item.status="{ item }">
+          <v-row
+            justify="center"
+            align="center"
+          >
+            <v-chip draggable >
+            {{ item.status}}
+            </v-chip>
+          </v-row>
+          </template>
       </v-data-table>
 </v-container>
 </template>
@@ -41,6 +53,7 @@ export default {
             mock,
             items: [
               {
+                icon: 'mdi-truck',
                 title: 'Logistic Instruction',
                 link: {
                   name: 'NewInstruction',
@@ -48,6 +61,7 @@ export default {
                 }
               },
               {
+                icon: 'mdi-human-male-board-poll',
                 title: 'Service Instruction',
                 link: {
                   name: 'NewInstruction',
@@ -60,10 +74,12 @@ export default {
         ...mapGetters('instruction',['FilteredDataInstruction']),
         dataInstructions(){
           return this.FilteredDataInstruction('draft','in progress');
-        }
+        },
+        
     },
     mounted(){
         this.getAll();
+        console.log('Table OPEN Mount');
         
     },
     methods:{
@@ -79,3 +95,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.row-pointer >>> tbody tr :hover {
+  cursor: pointer;
+}
+</style>
