@@ -13,7 +13,6 @@ class Instruction extends Model
 
 
     protected $fillable = [
-        'instruction_id',
         'instruction_type',
         'associates_vendor_name',
         'associates_vendor_addres',
@@ -37,6 +36,11 @@ class Instruction extends Model
         'link'
 
     ];
+
+    public function attachments()
+    {
+        return $this->embedsOne(Attachment::class);
+    }
 
     
 }

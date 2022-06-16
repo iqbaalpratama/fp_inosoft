@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InstructionController;
+use App\Repositories\AssociateRepository;
 use App\Repositories\InstructionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ Route::get('instruction', [InstructionController::class, 'getAll']);
 Route::get('instruction/{id}', [InstructionController::class, 'getDetail']);
 
 Route::post('instruction', [InstructionController::class, 'store']);
+
+Route::put('reciveInvocie/{id}', [InstructionRepository::class, 'reciveInvoice']);
+
+Route::get('getVendor', [AssociateRepository::class, 'getVendor']);
 
 Route::put('instruction/{id}', [InstructionController::class, 'update']);
 
