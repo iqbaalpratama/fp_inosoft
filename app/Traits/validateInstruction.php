@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 // use App\Models\Instruction;
 
-trait Instruction {
+trait validateInstruction {
 
     public function validate($data)
     {
@@ -29,7 +29,7 @@ trait Instruction {
             'invoice.total',
             'charge' => 'required',
             'notes',
-            'attachtment',
+            'attachtment'=>'mimes:doc,docx,pdf,txt,csv|max:2048',
             'link' => 'required'
 
         ]);

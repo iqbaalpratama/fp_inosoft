@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories as Repository;
 use App\Traits\Instruction;
+use App\Traits\validateInstruction;
 use Illuminate\Support\Facades\Validator ;
 use InvalidArgumentException;
 
@@ -12,7 +13,7 @@ class InstructionServices
     protected $instructionRepository;
     protected $updateInstructionRepository;
     protected $createInstructionRepository;
-    use Instruction;
+    use validateInstruction;
 
     public function __construct
     (

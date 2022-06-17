@@ -16,7 +16,7 @@ class AssociateRepository
     {
         $vendor = $this->associate::all();
         return $vendor->map(function ($vendor)  {
-            [
+            return[
                 'id' => $vendor->id,
                 'vendor_name' => $vendor->vendor_name,
                 'vendor_address' => $vendor->vendor_address
