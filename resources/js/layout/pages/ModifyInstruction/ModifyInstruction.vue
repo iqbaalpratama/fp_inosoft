@@ -43,7 +43,7 @@
             <v-row no-gutters>
               <v-col cols="12" class="text-right pb-3">
                 <v-chip style="width: 100px; justify-content: center"
-                  >Draft</v-chip
+                  >{{data.invoice_status}}</v-chip
                 >
               </v-col>
               <v-col cols="12">
