@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instruction;
+use App\Services\AssociateServices;
 use App\Services\AttachmentServices;
 use App\Services\InstructionServices;
 use Exception;
@@ -13,11 +14,13 @@ class InstructionController extends Controller
 {
     protected $instructionServices;
     protected $attachmentServices;
+    protected $associateServices;
 
-    public function __construct(InstructionServices $instructionServices, AttachmentServices $attachmentServices)
+    public function __construct(InstructionServices $instructionServices, AttachmentServices $attachmentServices, AssociateServices $associateServices)
     {
         $this->instructionServices = $instructionServices;
         $this->attachmentServices = $attachmentServices;
+        $this->associateServices = $associateServices;
     }
 
     public function getAll()
@@ -50,6 +53,23 @@ class InstructionController extends Controller
             ];
         }
         return response()->json($result, $result['status']);
+    }
+
+    public function getVendor()
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->associateServices->getVendor();
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
+
     }
 
     public function store(Request $request)

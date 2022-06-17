@@ -39,13 +39,15 @@ class CreateInstructionRepository
         $instruction->invoice_total = $data['invoice_total'];
         $instruction->charge = $data['charge'];
         $instruction->notes = $data['notes'];
-        // $instruction->attachtment = $data['attachtment'];
+        $instruction->attachment = $data['attachment'];
         $instruction->link = $data['link'];
-        // if ($file = $data['attachtment']->file()) 
-        // $path = $file->store('public/files'); 
-        // $name = $file->getClientOriginalName();
-        // $instruction->$name = $file;
-        // $instruction-> store_path = $path;
+       
+        if ( $files = $data['attachment']) {
+            $path = 'public/files';
+            $filename = $files->getClientOriginalName();
+            $instruction->attachment = $filename;
+            $files->move($path, $filename);
+        }
         $instruction->save();
 
         return $instruction;

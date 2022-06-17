@@ -30,7 +30,7 @@ Route::post('cancel-instruction/{id}', [InstructionController::class, 'terminate
 
 Route::put('reciveInvocie/{id}', [InstructionRepository::class, 'reciveInvoice']);
 
-Route::get('getVendor', [AssociateRepository::class, 'getVendor']);
+Route::get('getVendor', [InstructionController::class, 'getVendor']);
 
 Route::put('instruction/{id}', [InstructionController::class, 'update']);
 
