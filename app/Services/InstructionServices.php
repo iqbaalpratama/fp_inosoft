@@ -105,7 +105,6 @@ class InstructionServices
 
     public function terminateInstruction($data, $id){
         $validator = Validator::make($data,[
-            'attachtment' => 'mimes:doc,docx,pdf,txt,csv|max:2048',
             'cancel_reason'
         ]);
         

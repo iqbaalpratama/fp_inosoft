@@ -16,8 +16,9 @@ class AttachmentServices
     }
 
     public function saveAttachment($data, $id, $type){
+        // dd($data);
         $validator = Validator::make($data,[
-            'attachment' => 'mimes:doc,docx,pdf,txt,csv,jpg,mp4,png|max:2048',
+            'attachment.*' => 'required|mimes:doc,docx,pdf,txt,csv,jpg,mp4,png|max:2048',
         ]);
 
         if ($validator->fails()) {
