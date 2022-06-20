@@ -38,19 +38,20 @@ class AttachmentRepository
     public function createMany($data, $id, $type)
     {
         $files = $data['attachment'];
-        foreach ($files as $file) {
-            $path = 'Data/Attachment/'.$id.'/'.$type;
-            $filename = $file->getClientOriginalName();
+        foreach ($files as $file) {        
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);            
             $extension = $file->getClientOriginalExtension();
+            $filenameToSave = $filename.'_'.time().'.'.$extension;
+            $path = $file->storeAs('public/'.$type, $filenameToSave);
             $attachment = new $this->attachment;
             $attachment->attachment_id = $id;
             $attachment->path = $path;
-            $attachment->name = $file->getClientOriginalName();;
+            $attachment->name = $filenameToSave;
             $attachment->type = $this->checkTypeFile($extension);
             $attachment->mime = $extension;
             $attachment->size = $file->getSize();
             $attachment->save();
-            $file->move($path, $filename);
         }
     }
 
