@@ -1,13 +1,14 @@
 export default {
     light: {
-      primary: "#212121",
-      secondary: "#FF5C93",
+      primary: "#14afc1",
+      secondary: "#bac0c5",
       error: "#FF4081",
       warning: "#FFC260",
       success: "#3CD4A0",
       info: "#9013FE",
-      textColor: "#B9B9B9",
-      iconColor: "#FFFFFF59",
+      textColor: "#b5b5b5",
+      iconColor: "#939498",
+      navColor: "#333335",
       grayBold: '#4a4a4a'
   }
 };
