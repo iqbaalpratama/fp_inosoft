@@ -1,15 +1,7 @@
 <template>
   <v-container fluid class="pr-15 pl-15 pt-10">
-    <div class="text-h4">3rd Party Instruction</div>
-
-    <v-breadcrumbs
-      :items="mock.DetailInstruction.items"
-      class="pl-0 pt-1 mb-7"
-    >
-      <template v-slot:divider>
-        <v-icon>mdi-chevron-right</v-icon>
-      </template>
-    </v-breadcrumbs>
+    
+    <Header :item="mock.DetailInstruction.items" title="3rd Party Instruction"/>
 
     <div style="width:100%;text-align: right" class="mb-2">
         <v-btn style="background-color: white" outlined color="grey lighten-2"> <v-icon color="primary" left>mdi-email-fast</v-icon><span style="color:black">Send Email</span></v-btn>
@@ -114,7 +106,7 @@
           </v-col>
           <v-col cols="2" class="pa-3">
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
-              SI No.</v-subheader
+             {{ data.intruction_type }}  No.</v-subheader
             >
             <h4>{{data.instruction_id}}</h4>
           </v-col>
@@ -389,7 +381,7 @@
               </p>
             </v-col>
             <v-col cols="6" class="text-left pl-2">
-              <v-btn color="primary"> All Received</v-btn>
+              <v-btn color="primary" @click="receiveInvoice"> All Received</v-btn>
             </v-col>
           </v-row>
 
@@ -400,9 +392,14 @@
 </template>
 <script>
 import InstructionService from '../../../services/instruction.service'
+import Header from '../../components/Header/HeaderComponent.vue'
 import mock from './mock'
+import {mapActions} from 'vuex'
 export default {
     name: "DetailInstruction",
+    components:{
+      Header
+    },
     data(){
         return{
         mock,
@@ -540,6 +537,11 @@ export default {
         }
         this.close()
       },
+      receiveInvoice(){
+        this.ReceiveInvoice(this.$route.params.id);
+        console.log(this.$route.params.id);
+      },
+      ...mapActions('instruction',['ReceiveInvoice'])
     },
 }
 </script>

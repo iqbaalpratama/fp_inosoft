@@ -1,13 +1,6 @@
 <template>
   <v-container fluid class="pr-15 pl-15 pt-10">
-    <div class="text-h4">3rd Party Instruction</div>
-
-    <v-breadcrumbs :items="mock.InvoiceInstruction.items" class="pl-0 pt-1 mb-7">
-      <template v-slot:divider>
-        <v-icon>mdi-chevron-right</v-icon>
-      </template>
-    </v-breadcrumbs>
-
+    <Header :item="mock.InvoiceInstruction.items" title="3rd Party Instruction"/>
     <v-card class="pa-3">
       <v-container class="container-custom">
         <v-row class="pa-1" no-gutters>
@@ -416,7 +409,7 @@
     </v-card>
     <v-card class="pa-5 mt-5">
         <div style="width:100%; text-align: right">
-          
+    <v-btn text @click="cancel"> Cancel</v-btn>
     <v-btn
       class="ma-2"
       outlined
@@ -439,8 +432,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import mock from './mock'
+import Header from '../../components/Header/HeaderComponent.vue'
 export default {
     name: "CreateInstruction",
+    components:{
+      Header
+    },
     data(){
         return{
         mock,
@@ -486,11 +483,14 @@ export default {
       removeLink(){
         this.LinkTo = ''
       },
-      submit(){
+      cancel(){
+      this.$router.push('/instruction');
+    },
+      async submit(){
         let formData = new FormData();
         formData.append('instruction_type', this.TypeInstruction);
         formData.append('associates_vendor_name',this.vendor_name);
-        formData.append('associates_vendor_addres',this.vendor_address);
+        formData.append('associates_vendor_address',this.vendor_address);
         formData.append('attention_of',this.attention_of);
         formData.append('quatation_no',this.quotation_no);
         formData.append('invoice_name',this.invoice_to);
@@ -508,9 +508,10 @@ export default {
         formData.append('charge', this.ChargeTo);
         formData.append('invoice_total', this.Total);
         formData.append('notes', this.notes);
-        formData.append('attachtment', this.attachment);
+        formData.append('attachment', this.attachment);
         console.log(this.attachment);
-        this.AddDataInstruction(formData);      
+        await this.AddDataInstruction(formData);
+        this.$router.push('/instruction');
       },
       ...mapActions('instruction',['AddDataInstruction'])
     }

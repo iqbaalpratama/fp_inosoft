@@ -1,13 +1,7 @@
 <template>
   <v-container fluid class="pr-15 pl-15 pt-10">
-    <div class="text-h4">3rd Party Instruction</div>
 
-    <v-breadcrumbs :items="mock.InvoiceInstruction.items" class="pl-0 pt-1 mb-10">
-      <template v-slot:divider>
-        <v-icon>mdi-chevron-right</v-icon>
-      </template>
-    </v-breadcrumbs>
-
+    <Header :item="mock.InvoiceInstruction.items" title="3rd Party Instruction"/>
     <v-card class="pa-3">
       <v-container class="container-custom">
         <v-row class="pa-1" no-gutters>
@@ -418,7 +412,7 @@
     </v-card>
     <v-card class="pa-5 mt-5">
         <div style="width:100%; text-align: right">
-          
+    <v-btn text @click="cancel"> Cancel</v-btn>      
     <v-btn
       class="ma-2"
       outlined
@@ -478,6 +472,14 @@ export default {
       },
       removeLink(){
         this.data.link = ''
+      },
+      cancel(){
+        this.$router.push({
+          name: 'DetailInstruction',
+          params:{
+            id: this.data.id
+          }
+        })
       },
       submit(){
         let formData = new FormData();
