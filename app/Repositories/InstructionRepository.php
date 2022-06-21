@@ -91,7 +91,7 @@ class InstructionRepository
     {
         $instruction = $this->instruction->find($id);
         $instruction->status = "Cancelled";
-        $instruction->cancel_reason = $data['reason'];
+        $instruction->cancel_reason = $data['cancel_reason'] ? $data['cancel_reason'] : "";
         $instruction->update();
         return $instruction;
     }   
