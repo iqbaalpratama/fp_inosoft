@@ -20,12 +20,12 @@
         </v-list>
       </v-menu>
       </div>
-      
       <v-data-table
         @click:row="rowClick"
         :headers="mock.TableOpen.headers"
         :items="dataInstructions"
         class="row-pointer"
+        :search="SearchText"
         item-key="instruction_id"
       >
          <template v-slot:item.status="{ item }">
@@ -33,9 +33,7 @@
             justify="center"
             align="center"
           >
-            <v-chip draggable >
-            {{ item.status}}
-            </v-chip>
+            <ChipStatus :status="item.status"/>
           </v-row>
           </template>
       </v-data-table>
@@ -44,10 +42,15 @@
 <script>
 import mock from './mock';
 import {  mapActions,mapGetters } from 'vuex'
+import ChipStatus from '../Chip/ChipStatusComponent.vue'
 
 
 export default {
     name: 'TableOpenComponent',
+    components:{
+      ChipStatus
+    },
+    props: ['SearchText'],
     data(){
         return{
             mock,

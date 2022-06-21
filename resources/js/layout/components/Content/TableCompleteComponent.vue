@@ -4,6 +4,8 @@
         :headers="mock.TableCompleted.headers"
         :items="dataInstructions"
         item-key="instruction_id"
+        class="row-pointer"
+        :search="SearchText"
         @click:row="rowClick"
       >
       <template v-slot:item.status="{ item }">
@@ -11,9 +13,7 @@
             justify="center"
             align="center"
           >
-            <v-chip draggable text-color="white" :color="ColorChipStatus(item.status)">
-            {{ item.status}}
-            </v-chip>
+            <ChipStatus :status="item.status" />
           </v-row>
           </template>
       </v-data-table>
@@ -22,9 +22,13 @@
 <script>
 import mock from './mock';
 import { mapActions, mapGetters } from 'vuex'
-
+import ChipStatus from '../Chip/ChipStatusComponent.vue'
 export default {
     name: 'TableCompleteComponent',
+    components:{
+      ChipStatus
+    },
+    props: ['SearchText'],
     data(){
         return{
             mock
@@ -44,15 +48,6 @@ export default {
         ...mapActions('instruction', {
             getAll: 'getAllInstruction'
         }),
-        ColorChipStatus(data){
-          if(data == 'completed'){
-            return 'green'
-          }else if(data == 'cancelled'){
-            return 'grey'
-          }else{
-            return ''
-          }
-        },
         rowClick(item){
           this.$router.push({
             name: 'DetailInstruction', 

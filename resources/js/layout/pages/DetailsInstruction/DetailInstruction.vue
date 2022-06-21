@@ -132,7 +132,7 @@
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
               Status
             </v-subheader>
-            <h4>{{data.invoice_status}}</h4>
+            <ChipStatus :status="data.invoice_status"/>
           </v-col>
           <v-col cols="2" class="pa-3">
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
@@ -394,11 +394,13 @@
 import InstructionService from '../../../services/instruction.service'
 import Header from '../../components/Header/HeaderComponent.vue'
 import mock from './mock'
+import ChipStatus from '../../components/Chip/ChipStatusComponent.vue'
 import {mapActions} from 'vuex'
 export default {
     name: "DetailInstruction",
     components:{
-      Header
+      Header,
+      ChipStatus
     },
     data(){
         return{

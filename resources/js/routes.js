@@ -28,16 +28,19 @@ export const routes = [
               {
                 path: '/',
                 redirect: { name: 'TableOpen' },
+                props: true
               },
               {
                 path: '1',
                 name: 'TableOpen',
-                component: TableOpenComponent
+                component: TableOpenComponent,
+                props: true
               },
               {
                 path: '2',
                 name: 'TableComplete',
-                component: TableCompleteComponent
+                component: TableCompleteComponent,
+                props: true
               }
             ]
           },

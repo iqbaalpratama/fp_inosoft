@@ -7,13 +7,16 @@
         <v-tab :to="{ name: 'TableOpen'}">Open</v-tab>
         <v-tab :to="{ name: 'TableComplete'}">Complete</v-tab>
         <v-spacer></v-spacer>
-        <div style="margin:7px!important"><Search/></div>
+        <div style="margin:7px!important">
+          <Search @update:modelValue="newValue => searchText = newValue" />
+        </div>
+        {{searchText}}
         <div class="ma-2">
         <v-btn style="color: black" outlined color="grey lighten-2" > <v-icon left color="primary">mdi-file-outline</v-icon><span style="color:black">Export</span></v-btn>
         </div>
 
       </v-tabs>
-      <router-view></router-view>
+      <router-view :SearchText="searchText"></router-view>
     </v-card>
   </v-container>
 </template>
@@ -28,6 +31,7 @@ export default {
     },
     data(){
         return{
+        searchText: '',
         items: [
         {
           text: 'Vendor Management',
@@ -39,7 +43,7 @@ export default {
           disabled: false,
           href: 'breadcrumbs_link_1',
         },
-      ]
+        ]
         }
     },
     computed: {
