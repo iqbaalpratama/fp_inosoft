@@ -43,10 +43,9 @@ class CreateInstructionRepository
         $instruction->link = $data['link'];
        
         if ( $files = $data['attachment']) {
-            $path = 'public/files';
             $filename = $files->getClientOriginalName();
             $instruction->attachment = $filename;
-            $files->move($path, $filename);
+            $files->store('public/files');
         }
         $instruction->save();
 

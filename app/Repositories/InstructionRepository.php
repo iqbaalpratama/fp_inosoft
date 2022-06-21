@@ -37,11 +37,15 @@ class InstructionRepository
 
     public function getById($id)
     {
-        $instruction = $this->instruction::where('_id', $id)->get();
-
-        return $instruction->map(function ($instruction)  {
+        $instruction = $this->instruction::all()->where('_id', $id);
+    
+        // $testSort = $this->instruction::orderBy('id')->get();
+        // dd($instruction->modelKeys());
+        
+        return $instruction->map(function ($instruction,$i)  {
             return [
                     'id' => $instruction->_id,
+                    'instruction_id'=> $instruction->instruction_type.("-").date("Y").("-").str_pad( $i+1, 4, "0", STR_PAD_LEFT),
                     'intruction_type' => $instruction->instruction_type,
                     'assigned_vendor' => $instruction->associates_vendor_name,
                     'attention_of' => $instruction->attention_of,
@@ -72,9 +76,10 @@ class InstructionRepository
         
     }
 
+    
+
     public function reciveInvoice($id)
-    {
-        
+    {        
         $instruction = $this->instruction->find($id);
         $instruction->invoice_status = "Completed";
         $instruction->update();
