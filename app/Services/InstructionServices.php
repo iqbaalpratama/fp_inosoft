@@ -61,7 +61,7 @@ class InstructionServices
         return $result;
     }
 
-    public function terminateInstruction($data, $id){
+    public function terminateInstruction($id,$data){
         $validator = Validator::make($data,[
             'cancel_reason'
         ]);
@@ -72,7 +72,7 @@ class InstructionServices
         }
 
 
-        $result = $this->instructionRepository->terminateInstruction($data, $id);
+        $result = $this->instructionRepository->terminateInstruction($id,$data);
 
         return $result;
     }
