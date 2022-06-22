@@ -2,7 +2,9 @@
 namespace App\Repositories;
 
 use App\Models\Instruction;
+use Exception;
 
+use function PHPUnit\Framework\throwException;
 
 class InstructionRepository
 {
@@ -78,9 +80,14 @@ class InstructionRepository
 
     
 
-    public function reciveInvoice($id)
+    public function receieveInvoice($id,$data)
     {        
         $instruction = $this->instruction->find($id);
+        if ($instruction->invoice_status == "Cancelled") {
+            throw new Exception("can't receieve invoice");
+        }
+        $attachment = new AttachmentRepository();
+        $attachment->createMany($data,"receieve_invoice");
         $instruction->invoice_status = "Completed";
         $instruction->update();
         return $instruction;
@@ -90,7 +97,7 @@ class InstructionRepository
     public function terminateInstruction($data, $id)
     {
         $instruction = $this->instruction->find($id);
-        $instruction->status = "Cancelled";
+        $instruction->invoice_status = "Cancelled";
         $instruction->cancel_reason = $data['cancel_reason'] ? $data['cancel_reason'] : "";
         $instruction->update();
         return $instruction;

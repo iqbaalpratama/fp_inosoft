@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories as Repository;
-use App\Traits\Instruction;
 use App\Traits\validateInstruction;
 use Illuminate\Support\Facades\Validator ;
 use InvalidArgumentException;
@@ -35,7 +34,7 @@ class InstructionServices
 
     public function saveInstruction($data)
     {
-        $this->validate($data);
+        $this->validateCreate($data);
         $result = $this->createInstructionRepository->create($data);
 
         return $result;
@@ -43,7 +42,7 @@ class InstructionServices
 
     public function editInstruction($id,$data)
     {
-        $this->validate($data);
+        $this->validateUpdate($data);
         $result = $this->updateInstructionRepository->update($id, $data);
 
         return $result;
@@ -55,9 +54,11 @@ class InstructionServices
     }
 
 
-    public function reciveInvoice()
+    public function receieveInvoice($id,$data)
     {
-        # code...
+        $result = $this->instructionRepository->receieveInvoice($id,$data);
+
+        return $result;
     }
 
     public function terminateInstruction($data, $id){
