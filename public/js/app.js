@@ -3789,6 +3789,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_instruction_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/instruction.service */ "./resources/js/services/instruction.service.js");
 /* harmony import */ var _components_Table_SimpleTable_SimpleTableComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Table/SimpleTable/SimpleTableComponent.vue */ "./resources/js/layout/components/Table/SimpleTable/SimpleTableComponent.vue");
 /* harmony import */ var _components_Chip_ChipStatusComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Chip/ChipStatusComponent.vue */ "./resources/js/layout/components/Chip/ChipStatusComponent.vue");
+/* harmony import */ var _components_Header_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Header/HeaderComponent.vue */ "./resources/js/layout/components/Header/HeaderComponent.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4200,11 +4201,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ModifyInstruction",
   components: {
     SimpleTable: _components_Table_SimpleTable_SimpleTableComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ChipStatus: _components_Chip_ChipStatusComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    ChipStatus: _components_Chip_ChipStatusComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Header: _components_Header_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {

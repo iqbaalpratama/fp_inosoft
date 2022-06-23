@@ -398,11 +398,13 @@ import mock from './mock'
 import InstructionService from '../../../services/instruction.service'
 import SimpleTable from '../../components/Table/SimpleTable/SimpleTableComponent.vue'
 import ChipStatus from '../../components/Chip/ChipStatusComponent.vue'
+import Header from '../../components/Header/HeaderComponent.vue'
 export default {
     name: "ModifyInstruction",
     components:{
       SimpleTable,
-      ChipStatus
+      ChipStatus,
+      Header
     },
     data(){
         return{
