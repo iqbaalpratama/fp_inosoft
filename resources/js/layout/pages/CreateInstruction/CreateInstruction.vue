@@ -44,9 +44,7 @@
           <v-col cols="10">
             <v-row no-gutters>
               <v-col cols="12" class="text-right pb-3">
-                <v-chip style="width: 100px; justify-content: center"
-                  >Draft</v-chip
-                >
+                <ChipStatus status="Draft" />
               </v-col>
               <v-col cols="12">
                 <v-row no-gutters>
@@ -405,11 +403,13 @@ import { mapActions } from 'vuex'
 import mock from './mock'
 import Header from '../../components/Header/HeaderComponent.vue'
 import SimpleTable from '../../components/Table/SimpleTable/SimpleTableComponent.vue'
+import ChipStatus from '../../components/Chip/ChipStatusComponent.vue'
 export default {
     name: "CreateInstruction",
     components:{
       Header,
-      SimpleTable
+      SimpleTable,
+      ChipStatus
     },
     data(){
         return{

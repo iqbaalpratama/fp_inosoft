@@ -11,54 +11,24 @@
       <slot name="body">
         <tbody>
           <tr class="text-2rem">
-            <td class="pa-2">
-              {{data.description}}
-            </td>
-            <td>
-              {{data.quantity}}
-            </td>
-            <td>
-              {{data.uom}}
-            </td>
-            <td>
-              {{data.unit_price}}
-            </td>
-            <td>
-              {{data.discount}}
-            </td>
-            <td>
-              {{data.gst_vat}}
-            </td>
-            <td>
-              {{data.currency}}
-            </td>
-            <td>
-              {{data.vat_amount}}
-            </td>
-            <td>
-              {{data.sub_total}}
-            </td>
-            <td>
-              {{data.total}}
-            </td>
-            <td>
-              {{data.charge_to}}
-            </td>
+            <template v-for="item in data">
+              <td>
+                {{item}}
+              </td>   
+            </template>
           </tr>
           <tr>
-            <td colspan="6" class="text-left">
+            <td colspan="6">
               Exchange Rate 1 USD = 3.6725 AED
             </td>
-            <td>
-              <div>AED (Total)</div>
-            </td>
+            <td>AED (Total)</td>
             <td>0.00</td>
             <td>0.00</td>
             <td>0.00</td>
             <td></td>
           </tr>
           <tr>
-            <td colspan="6" class="text-left"></td>
+            <td colspan="6"></td>
             <td>USD (Total)</td>
             <td>0.00</td>
             <td>0.00</td>
@@ -79,8 +49,14 @@ export default {
 </script>
 
 <style scoped>
-.tbl:nth-child(3) {
+.tbl:nth-child(3){
   width: 100px;
+}
+.tbl:nth-child(7){
+  width: 120px;
+}
+.tbl:nth-child(11){
+  width: 140px;
 }
 .text-2rem td div {
   font-size: 0.7rem;

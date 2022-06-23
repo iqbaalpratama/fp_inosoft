@@ -2,7 +2,7 @@ export default {
     InvoiceInstruction: {
         vendor_name: [
             {
-                text: 'Amarit & Associates Logictic Co Ltd'
+                text: 'Amarit & Associates Logistic Co Ltd'
             },
             {
                 text: 'Alphatrans Pte. Ltd.'
@@ -24,7 +24,7 @@ export default {
         customer_contract: [
             {
                 id: 'ADNOC',
-                text: 'Hail & Ghasha'
+                text: 'Hail & Gasha'
             },
             {
                 id: 'ABSOX',
