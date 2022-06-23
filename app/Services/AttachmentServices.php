@@ -15,7 +15,7 @@ class AttachmentServices
         $this->attachmentRepository = $attachmentRepository;
     }
 
-    public function saveAttachment($data, $id, $type){
+    public function saveAttachment($data,$type){
         // dd($data);
         $validator = Validator::make($data,[
             'attachment.*' => 'required|mimes:doc,docx,pdf,txt,csv,jpg,mp4,png|max:2048',
@@ -25,7 +25,7 @@ class AttachmentServices
             throw new InvalidArgumentException($validator->errors()->first());
         }
 
-        $this->attachmentRepository->createMany($data, $id, $type);
+        $this->attachmentRepository->createMany($data,$type);
     }
 
 }

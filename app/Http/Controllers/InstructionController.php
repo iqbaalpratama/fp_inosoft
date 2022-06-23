@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instruction;
+use App\Services\AssociateServices;
 use App\Services\AttachmentServices;
 use App\Services\InstructionServices;
 use Exception;
@@ -13,11 +14,13 @@ class InstructionController extends Controller
 {
     protected $instructionServices;
     protected $attachmentServices;
+    protected $associateServices;
 
-    public function __construct(InstructionServices $instructionServices, AttachmentServices $attachmentServices)
+    public function __construct(InstructionServices $instructionServices, AttachmentServices $attachmentServices, AssociateServices $associateServices)
     {
         $this->instructionServices = $instructionServices;
         $this->attachmentServices = $attachmentServices;
+        $this->associateServices = $associateServices;
     }
 
     public function getAll()
@@ -52,6 +55,41 @@ class InstructionController extends Controller
         return response()->json($result, $result['status']);
     }
 
+    public function receieveInvoice($id)
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->instructionServices->receieveInvoice($id);
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
+
+    }
+
+
+    public function getVendor()
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->associateServices->getVendor();
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
+
+    }
+
     public function store(Request $request)
     {
         $data = $request->all();
@@ -82,8 +120,8 @@ class InstructionController extends Controller
     public function update(Request $request,$id)
     {
         $data = $request->all();
+        
     
-                     
         try {
             $result = ['status' => 200];
             $result['data'] = $this->instructionServices->editInstruction($id,$data);
@@ -105,10 +143,7 @@ class InstructionController extends Controller
 
         try {
             $result = ['status' => 200];
-            $result['data'] = $this->instructionServices->terminateInstruction($data, $id);
-            if($request->has('attachment')){
-                $this->attachmentServices->saveAttachment($data, $id, 'terminate');
-            }
+            $result['data'] = $this->instructionServices->terminateInstruction($id,$data);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,

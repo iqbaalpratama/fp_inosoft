@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\InstructionController;
-use App\Repositories\InstructionRepository;
+use App\Repositories\AttachmentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,14 +20,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('instruction', [InstructionController::class, 'getAll']);
+Route::get('getall_instruction', [InstructionController::class, 'getAll']);
 
-Route::get('instruction/{id}', [InstructionController::class, 'getDetail']);
+Route::get('getdetail_instruction/{id}', [InstructionController::class, 'getDetail']);
 
-Route::post('instruction', [InstructionController::class, 'store']);
+Route::post('create_instruction', [InstructionController::class, 'store']);
+
 Route::post('cancel-instruction/{id}', [InstructionController::class, 'terminate']);
 
-Route::put('instruction/{id}', [InstructionController::class, 'update']);
+Route::post('receieve_invoice/{id}', [InstructionController::class, 'receieveInvoice']);
+
+Route::get('get_vendor', [InstructionController::class, 'getVendor']);
+
+Route::post('update_instruction/{id}', [InstructionController::class, 'update']);
+
+Route::post('file', [AttachmentRepository::class, 'createMany']);
+
 
 
 

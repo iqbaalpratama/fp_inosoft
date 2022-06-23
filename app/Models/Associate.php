@@ -15,7 +15,6 @@ class Associate extends Model
         'vendor_name',
         'vendor_address',
         'customer_contract',
-        'customer_po_no'
     ];
 
 }
