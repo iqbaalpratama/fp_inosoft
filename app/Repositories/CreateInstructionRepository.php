@@ -3,27 +3,19 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Instruction;
-use Illuminate\Support\Facades\DB;
 
 class CreateInstructionRepository
 {
-    
-    protected  $instruction;
-
-    public function __construct(Instruction $instruction)
-    {
-        $this->instruction = $instruction;
-    }
 
     public function create($data)
     {
         // $id = $this->instruction::latest()->first();
         // dd($id);
         
-        $instruction = new $this->instruction;     
+        $instruction = new Instruction();     
         $instruction->instruction_type = $data['instruction_type'];
         $instruction->associates_vendor_name = $data['associates_vendor_name'];
-        $instruction->associates_vendor_addres = $data['associates_vendor_address'];
+        $instruction->associates_vendor_address = $data['associates_vendor_address'];
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
@@ -43,10 +35,9 @@ class CreateInstructionRepository
         $instruction->link = $data['link'];
        
         if ( $files = $data['attachment']) {
-            $path = 'public/files';
             $filename = $files->getClientOriginalName();
             $instruction->attachment = $filename;
-            $files->move($path, $filename);
+            $files->store('public/files');
         }
         $instruction->save();
 

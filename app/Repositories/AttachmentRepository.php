@@ -7,13 +7,6 @@ use App\Models\Attachment;
 class AttachmentRepository
 {
 
-    protected $attachment;
-
-    public function __construct(Attachment $attachment)
-    {
-        $this->attachment = $attachment;
-    }
-
     private function checkTypeFile($extension){
         $type = '';
         switch ($extension) {
@@ -35,22 +28,23 @@ class AttachmentRepository
         return $type;
     }
 
-    public function createMany($data, $id, $type)
-    {
-        $files = $data['attachment'];
-        foreach ($files as $file) {
-            $path = 'Data/Attachment/'.$id.'/'.$type;
-            $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $attachment = new $this->attachment;
-            $attachment->attachment_id = $id;
+    public function createMany($data, $type)
+    {  
+        $id = Attachment::all()->count();
+        if ( $files = $data['attachment']) {        
+            $filenameWithExt = $files->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);            
+            $extension = $files->getClientOriginalExtension();
+            $filenameToSave = $filename.'_'.time().'.'.$extension;
+            $path = $files->storeAs('public/'.$type, $filenameToSave);
+            $attachment = new Attachment();
+            $attachment->attachment_id = ++$id ;
             $attachment->path = $path;
-            $attachment->name = $file->getClientOriginalName();;
+            $attachment->name = $filenameToSave;
             $attachment->type = $this->checkTypeFile($extension);
             $attachment->mime = $extension;
-            $attachment->size = $file->getSize();
+            $attachment->size = $files->getSize();
             $attachment->save();
-            $file->move($path, $filename);
         }
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Associate;
 use App\Repositories\AssociateRepository;
 
 class AssociateServices

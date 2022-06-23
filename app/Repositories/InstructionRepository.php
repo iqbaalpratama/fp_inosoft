@@ -2,7 +2,9 @@
 namespace App\Repositories;
 
 use App\Models\Instruction;
+use Exception;
 
+use function PHPUnit\Framework\throwException;
 
 class InstructionRepository
 {
@@ -19,7 +21,7 @@ class InstructionRepository
 
     public function getAll()
     {
-        $instruction = $this->instruction::all();
+        $instruction = $this->instruction->all();
        
         return $instruction->map(function ($instruction,$i)  {
             return [
@@ -37,11 +39,13 @@ class InstructionRepository
 
     public function getById($id)
     {
-        $instruction = $this->instruction::where('_id', $id)->get();
+        $instruction = $this->instruction->all()->where('_id',$id);
 
-        return $instruction->map(function ($instruction)  {
+        // dd(array_keys($instruction->modelKeys()));
+        return $instruction->map(function ($instruction,$i)  {
             return [
                     'id' => $instruction->_id,
+                    'instruction_id'=> $instruction->instruction_type.("-").date("Y").("-").str_pad( $i+1, 4, "0", STR_PAD_LEFT),
                     'intruction_type' => $instruction->instruction_type,
                     'assigned_vendor' => $instruction->associates_vendor_name,
                     'attention_of' => $instruction->attention_of,
@@ -64,7 +68,7 @@ class InstructionRepository
                         'charge_to' => $instruction->charge,
                     ],
                     'notes' => $instruction->notes,
-                    // 'attachtment' => $instruction->attachtment,
+                    'attachtment' => $instruction->attachtment,
                     'link' => $instruction->link,
                     'invoice_status' => $instruction->invoice_status,
             ];
@@ -72,24 +76,35 @@ class InstructionRepository
         
     }
 
-    public function reciveInvoice($id)
-    {
-        
+    
+
+    public function receieveInvoice($id)
+    {        
         $instruction = $this->instruction->find($id);
+        if ($instruction->invoice_status == "Cancelled") {
+            throw new Exception("can't receieve invoice");
+        }
         $instruction->invoice_status = "Completed";
         $instruction->update();
         return $instruction;
     }
 
 
-    public function terminateInstruction($data, $id)
+    public function terminateInstruction($id,$data)
     {
         $instruction = $this->instruction->find($id);
-        $instruction->status = "Cancelled";
-        $instruction->cancel_reason = $data['reason'];
+        dd($instruction);
+        if ($instruction->invoice_status == "Completed") {
+            throw new Exception("can't Completed");
+        }
+        $attachment = new AttachmentRepository();
+        $attachment->createMany($data,"terminate");
+        $instruction->invoice_status = "Cancelled";
+        $instruction->cancel_reason = $data['cancel_reason'] ? $data['cancel_reason'] : "";
         $instruction->update();
         return $instruction;
     }   
 
+   
 }
 
