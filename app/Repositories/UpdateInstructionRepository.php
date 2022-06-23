@@ -19,14 +19,13 @@ class UpdateInstructionRepository
     public function update($id,$data)
     {
         $instruction = $this->instruction->find($id);
-        $instruction->vendor_name = $data['associates_vendor_name'];   
-        $instruction->vendor_addres = $data['associates_vendor_address'];
+        $instruction->associates_vendor_name = $data['associates_vendor_name'];
+        $instruction->associates_vendor_address = $data['associates_vendor_address'];
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
-        $instruction->invoice_status = 'progress';
-        $instruction->customer_contract = $data['associates_customer_contract'];
-        $instruction->customer_po_no = $data['associates_customer_po_no'];
+        $instruction->associates_customer_contract = $data['associates_customer_contract'];
+        $instruction->associates_customer_po_no = $data['associates_customer_po_no'];
         $instruction->desc = $data['desc'];
         $instruction->qty = $data['qty'];
         $instruction->uom = $data['uom'];
@@ -36,14 +35,14 @@ class UpdateInstructionRepository
         $instruction->invoice_total =$data['invoice_total'];
         $instruction->charge = $data['charge'];
         $instruction->notes = $data['notes'];
-        $instruction->attachtment = $data['attachtment'];
+        $instruction->attachment = $data['attachment'];
         $instruction->link = $data['link'];
-        // if ($file = $data->file('attachtment')) 
-        // $path = $file->store('public/files'); 
-        // $name = $file->getClientOriginalName();
-        // $instruction->$name = $file;
-        // $instruction-> store_path = $path;
-        $instruction->update();
+       if ( $files = $data['attachment']) {
+            $filename = $files->getClientOriginalName();
+            $instruction->attachment = $filename;
+            $files->store('public/files');
+        }
+        $instruction->save();
         return $instruction;
     }
 
