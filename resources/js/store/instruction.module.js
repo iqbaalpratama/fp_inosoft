@@ -33,6 +33,16 @@ const actions = {
             }
         );
         dispatch('getAllInstruction')
+    },
+    ReceiveInvoice({dispatch},data){
+        InstructionService.receiveInvoice(data).then(
+            response => {
+                console.log(response);
+            },
+            error => {
+                console.log(error);
+            }
+        );
     }
 };
 const getters = {

@@ -11,5 +11,8 @@ class InstructionService{
     getDetail(id){
         return axios.get(API_URL + 'instruction/' + id);
     }
+    receiveInvoice(id){
+        return axios.put(API_URL + 'reciveInvocie/'+ id );
+    }
 }
 export default new InstructionService();
