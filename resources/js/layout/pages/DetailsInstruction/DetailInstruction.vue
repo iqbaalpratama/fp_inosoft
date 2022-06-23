@@ -346,20 +346,11 @@ export default {
           attachment: '',
           supporting_document: 0,
         },
-        StatusChecker: null
+        StatusChecker: ''
         }
     },
     async mounted(){
-      this.getData().then(
-            response => {
-                this.data = response.data.data[0];
-                console.log(response);
-                this.StatusCheck();
-            },
-            error => {
-                console.log(error);
-            }
-      )
+      await this.getData();
       this.initialize();
     },
     computed: {
@@ -374,19 +365,26 @@ export default {
       dialogDelete (val) {
         val || this.closeDelete()
       },
+      'data.invoice_status'(newValue){
+          let status = newValue.toUpperCase()
+          if(status == 'COMPLETED'){
+            this.StatusChecker = false
+          }else{
+            this.StatusChecker = true
+          }
+      }
     },
     methods: {
       getData(){
-        return InstructionService.getDetail(this.$route.params.id);
-      },
-      StatusCheck(){
-        console.log('this.data.invoice_status')
-        console.log(this.data.invoice_status)
-        if(this.data.invoice_status == 'Completed' || this.data.invoice_status == 'completed'){
-          this.StatusChecker = false
-        }else{
-          this.StatusChecker = true
-        }
+        InstructionService.getDetail(this.$route.params.id).then(
+            response => {
+                this.data = response.data.data[0];
+                console.log(response);
+            },
+            error => {
+                console.log(error);
+            }
+      );
       },
       BackClick(){
         this.$router.push('/instruction');
@@ -466,7 +464,6 @@ export default {
         await this.getData().then(
             response => {
                 this.data = response.data.data[0];
-                this.StatusCheck();
             },
             error => {
                 console.log(error);
