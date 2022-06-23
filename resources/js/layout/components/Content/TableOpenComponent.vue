@@ -5,7 +5,6 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="primary"
-            dark
             v-bind="attrs"
             v-on="on"
           ><v-icon left>mdi-plus</v-icon>
@@ -28,6 +27,9 @@
         :search="SearchText"
         item-key="instruction_id"
       >
+        <template v-slot:item.intruction_type="{ item }">
+          <v-icon left color="secondary">{{ item.intruction_type == 'LI'? 'mdi-truck': 'mdi-human-male-board-poll'}}</v-icon>{{item.intruction_type}}
+      </template>
          <template v-slot:item.status="{ item }">
           <v-row
             justify="center"

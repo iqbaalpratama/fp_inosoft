@@ -8,6 +8,9 @@
         :search="SearchText"
         @click:row="rowClick"
       >
+      <template v-slot:item.intruction_type="{ item }">
+          <v-icon left color="secondary">{{ item.intruction_type == 'LI'? 'mdi-truck': 'mdi-human-male-board-poll'}}</v-icon>{{item.intruction_type}}
+      </template>
       <template v-slot:item.status="{ item }">
           <v-row
             justify="center"
@@ -15,7 +18,7 @@
           >
             <ChipStatus :status="item.status" />
           </v-row>
-          </template>
+      </template>
       </v-data-table>
 </v-container>
 </template>
@@ -37,7 +40,7 @@ export default {
     computed: {
         ...mapGetters('instruction',['FilteredDataInstruction']),
         dataInstructions(){
-          return this.FilteredDataInstruction('completed');
+          return this.FilteredDataInstruction('Completed');
         }
     },
     mounted(){
