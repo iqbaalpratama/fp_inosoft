@@ -1,26 +1,27 @@
 <template>
-<v-container fluid class="pa-0">      
-      <v-data-table
-        :headers="mock.TableCompleted.headers"
-        :items="dataInstructions"
-        item-key="instruction_id"
-        class="row-pointer"
-        :search="SearchText"
-        @click:row="rowClick"
-      >
+  <v-container fluid class="pa-0">
+    <v-data-table
+      :headers="mock.TableCompleted.headers"
+      :items="dataInstructions"
+      item-key="instruction_id"
+      class="row-pointer"
+      :search="SearchText"
+      @click:row="rowClick"
+    >
       <template v-slot:item.intruction_type="{ item }">
-          <v-icon left color="secondary">{{ item.intruction_type == 'LI'? 'mdi-truck': 'mdi-human-male-board-poll'}}</v-icon>{{item.intruction_type}}
+        <v-icon
+          left
+          color="secondary"
+          >{{ item.intruction_type == 'LI'? 'mdi-truck': 'mdi-human-male-board-poll'}}</v-icon
+        >{{item.intruction_type}}
       </template>
       <template v-slot:item.status="{ item }">
-          <v-row
-            justify="center"
-            align="center"
-          >
-            <ChipStatus :status="item.status" />
-          </v-row>
+        <v-row justify="center" align="center">
+          <ChipStatus :status="item.status" />
+        </v-row>
       </template>
-      </v-data-table>
-</v-container>
+    </v-data-table>
+  </v-container>
 </template>
 <script>
 import mock from './mock';
@@ -45,7 +46,7 @@ export default {
     },
     mounted(){
         this.getAll();
-        
+
     },
     methods:{
         ...mapActions('instruction', {
@@ -53,7 +54,7 @@ export default {
         }),
         rowClick(item){
           this.$router.push({
-            name: 'DetailInstruction', 
+            name: 'DetailInstruction',
             params: { id: item.id }
           });
         }

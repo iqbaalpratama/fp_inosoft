@@ -1,12 +1,9 @@
 <template>
   <div class="container">
-  <div class="copy-container center-xy">
-    <p>
-      404, page not found.
-    </p>
+    <div class="copy-container center-xy">
+      <p>404, page not found.</p>
+    </div>
   </div>
-</div>
-
 </template>
 
 <script>
@@ -16,17 +13,18 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 
 .center-xy {
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   position: absolute;
 }
 
-html, body {
-  font-family: 'Roboto Mono', monospace;
+html,
+body {
+  font-family: "Roboto Mono", monospace;
   font-size: 16px;
 }
 
@@ -39,7 +37,9 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -54,8 +54,7 @@ body {
 p {
   color: rgb(0, 0, 0);
   font-size: 24px;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
   margin: 0;
 }
-
 </style>

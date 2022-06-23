@@ -1,11 +1,16 @@
 <template>
-    <div class="box">
-
+  <div class="box">
     <label :data-state="state">
-      <input type="text" placeholder="Search" v-model="value" @click="state = 'open'" @blur="state='close'"/>
-      <v-icon color="primary" >mdi-magnify</v-icon>
+      <input
+        type="text"
+        placeholder="Search"
+        v-model="value"
+        @click="state = 'open'"
+        @blur="state='close'"
+      />
+      <v-icon color="primary">mdi-magnify</v-icon>
     </label>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -33,5 +38,3 @@ export default {
 </script>
 
 <style src="./Search.scss" lang="scss"></style>
-
-

@@ -1,6 +1,9 @@
 <template>
   <v-container fluid class="pr-15 pl-15 pt-10">
-    <Header :item="mock.InvoiceInstruction.items" title="3rd Party Instruction"/>
+    <Header
+      :item="mock.InvoiceInstruction.items"
+      title="3rd Party Instruction"
+    />
     <v-card class="pa-3">
       <v-container class="container-custom">
         <v-row class="pa-1" no-gutters>
@@ -18,15 +21,22 @@
               background-color="grey lighten-4"
             >
               <template slot="selection" slot-scope="data">
-                      <v-icon left size="20" color="primary">{{data.item.icon}}</v-icon>
-                      {{data.item.name}}
+                <v-icon
+                  left
+                  size="20"
+                  color="primary"
+                  >{{data.item.icon}}</v-icon
+                >
+                {{data.item.name}}
               </template>
               <template slot="item" slot-scope="data">
                 <v-list-item-icon style="margin-right: 0">
                   <v-icon left color="primary">{{data.item.icon}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title v-text="data.item.name"></v-list-item-title>
+                  <v-list-item-title
+                    v-text="data.item.name"
+                  ></v-list-item-title>
                 </v-list-item-content>
               </template>
             </v-select>
@@ -182,7 +192,7 @@
           </v-col>
         </v-row>
       </v-container>
-      
+
       <v-container class="container-custom">
         <h2>Cost Detail</h2>
         <SimpleTable :headertable="HeadersName">
@@ -327,7 +337,10 @@
         <v-row no-gutters class="pt-10">
           <v-col cols="5" class="pr-7">
             <h3>Attachment</h3>
-            <v-file-input label="File input" v-model="attachment"></v-file-input>
+            <v-file-input
+              label="File input"
+              v-model="attachment"
+            ></v-file-input>
           </v-col>
           <v-col cols="7">
             <h3 class="pb-2">Notes</h3>
@@ -342,14 +355,13 @@
       </v-container>
     </v-card>
     <v-card class="pa-3 mt-5">
-      <div style="width:50%;">
-          <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
-            Link To
-          </v-subheader>
+      <div style="width: 50%">
+        <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
+          Link To
+        </v-subheader>
         <v-row no-gutters>
           <v-col cols="9">
-
-          <v-select
+            <v-select
               placeholder="Select Item"
               class="select"
               :items="mock.InvoiceInstruction.ItemsLink"
@@ -362,34 +374,29 @@
               color="black"
               background-color="grey lighten-4"
             ></v-select>
-          
           </v-col>
           <v-col cols="3" class="pl-2">
-
-          <v-btn depressed color="error" v-if="LinkTo !== ''? true : false" @click="removeLink"> Remove Link </v-btn>
+            <v-btn
+              depressed
+              color="error"
+              v-if="LinkTo !== ''? true : false"
+              @click="removeLink"
+            >
+              Remove Link
+            </v-btn>
           </v-col>
         </v-row>
-     </div>
+      </div>
     </v-card>
     <v-card class="pa-5 mt-5">
-        <div style="width:100%; text-align: right">
-    <v-btn text @click="cancel"> Cancel</v-btn>
-    <v-btn
-      class="ma-2"
-      outlined
-      color="grey darken-2"
-    >
-      Save as Draft
-    </v-btn>
-    
-    <v-btn
-      depressed
-      color="primary"
-      @click="submit"
-    >
-      Submit
-    </v-btn>
-        </div>
+      <div style="width: 100%; text-align: right">
+        <v-btn text @click="cancel"> Cancel</v-btn>
+        <v-btn class="ma-2" outlined color="grey darken-2">
+          Save as Draft
+        </v-btn>
+
+        <v-btn depressed color="primary" @click="submit"> Submit </v-btn>
+      </div>
     </v-card>
   </v-container>
 </template>
@@ -444,7 +451,7 @@ export default {
       },
       Total(){
         return (this.Subtotal + this.VATAmount)
-      }      
+      }
     },
     methods:{
       removeLink(){

@@ -1,7 +1,13 @@
 <template>
-    <v-chip tag="div" draggable :text-color="FontColorChipStatus" :color="BgColorChipStatus" class="chip text-center">
-        {{ status }}
-    </v-chip>
+  <v-chip
+    tag="div"
+    draggable
+    :text-color="FontColorChipStatus"
+    :color="BgColorChipStatus"
+    class="chip text-center"
+  >
+    {{ status }}
+  </v-chip>
 </template>
 
 <script>
@@ -11,7 +17,7 @@ export default {
     computed:{
         BgColorChipStatus(){
             let data = this.status.toUpperCase();
-            
+
             if(data == 'COMPLETED'){
                 return 'green'
             }else if(data == 'CANCELLED'){
@@ -41,8 +47,8 @@ export default {
 </script>
 
 <style scoped>
-.chip{
-    width:100px;
-    justify-content: center;
+.chip {
+  width: 100px;
+  justify-content: center;
 }
 </style>

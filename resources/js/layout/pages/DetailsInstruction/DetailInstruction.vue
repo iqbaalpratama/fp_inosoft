@@ -1,11 +1,19 @@
 <template>
   <v-container fluid class="pr-15 pl-15 pt-10">
-    
-    <Header :item="mock.DetailInstruction.items" title="3rd Party Instruction"/>
+    <Header
+      :item="mock.DetailInstruction.items"
+      title="3rd Party Instruction"
+    />
 
-    <div style="width:100%;text-align: right" class="mb-2">
-        <v-btn style="background-color: white" outlined color="grey lighten-2"> <v-icon color="primary" left>mdi-email-fast</v-icon><span style="color:black">Send Email</span></v-btn>
-        <v-btn style="background-color: white" outlined color="grey lighten-2" > <v-icon left color="primary">mdi-file-outline</v-icon><span style="color:black">Export</span></v-btn>
+    <div style="width: 100%; text-align: right" class="mb-2">
+      <v-btn style="background-color: white" outlined color="grey lighten-2">
+        <v-icon color="primary" left>mdi-email-fast</v-icon
+        ><span style="color: black">Send Email</span></v-btn
+      >
+      <v-btn style="background-color: white" outlined color="grey lighten-2">
+        <v-icon left color="primary">mdi-file-outline</v-icon
+        ><span style="color: black">Export</span></v-btn
+      >
     </div>
     <v-card class="pa-3">
       <v-row no-gutters>
@@ -16,79 +24,75 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="auto">
-          <v-dialog v-if="StatusChecker"
+          <v-dialog
+            v-if="StatusChecker"
             v-model="dialogTerminated"
             persistent
             max-width="600px"
-            >
+          >
             <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                v-on="on"
-                text
-                >
-              <v-icon left>mdi-delete</v-icon>Terminated
+              <v-btn v-bind="attrs" v-on="on" text>
+                <v-icon left>mdi-delete</v-icon>Terminated
               </v-btn>
             </template>
-      <v-card>
-        <v-card-title class="text-center">
-          <span class="text-h5 text-center">Reason Of Cancellation</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
-              Cancelled By
-            </v-subheader>
-            <h4>
-              Winata Admin
-            </h4>
-              </v-col>
-              <v-col cols="12">
-                <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
-              Description
-            </v-subheader>
-                <v-textarea
-                  readonly
-                  outlined
-                  name="input-7-4"
-                  background-color="grey lighten-5"
-                ></v-textarea>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
-              Attachment
-            </v-subheader>
-<v-file-input
-                  label="File input"
-                ></v-file-input>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialogTerminated = false"
-          >
-            Close
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialogTerminated = false"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+            <v-card>
+              <v-card-title class="text-center">
+                <span class="text-h5 text-center">Reason Of Cancellation</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-subheader
+                        style="height: 20px; font-size: 0.75rem; padding: 0"
+                      >
+                        Cancelled By
+                      </v-subheader>
+                      <h4>Winata Admin</h4>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-subheader
+                        style="height: 20px; font-size: 0.75rem; padding: 0"
+                      >
+                        Description
+                      </v-subheader>
+                      <v-textarea
+                        readonly
+                        outlined
+                        name="input-7-4"
+                        background-color="grey lighten-5"
+                      ></v-textarea>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-subheader
+                        style="height: 20px; font-size: 0.75rem; padding: 0"
+                      >
+                        Attachment
+                      </v-subheader>
+                      <v-file-input label="File input"></v-file-input>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="dialogTerminated = false"
+                >
+                  Close
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="dialogTerminated = false"
+                >
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-btn text @click="ModifyClick" v-if="StatusChecker">
             <v-icon left>mdi-pencil</v-icon>Modify
           </v-btn>
@@ -106,7 +110,7 @@
           </v-col>
           <v-col cols="2" class="pa-3">
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
-             {{ data.intruction_type }}  No.</v-subheader
+              {{ data.intruction_type }} No.</v-subheader
             >
             <h4>{{data.instruction_id}}</h4>
           </v-col>
@@ -132,7 +136,7 @@
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
               Status
             </v-subheader>
-            <ChipStatus :status="data.invoice_status"/>
+            <ChipStatus :status="data.invoice_status" />
           </v-col>
           <v-col cols="2" class="pa-3">
             <v-subheader style="height: 20px; font-size: 0.75rem; padding: 0">
@@ -188,125 +192,115 @@
             </v-row>
           </v-container>
         </v-container>
-        
-          <v-data-table
 
-            :headers="headers"
-            :items="desserts"
-            disable-sort
-            disable-pagination
-            disable-filtering
-            :hide-default-footer="true"
-            class="elevation-1 mt-5 mb-5"
-          >
-            <template v-slot:top>
-              <v-toolbar flat>
-                <v-toolbar-title>Vendor Invoice</v-toolbar-title>
+        <v-data-table
+          :headers="headers"
+          :items="desserts"
+          disable-sort
+          disable-pagination
+          disable-filtering
+          :hide-default-footer="true"
+          class="elevation-1 mt-5 mb-5"
+        >
+          <template v-slot:top>
+            <v-toolbar flat>
+              <v-toolbar-title>Vendor Invoice</v-toolbar-title>
 
-                <v-spacer></v-spacer>
+              <v-spacer></v-spacer>
 
-                <v-dialog v-model="dialog" max-width="500px" v-if="StatusChecker">
+              <v-dialog v-model="dialog" max-width="500px" v-if="StatusChecker">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    Add Vendor Invoice
+                  </v-btn>
+                </template>
 
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      v-bind="attrs"
-                      v-on="on"
-                    >
-                      Add Vendor Invoice
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5"> {{formTitle}}</span>
+                  </v-card-title>
+
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-text-field
+                            v-model="editedItem.invoice_no"
+                            label="Invoice No."
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            v-model="editedItem.attachment"
+                            label="Attachment"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            v-model="editedItem.supporting_document"
+                            label="Supporting Document"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="close">
+                      Cancel
                     </v-btn>
-                  </template>
+                    <v-btn color="blue darken-1" text @click="save">
+                      Save
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
 
-                  <v-card>
-
-                    <v-card-title>
-                      <span class="text-h5"> {{formTitle}}</span>
-                    </v-card-title>
-
-                    <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col cols="12">
-                            <v-text-field
-                              v-model="editedItem.invoice_no"
-                              label="Invoice No."
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              v-model="editedItem.attachment"
-                              label="Attachment"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              v-model="editedItem.supporting_document"
-                              label="Supporting Document"
-                            ></v-text-field>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click="close">
-                        Cancel
-                      </v-btn>
-                      <v-btn color="blue darken-1" text @click="save">
-                        Save
-                      </v-btn>
-                    </v-card-actions>
-
-                  </v-card>
-                </v-dialog>
-
-                <v-dialog v-model="dialogDelete" max-width="500px">
-                  <v-card>
-                    <v-card-title class="text-h5"
-                      >Are you sure you want to delete this item?</v-card-title
+              <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                  <v-card-title class="text-h5"
+                    >Are you sure you want to delete this item?</v-card-title
+                  >
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="closeDelete"
+                      >Cancel</v-btn
                     >
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click="closeDelete"
-                        >Cancel</v-btn
-                      >
-                      <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="deleteItemConfirm"
-                        >OK</v-btn
-                      >
-                      <v-spacer></v-spacer>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-toolbar>
-            </template>
+                    <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                      >OK</v-btn
+                    >
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-toolbar>
+          </template>
 
-            <template v-slot:item.actions="{ item }">
-              <v-icon small class="mr-2" @click="editItem(item)">
-                mdi-pencil
-              </v-icon>
-              <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-            </template>
-
-          </v-data-table>
-          <v-row no-gutters class="mb-10" v-if="StatusChecker">
-            <v-col cols="6" class="text-right pr-2">
-              <p class="text-body-2">
-              Click the button if all vendor invoices <br>
+          <template v-slot:item.actions="{ item }">
+            <v-icon small class="mr-2" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          </template>
+        </v-data-table>
+        <v-row no-gutters class="mb-10" v-if="StatusChecker">
+          <v-col cols="6" class="text-right pr-2">
+            <p class="text-body-2">
+              Click the button if all vendor invoices <br />
               have been received.
-              </p>
-            </v-col>
-            <v-col cols="6" class="text-left pl-2">
-              <v-btn color="primary" @click="receiveInvoice"> All Received</v-btn>
-            </v-col>
-          </v-row>
-
-
+            </p>
+          </v-col>
+          <v-col cols="6" class="text-left pl-2">
+            <v-btn color="primary" @click="receiveInvoice"> All Received</v-btn>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card>
   </v-container>
@@ -327,7 +321,7 @@ export default {
     },
     data(){
         return{
-         HeadersName: ['Description','QTY','UOM','Unit Price','Discount (%)','GST/VAT (%)','Currency','VAT Amount','Sub Total','Total','Charge To'], 
+         HeadersName: ['Description','QTY','UOM','Unit Price','Discount (%)','GST/VAT (%)','Currency','VAT Amount','Sub Total','Total','Charge To'],
         mock,
         data: null,
         dialogTerminated: false,
@@ -501,7 +495,10 @@ export default {
 .text-2rem td {
   font-size: 0.7rem;
 }
-.v-data-table > .v-data-table__wrapper tbody tr.v-data-table__expanded__content {
+.v-data-table
+  > .v-data-table__wrapper
+  tbody
+  tr.v-data-table__expanded__content {
   box-shadow: none;
 }
 </style>
