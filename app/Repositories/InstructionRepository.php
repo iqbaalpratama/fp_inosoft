@@ -21,7 +21,7 @@ class InstructionRepository
 
     public function getAll()
     {
-        $instruction = $this->instruction::all();
+        $instruction = $this->instruction->all();
        
         return $instruction->map(function ($instruction,$i)  {
             return [
@@ -39,11 +39,9 @@ class InstructionRepository
 
     public function getById($id)
     {
-        $instruction = $this->instruction::all()->where('_id', $id);
-    
-        // $testSort = $this->instruction::orderBy('id')->get();
-        // dd($instruction->modelKeys());
-        
+        $instruction = $this->instruction->all()->where('_id',$id);
+
+        // dd(array_keys($instruction->modelKeys()));
         return $instruction->map(function ($instruction,$i)  {
             return [
                     'id' => $instruction->_id,
@@ -70,7 +68,7 @@ class InstructionRepository
                         'charge_to' => $instruction->charge,
                     ],
                     'notes' => $instruction->notes,
-                    // 'attachtment' => $instruction->attachtment,
+                    'attachtment' => $instruction->attachtment,
                     'link' => $instruction->link,
                     'invoice_status' => $instruction->invoice_status,
             ];
@@ -80,28 +78,33 @@ class InstructionRepository
 
     
 
-    public function receieveInvoice($id,$data)
+    public function receieveInvoice($id)
     {        
         $instruction = $this->instruction->find($id);
         if ($instruction->invoice_status == "Cancelled") {
             throw new Exception("can't receieve invoice");
         }
-        $attachment = new AttachmentRepository();
-        $attachment->createMany($data,"receieve_invoice");
         $instruction->invoice_status = "Completed";
         $instruction->update();
         return $instruction;
     }
 
 
-    public function terminateInstruction($data, $id)
+    public function terminateInstruction($id,$data)
     {
         $instruction = $this->instruction->find($id);
+        dd($instruction);
+        if ($instruction->invoice_status == "Completed") {
+            throw new Exception("can't Completed");
+        }
+        $attachment = new AttachmentRepository();
+        $attachment->createMany($data,"terminate");
         $instruction->invoice_status = "Cancelled";
         $instruction->cancel_reason = $data['cancel_reason'] ? $data['cancel_reason'] : "";
         $instruction->update();
         return $instruction;
     }   
 
+   
 }
 

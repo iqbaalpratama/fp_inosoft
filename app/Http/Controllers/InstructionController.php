@@ -55,14 +55,12 @@ class InstructionController extends Controller
         return response()->json($result, $result['status']);
     }
 
-    public function receieveInvoice(Request $request, $id)
+    public function receieveInvoice($id)
     {
-        $data = $request->only([
-            'attachment'
-        ]);
+        $result = ['status' => 200];
+
         try {
-            $result = ['status' => 200];
-            $result['data'] = $this->instructionServices->receieveInvoice($id,$data);
+            $result['data'] = $this->instructionServices->receieveInvoice($id);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,

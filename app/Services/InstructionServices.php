@@ -54,9 +54,9 @@ class InstructionServices
     }
 
 
-    public function receieveInvoice($id,$data)
+    public function receieveInvoice($id)
     {
-        $result = $this->instructionRepository->receieveInvoice($id,$data);
+        $result = $this->instructionRepository->receieveInvoice($id);
 
         return $result;
     }
