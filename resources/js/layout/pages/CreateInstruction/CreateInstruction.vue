@@ -316,17 +316,17 @@
                 <td>
                   <div>AED (Total)</div>
                 </td>
-                <td>0.00</td>
-                <td>0.00</td>
-                <td>0.00</td>
+                <td>{{CurrencyTotal.AED.tax}}</td>
+                <td>{{CurrencyTotal.AED.subtotal}}</td>
+                <td>{{CurrencyTotal.AED.total}}</td>
                 <td></td>
               </tr>
               <tr>
                 <td colspan="6" class="text-left"></td>
                 <td>USD (Total)</td>
-                <td>0.00</td>
-                <td>0.00</td>
-                <td>0.00</td>
+                <td>{{CurrencyTotal.USD.tax}}</td>
+                <td>{{CurrencyTotal.USD.subtotal}}</td>
+                <td>{{CurrencyTotal.USD.total}}</td>
                 <td></td>
               </tr>
             </tbody>
@@ -401,7 +401,7 @@
   </v-container>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 import mock from './mock'
 import Header from '../../components/Header/HeaderComponent.vue'
 import SimpleTable from '../../components/Table/SimpleTable/SimpleTableComponent.vue'
@@ -433,13 +433,35 @@ export default {
         LinkTo: '',
         TypeInstruction:'',
         attachment:null,
-        notes:''
-
+        notes:'',
+        CurrencyTotal: {
+          USD :{
+            tax: 0,
+            subtotal: 0,
+            total: 0
+          },
+          AED :{
+            tax: 0,
+            subtotal: 0,
+            total: 0
+          }
+          }
         }
     },
     mounted(){
       if(this.$route.query.type !== '' || this.$route.query.type !== null){
         this.TypeInstruction = this.$route.query.type
+      }
+    },
+    watch:{
+      Currency(newValue){
+        if(newValue == 'USD'){
+          this.CurrencyTotal.USD = { tax: this.VATAmount, subtotal: this.Subtotal, total: this.Total }
+          this.CurrencyTotal.AED = { tax: this.VATAmount * 3.67, subtotal: this.Subtotal* 3.67, total: this.Total * 3.67 }
+        }else if(newValue == 'AED'){
+          this.CurrencyTotal.AED = { tax: this.VATAmount, subtotal: this.Subtotal, total: this.Total }
+          this.CurrencyTotal.USD = { tax: this.VATAmount * 0.27, subtotal: this.Subtotal* 0.27, total: this.Total * 0.27 }
+        }
       }
     },
     computed: {
