@@ -6,6 +6,7 @@ import TableCompleteComponent from './layout/components/Content/TableCompleteCom
 import CreateInstruction from './layout/pages/CreateInstruction/CreateInstruction'
 import DetailInstruction from './layout/pages/DetailsInstruction/DetailInstruction'
 import ModifyInstruction from './layout/pages/ModifyInstruction/ModifyInstruction'
+import NotFoundPages from './layout/pages/404Pages/404NotFound.vue'
 
 
 
@@ -61,4 +62,10 @@ export const routes = [
           }      
         ],
       },
+      {
+        name: 'PageNotFound',
+        path: '/:pathMatch(.*)*',
+        component: NotFoundPages
+
+      }
 ];
