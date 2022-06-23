@@ -164,87 +164,7 @@
       <v-container class="mt-10 pa-0">
         <h2 class="pb-5">Cost Detail</h2>
         <v-container class="container-custom pa-0">
-          <v-simple-table readonly>
-            <template v-slot:default>
-              <thead class="secondary">
-                <tr>
-                  <th class="text-left white--text">Description</th>
-                  <th class="text-left white--text">QTY</th>
-                  <th
-                    class="text-left white--text"
-                    style="min-width: 50px; width: 75px"
-                  >
-                    UOM
-                  </th>
-                  <th class="text-left white--text">Unit Price</th>
-                  <th class="text-left white--text">Discount (%)</th>
-                  <th class="text-left white--text">GST/VAT (%)</th>
-                  <th class="text-left white--text">Currency</th>
-                  <th class="text-left white--text">VAT Amount</th>
-                  <th class="text-left white--text">Sub Total</th>
-                  <th class="text-left white--text">Total</th>
-                  <th class="text-left white--text">Charge To</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-2rem">
-                  <td class="pa-2">
-                    {{data.cost_detail.description}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.quantity}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.uom}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.unit_price}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.discount}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.gst_vat}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.currency}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.vat_amount}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.sub_total}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.total}}
-                  </td>
-                  <td>
-                    {{data.cost_detail.charge_to}}
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="6" class="text-left">
-                    Exchange Rate 1 USD = 3.6725 AED
-                  </td>
-                  <td>
-                    <div>AED (Total)</div>
-                  </td>
-                  <td>0.00</td>
-                  <td>0.00</td>
-                  <td>0.00</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td colspan="6" class="text-left"></td>
-                  <td>USD (Total)</td>
-                  <td>0.00</td>
-                  <td>0.00</td>
-                  <td>0.00</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+          <SimpleTable :data="data.cost_detail" :headertable="HeadersName" />
           <v-container>
             <v-row no-gutters class="pt-5">
               <v-col cols="5" class="pr-7">
@@ -258,6 +178,7 @@
                 <h3 class="pb-2">Notes</h3>
                 <v-textarea
                   readonly
+                  disabled
                   outlined
                   v-model="data.notes"
                   name="input-7-4"
@@ -395,15 +316,18 @@ import InstructionService from '../../../services/instruction.service'
 import Header from '../../components/Header/HeaderComponent.vue'
 import mock from './mock'
 import ChipStatus from '../../components/Chip/ChipStatusComponent.vue'
+import SimpleTable from '../../components/Table/SimpleTable/SimpleTableComponent.vue'
 import {mapActions} from 'vuex'
 export default {
     name: "DetailInstruction",
     components:{
+      SimpleTable,
       Header,
       ChipStatus
     },
     data(){
         return{
+         HeadersName: ['Description','QTY','UOM','Unit Price','Discount (%)','GST/VAT (%)','Currency','VAT Amount','Sub Total','Total','Charge To'], 
         mock,
         data: null,
         dialogTerminated: false,
@@ -432,27 +356,19 @@ export default {
         }
     },
     async mounted(){
-        await InstructionService.getDetail(this.$route.params.id).then(
+      this.getData().then(
             response => {
                 this.data = response.data.data[0];
-                console.log(this.data);
+                console.log(response);
+                this.StatusCheck();
             },
             error => {
                 console.log(error);
             }
-        );
-        this.initialize();
-        this.StatusCheck();
-
+      )
+      this.initialize();
     },
     computed: {
-      StatusCheck(){
-        if(this.data.invoice_status == 'completed'){
-          this.StatusChecker = false
-        }else{
-          this.StatusChecker = true
-        }
-      },
       formTitle () {
         return this.editedIndex === -1 ? 'Add Vendor Invoice' : 'Edit Vendor Invoice'
       }
@@ -466,6 +382,18 @@ export default {
       },
     },
     methods: {
+      getData(){
+        return InstructionService.getDetail(this.$route.params.id);
+      },
+      StatusCheck(){
+        console.log('this.data.invoice_status')
+        console.log(this.data.invoice_status)
+        if(this.data.invoice_status == 'Completed' || this.data.invoice_status == 'completed'){
+          this.StatusChecker = false
+        }else{
+          this.StatusChecker = true
+        }
+      },
       BackClick(){
         this.$router.push('/instruction');
       },
@@ -539,9 +467,17 @@ export default {
         }
         this.close()
       },
-      receiveInvoice(){
-        this.ReceiveInvoice(this.$route.params.id);
-        console.log(this.$route.params.id);
+      async receiveInvoice(){
+        await this.ReceiveInvoice(this.$route.params.id);
+        await this.getData().then(
+            response => {
+                this.data = response.data.data[0];
+                this.StatusCheck();
+            },
+            error => {
+                console.log(error);
+            }
+      )
       },
       ...mapActions('instruction',['ReceiveInvoice'])
     },

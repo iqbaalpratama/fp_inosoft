@@ -182,48 +182,11 @@
           </v-col>
         </v-row>
       </v-container>
+      
       <v-container class="container-custom">
         <h2>Cost Detail</h2>
-        <!-- <v-data-table
-            :headers="headers"
-            :items="invoice_detail"
-            disable-sort
-          >
-            <template v-slot:item.link_to>
-                <v-text-field 
-                          class="select text-center mt-2"
-                          placeholder="Select Quotation"
-                          outlined
-                          dense
-                          item-color="black"
-                          color="black"
-                          background-color="grey lighten-4"
-                ></v-text-field>
-            </template>
-          </v-data-table> -->
-
-        <v-simple-table readonly>
-          <template v-slot:default>
-            <thead class="secondary">
-              <tr>
-                <th class="text-left white--text">Description</th>
-                <th class="text-left white--text">QTY</th>
-                <th
-                  class="text-left white--text"
-                  style="min-width: 50px; width: 75px"
-                >
-                  UOM
-                </th>
-                <th class="text-left white--text">Unit Price</th>
-                <th class="text-left white--text">Discount (%)</th>
-                <th class="text-left white--text">GST/VAT (%)</th>
-                <th class="text-left white--text">Currency</th>
-                <th class="text-left white--text">VAT Amount</th>
-                <th class="text-left white--text">Sub Total</th>
-                <th class="text-left white--text">Total</th>
-                <th class="text-left white--text">Charge To</th>
-              </tr>
-            </thead>
+        <SimpleTable :headertable="HeadersName">
+          <template v-slot:body>
             <tbody>
               <tr class="text-2rem">
                 <td class="pa-2">
@@ -253,6 +216,7 @@
                 </td>
                 <td>
                   <v-select
+                    full-width
                     class="select mt-5"
                     item-text="text"
                     item-value="text"
@@ -357,7 +321,7 @@
               </tr>
             </tbody>
           </template>
-        </v-simple-table>
+        </SimpleTable>
       </v-container>
       <v-container>
         <v-row no-gutters class="pt-10">
@@ -433,14 +397,17 @@
 import { mapActions, mapGetters } from 'vuex'
 import mock from './mock'
 import Header from '../../components/Header/HeaderComponent.vue'
+import SimpleTable from '../../components/Table/SimpleTable/SimpleTableComponent.vue'
 export default {
     name: "CreateInstruction",
     components:{
-      Header
+      Header,
+      SimpleTable
     },
     data(){
         return{
         mock,
+        HeadersName: ['Description','QTY','UOM','Unit Price','Discount (%)','GST/VAT (%)','Currency','VAT Amount','Sub Total','Total','Charge To'],
         vendor_name:'',
         attention_of:'',
         quotation_no:'',
@@ -511,7 +478,6 @@ export default {
         formData.append('attachment', this.attachment);
         console.log(this.attachment);
         await this.AddDataInstruction(formData);
-        this.$router.push('/instruction');
       },
       ...mapActions('instruction',['AddDataInstruction'])
     }
@@ -531,11 +497,5 @@ export default {
 .line {
   border: 1px dashed;
   border-color: grey;
-}
-.text-2rem td div {
-  font-size: 0.7rem;
-}
-.text-2rem td {
-  font-size: 0.7rem;
 }
 </style>
