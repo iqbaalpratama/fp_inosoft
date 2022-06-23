@@ -14,20 +14,21 @@ class Instruction extends Model
 
     protected $fillable = [
         'instruction_type',
-        'associates.vendor_name',
-        'associates.vendor_addres',
+        'associates_vendor_name',
+        'associates_vendor_addres',
         'attention_of',
         'quatation_no',
         'invoice.name',
         'invoice.status',
-        'associates.customer_contract',
-        'associates.customer_po_no',
+        'associates_customer_contract',
+        'associates_customer_po_no',
         'desc',
         'qty',
         'uom',
         'unit_price',
         'disc',
         'tax',
+        'curenncy',
         'invoice.total',
         'charge',
         'notes',
@@ -35,6 +36,11 @@ class Instruction extends Model
         'link'
 
     ];
+
+    public function attachments()
+    {
+        return $this->embedsOne(Attachment::class);
+    }
 
     
 }

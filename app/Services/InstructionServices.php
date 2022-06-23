@@ -2,44 +2,68 @@
 
 namespace App\Services;
 
-use App\Repositories\InstructionRepository;
-use Illuminate\Support\Facades\Validator;
+use App\Repositories as Repository;
+use App\Traits\Instruction;
+use App\Traits\validateInstruction;
+use Illuminate\Support\Facades\Validator ;
 use InvalidArgumentException;
 
 class InstructionServices
 {
     protected $instructionRepository;
+    protected $updateInstructionRepository;
+    protected $createInstructionRepository;
+    use validateInstruction;
 
-    public function __construct(InstructionRepository $instructionRepository)
+    public function __construct
+    (
+        Repository\InstructionRepository $instructionRepository,
+        Repository\CreateInstructionRepository $createInstructionRepository,
+        Repository\UpdateInstructionRepository $updateInstructionRepository 
+    )
     {
         $this->instructionRepository = $instructionRepository;
+        $this->createInstructionRepository = $createInstructionRepository;
+        $this->updateInstructionRepository = $updateInstructionRepository;
     }
+
+    public function getById($id)
+    {
+        return $this->instructionRepository->getById($id);
+    }
+
 
     public function saveInstruction($data)
     {
+        $this->validate($data);
+        $result = $this->createInstructionRepository->create($data);
 
+        return $result;
+    }
+
+    public function editInstruction($id,$data)
+    {
+        $this->validate($data);
+        $result = $this->updateInstructionRepository->update($id, $data);
+
+        return $result;
+    }
+
+    public function getAll()
+    {
+        return $this->instructionRepository->getAll();
+    }
+
+
+    public function reciveInvoice()
+    {
+        # code...
+    }
+
+    public function terminateInstruction($data, $id){
         $validator = Validator::make($data,[
-            'instruction_type' => 'required',
-            'associates.vendor_name' => 'required',
-            'associates.vendor_addres' => 'required',
-            'attention_of' => 'required',
-            'quatation_no' => 'required',
-            'invoice.name' => 'required',
-            'invoice.status',
-            'associates.customer_contract'=>'required',
-            'associates.customer_po_no'=>'required',
-            'desc' => 'required',
-            'qty' => 'required',
-            'uom' => 'required',
-            'unit_price' => 'required',
-            'disc',
-            'tax',
-            'invoice.total',
-            'charge' => 'required',
-            'notes',
-            'attachtment' => 'required|mimes:doc,docx,pdf,txt,csv|max:2048',
-            'link' => 'required'
-
+            'attachtment' => 'mimes:doc,docx,pdf,txt,csv|max:2048',
+            'cancel_reason'
         ]);
         
 
@@ -48,8 +72,9 @@ class InstructionServices
         }
 
 
-        $result = $this->instructionRepository->addInstruction($data);
+        $result = $this->instructionRepository->terminateInstruction($data, $id);
 
         return $result;
     }
+
 }

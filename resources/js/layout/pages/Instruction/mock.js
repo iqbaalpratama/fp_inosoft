@@ -6,13 +6,23 @@ export default {
                 align: 'start',
                 sortable: true,
                 value: 'instruction_id',
+                class:'secondary white--text'
             },
-            { text: 'Link To', value: 'link_to' },
-            { text: 'Intruction Type', value: 'intruction_type' },
-            { text: 'Assigned Vendor', value: 'assigned_vendor' },
-            { text: 'Attention Of', value: 'attention_of' },
-            { text: 'Quotation No', value: 'quotation_no' },
-            { text: 'Customer PO', value: 'customer_po' },
+            { text: 'Link To', value: 'link',
+            class:'secondary white--text' },
+            { text: 'Intruction Type', value: 'intruction_type',
+            class:'secondary white--text' },
+            { text: 'Assigned Vendor', value: 'assigned_vendor',
+            class:'secondary white--text' },
+            { text: 'Attention Of', value: 'attention_of',
+            class:'secondary white--text' },
+            { text: 'Quotation No', value: 'quotation_no',
+            class:'secondary white--text' },
+            { text: 'Customer PO', value: 'customer_po_no',
+            class:'secondary white--text' },
+            { text: 'Status', value: 'status',
+            class:'secondary white--text' },
+            
             
         ],
         invoice_detail: [
@@ -24,6 +34,7 @@ export default {
                 attention_of: "Rigrep Transportation",
                 quotation_no: "MITME-ADL-001",
                 customer_po: "PO01",
+                status: "complete"
 
             },
             {

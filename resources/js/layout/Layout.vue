@@ -1,6 +1,6 @@
 <template>
   <v-app class="pa-6">
-    <Header />
+    <Navbar />
     <v-main class="content">
       <router-view />
     </v-main>
@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import Header from './components/Header/HeaderComponent.vue';
+import Navbar from './components/Navbar/NavbarComponent.vue';
 
 export default {
     name: 'Layout',
-    components: {Header},
+    components: {Navbar},
 };
 </script>
 <style scoped>
