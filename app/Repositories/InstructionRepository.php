@@ -25,6 +25,7 @@ class InstructionRepository
        
         return $instruction->map(function ($instruction,$i)  {
             return [
+                'id' => $instruction->_id,
                 'instruction_id'=> $instruction->instruction_type.("-").date("Y").("-").str_pad( $i+=1, 4, "0", STR_PAD_LEFT),
                 'link' => $instruction->link,
                 'intruction_type' => $instruction->instruction_type,
@@ -39,9 +40,7 @@ class InstructionRepository
 
     public function getById($id)
     {
-        $instruction = $this->instruction->all()->where('_id',$id);
-
-        // dd(array_keys($instruction->modelKeys()));
+        $instruction = $this->instruction::where('_id', $id)->get();
         return $instruction->map(function ($instruction,$i)  {
             return [
                     'id' => $instruction->_id,
@@ -51,7 +50,7 @@ class InstructionRepository
                     'attention_of' => $instruction->attention_of,
                     'quotation_no' => $instruction->quatation_no,
                     'invoice_to' =>	$instruction->invoice_name,
-                    'vendor_address' =>	$instruction->associates_vendor_addres,
+                    'vendor_address' =>	$instruction->associates_vendor_address,
                     'customer_contract' => $instruction->associates_customer_contract,
                     'customer_po_no' => $instruction->associates_customer_po_no,
                     'cost_detail'=>[
@@ -68,7 +67,7 @@ class InstructionRepository
                         'charge_to' => $instruction->charge,
                     ],
                     'notes' => $instruction->notes,
-                    'attachtment' => $instruction->attachtment,
+                    'attachment' => $instruction->attachment,
                     'link' => $instruction->link,
                     'invoice_status' => $instruction->invoice_status,
             ];
@@ -82,7 +81,9 @@ class InstructionRepository
     {        
         $instruction = $this->instruction->find($id);
         if ($instruction->invoice_status == "Cancelled") {
-            throw new Exception("can't receieve invoice");
+            throw new Exception("Can't Receieve Invoice");
+        }else if($instruction->invoice_status == "Completed"){
+            throw new Exception("Invoice Has Been Received");
         }
         $instruction->invoice_status = "Completed";
         $instruction->update();
@@ -93,9 +94,10 @@ class InstructionRepository
     public function terminateInstruction($id,$data)
     {
         $instruction = $this->instruction->find($id);
-        dd($instruction);
         if ($instruction->invoice_status == "Completed") {
-            throw new Exception("can't Completed");
+            throw new Exception("Can't Terminated Invoice If Status Completed");
+        }else if($instruction->invoice_status == "Cancelled"){
+            throw new Exception("Invoice Has Been Terminated");
         }
         $attachment = new AttachmentRepository();
         $attachment->createMany($data,"terminate");

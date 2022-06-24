@@ -24,7 +24,20 @@ const actions = {
     },
 
     AddDataInstruction({dispatch},data){
-        InstructionService.Store(data).then(
+        return new Promise((resolve, reject) => {
+            InstructionService.Store(data).then(
+                response => {
+                    resolve(response);
+                    dispatch('getAllInstruction')
+                },
+                error => {
+                    reject(error);
+                }
+            );
+        })
+    },
+    ReceiveInvoice({dispatch},data){
+        InstructionService.receiveInvoice(data).then(
             response => {
                 console.log(response);
             },
@@ -32,7 +45,18 @@ const actions = {
                 console.log(error);
             }
         );
-        dispatch('getAllInstruction')
+    },
+    EditDataInstruction({dispatch},{id,data}){
+        InstructionService.UpdateInvoice(id,data).then(
+            response => {
+                console.log(response);
+                console.log('Update Berhasil')
+                dispatch('getAllInstruction')
+            },
+            error => {
+                console.log(error);
+            }
+        );
     }
 };
 const getters = {
