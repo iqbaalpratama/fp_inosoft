@@ -19,7 +19,7 @@ class CreateInstructionRepository
         $instruction->attention_of = $data['attention_of'];
         $instruction->quatation_no = $data['quatation_no'];
         $instruction->invoice_name = $data['invoice_name'];
-        $instruction->invoice_status = "in proggres";
+        $instruction->invoice_status = "In Progress";
         $instruction->associates_customer_contract = $data['associates_customer_contract'];
         $instruction->associates_customer_po_no = $data['associates_customer_po_no'];
         $instruction->desc = $data['desc'];
