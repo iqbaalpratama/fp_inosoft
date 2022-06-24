@@ -57,10 +57,10 @@
                         Description
                       </v-subheader>
                       <v-textarea
-                        readonly
                         outlined
                         name="input-7-4"
                         background-color="grey lighten-5"
+                        v-model="TerminatedForm.description"
                       ></v-textarea>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -69,7 +69,7 @@
                       >
                         Attachment
                       </v-subheader>
-                      <v-file-input label="File input"></v-file-input>
+                      <v-file-input v-model="TerminatedForm.attachment" label="File input"></v-file-input>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -86,7 +86,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
-                  @click="dialogTerminated = false"
+                  @click="SaveTerminated()"
                 >
                   Save
                 </v-btn>
@@ -346,7 +346,11 @@ export default {
           attachment: '',
           supporting_document: 0,
         },
-        StatusChecker: ''
+        StatusChecker: '',
+        TerminatedForm: {
+          attachment: null,
+          description: ''
+        }
         }
     },
     async mounted(){
@@ -458,6 +462,20 @@ export default {
           this.desserts.push(this.editedItem)
         }
         this.close()
+      },
+      SaveTerminated(){
+        let formData = new FormData()
+        formData.append('attachment', this.TerminatedForm.attachment);
+        formData.append('cancel_reason', this.TerminatedForm.description);
+        InstructionService.terminatedInvoice(this.$route.params.id,formData).then(
+            response => {
+                this.getData();
+                this.dialogTerminated = false
+            },
+            error => {
+                console.log(error);
+            }
+      );
       },
       async receiveInvoice(){
         await this.ReceiveInvoice(this.$route.params.id);

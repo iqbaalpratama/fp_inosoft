@@ -14,5 +14,11 @@ class InstructionService{
     getDetail(id){
         return axios.get(API_URL + 'getdetail_instruction/' + id);
     }
+    receiveInvoice(id){
+        return axios.post(API_URL + 'receieve_invoice/'+ id );
+    }
+    terminatedInvoice(id,data){
+        return axios.post(API_URL + 'cancel-instruction/' + id , data);
+    }
 }
 export default new InstructionService();
