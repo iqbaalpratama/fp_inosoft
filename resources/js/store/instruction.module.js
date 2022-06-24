@@ -24,15 +24,17 @@ const actions = {
     },
 
     AddDataInstruction({dispatch},data){
-        InstructionService.Store(data).then(
-            response => {
-                console.log(response);
-            },
-            error => {
-                console.log(error);
-            }
-        );
-        dispatch('getAllInstruction')
+        return new Promise((resolve, reject) => {
+            InstructionService.Store(data).then(
+                response => {
+                    resolve(response);
+                    dispatch('getAllInstruction')
+                },
+                error => {
+                    reject(error);
+                }
+            );
+        })
     },
     ReceiveInvoice({dispatch},data){
         InstructionService.receiveInvoice(data).then(
