@@ -43,6 +43,18 @@ const actions = {
                 console.log(error);
             }
         );
+    },
+    EditDataInstruction({dispatch},{id,data}){
+        InstructionService.UpdateInvoice(id,data).then(
+            response => {
+                console.log(response);
+                console.log('Update Berhasil')
+                dispatch('getAllInstruction')
+            },
+            error => {
+                console.log(error);
+            }
+        );
     }
 };
 const getters = {
