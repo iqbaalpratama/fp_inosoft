@@ -2,7 +2,9 @@
 namespace App\Repositories;
 
 use App\Models\Instruction;
+use Exception;
 
+use function PHPUnit\Framework\throwException;
 
 class InstructionRepository
 {
@@ -19,10 +21,11 @@ class InstructionRepository
 
     public function getAll()
     {
-        $instruction = $this->instruction::all();
+        $instruction = $this->instruction->all();
        
         return $instruction->map(function ($instruction,$i)  {
             return [
+                'id' => $instruction->_id,
                 'instruction_id'=> $instruction->instruction_type.("-").date("Y").("-").str_pad( $i+=1, 4, "0", STR_PAD_LEFT),
                 'link' => $instruction->link,
                 'intruction_type' => $instruction->instruction_type,
@@ -38,16 +41,16 @@ class InstructionRepository
     public function getById($id)
     {
         $instruction = $this->instruction::where('_id', $id)->get();
-
-        return $instruction->map(function ($instruction)  {
+        return $instruction->map(function ($instruction,$i)  {
             return [
                     'id' => $instruction->_id,
+                    'instruction_id'=> $instruction->instruction_type.("-").date("Y").("-").str_pad( $i+1, 4, "0", STR_PAD_LEFT),
                     'intruction_type' => $instruction->instruction_type,
                     'assigned_vendor' => $instruction->associates_vendor_name,
                     'attention_of' => $instruction->attention_of,
                     'quotation_no' => $instruction->quatation_no,
                     'invoice_to' =>	$instruction->invoice_name,
-                    'vendor_address' =>	$instruction->associates_vendor_addres,
+                    'vendor_address' =>	$instruction->associates_vendor_address,
                     'customer_contract' => $instruction->associates_customer_contract,
                     'customer_po_no' => $instruction->associates_customer_po_no,
                     'cost_detail'=>[
@@ -64,7 +67,7 @@ class InstructionRepository
                         'charge_to' => $instruction->charge,
                     ],
                     'notes' => $instruction->notes,
-                    // 'attachtment' => $instruction->attachtment,
+                    'attachment' => $instruction->attachment,
                     'link' => $instruction->link,
                     'invoice_status' => $instruction->invoice_status,
             ];
@@ -72,24 +75,38 @@ class InstructionRepository
         
     }
 
-    public function reciveInvoice($id)
-    {
-        
+    
+
+    public function receieveInvoice($id)
+    {        
         $instruction = $this->instruction->find($id);
+        if ($instruction->invoice_status == "Cancelled") {
+            throw new Exception("Can't Receieve Invoice");
+        }else if($instruction->invoice_status == "Completed"){
+            throw new Exception("Invoice Has Been Received");
+        }
         $instruction->invoice_status = "Completed";
         $instruction->update();
         return $instruction;
     }
 
 
-    public function terminateInstruction($data, $id)
+    public function terminateInstruction($id,$data)
     {
         $instruction = $this->instruction->find($id);
-        $instruction->status = "Cancelled";
-        $instruction->cancel_reason = $data['reason'];
+        if ($instruction->invoice_status == "Completed") {
+            throw new Exception("Can't Terminated Invoice If Status Completed");
+        }else if($instruction->invoice_status == "Cancelled"){
+            throw new Exception("Invoice Has Been Terminated");
+        }
+        $attachment = new AttachmentRepository();
+        $attachment->createMany($data,"terminate");
+        $instruction->invoice_status = "Cancelled";
+        $instruction->cancel_reason = $data['cancel_reason'] ? $data['cancel_reason'] : "";
         $instruction->update();
         return $instruction;
     }   
 
+   
 }
 

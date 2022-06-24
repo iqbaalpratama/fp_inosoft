@@ -327,7 +327,7 @@
         <v-row no-gutters class="pt-10">
           <v-col cols="5" class="pr-7">
             <h3>Attachment</h3>
-            <v-file-input label="File input" v-model="data.attachtment"></v-file-input>
+            <v-file-input label="File input" v-model="data.attachment"></v-file-input>
           </v-col>
           <v-col cols="7">
             <h3 class="pb-2">Notes</h3>
@@ -395,6 +395,7 @@
 </template>
 <script>
 import mock from './mock'
+import { mapActions} from 'vuex'
 import InstructionService from '../../../services/instruction.service'
 import SimpleTable from '../../components/Table/SimpleTable/SimpleTableComponent.vue'
 import ChipStatus from '../../components/Chip/ChipStatusComponent.vue'
@@ -475,10 +476,32 @@ export default {
       },
       submit(){
         let formData = new FormData();
-        Object.entries(this.data).forEach(([key, value]) => {
-            formData.append(key, value);   
-        });      
+        formData.append('associates_vendor_name',this.data.assigned_vendor);
+        formData.append('associates_vendor_address',this.data.vendor_address);
+        formData.append('attention_of',this.data.attention_of);
+        formData.append('quatation_no',this.data.quotation_no);
+        formData.append('invoice_name',this.data.invoice_to);
+        formData.append('associates_customer_contract',this.data.customer_contract);
+        formData.append('associates_customer_po_no', this.data.customer_po_no);
+
+        formData.append('desc', this.data.cost_detail.description);
+        formData.append('qty', this.data.cost_detail.quantity);
+        formData.append('uom', this.data.cost_detail.uom);
+        formData.append('unit_price', this.data.cost_detail.unit_price);
+        formData.append('disc', this.data.cost_detail.discount);
+        formData.append('tax', this.data.cost_detail.gst_vat);
+        formData.append('curenncy', this.data.cost_detail.currency);
+        formData.append('link',this.data.link);
+        formData.append('charge', this.data.cost_detail.charge_to);
+        formData.append('invoice_total', this.Total);
+        formData.append('notes', this.data.notes);
+        formData.append('attachment', this.data.attachment);
+        this.EditDataInstruction({
+          id: this.$route.params.id,
+          data: formData
+        })
       },
+      ...mapActions('instruction',['EditDataInstruction'])
     }
 }
 </script>

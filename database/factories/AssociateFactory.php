@@ -17,7 +17,6 @@ class AssociateFactory extends Factory
             'vendor_name' => $this->faker->name(),
             'vendor_address' => [
                 $this->faker->address(),
-                $this->faker->address()
             ]
         ];
     }

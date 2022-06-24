@@ -2204,7 +2204,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('instruction', ['FilteredDataInstruction'])), {}, {
     dataInstructions: function dataInstructions() {
-      return this.FilteredDataInstruction('Completed');
+      return this.FilteredDataInstruction('Completed', 'Cancelled');
     }
   }),
   mounted: function mounted() {
@@ -2326,7 +2326,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('instruction', ['FilteredDataInstruction'])), {}, {
     dataInstructions: function dataInstructions() {
-      return this.FilteredDataInstruction('draft', 'in progress');
+      return this.FilteredDataInstruction('Draft', 'In Progress');
     }
   }),
   mounted: function mounted() {
@@ -2609,20 +2609,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Header/HeaderComponent.vue */ "./resources/js/layout/components/Header/HeaderComponent.vue");
 /* harmony import */ var _components_Table_SimpleTable_SimpleTableComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Table/SimpleTable/SimpleTableComponent.vue */ "./resources/js/layout/components/Table/SimpleTable/SimpleTableComponent.vue");
 /* harmony import */ var _components_Chip_ChipStatusComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Chip/ChipStatusComponent.vue */ "./resources/js/layout/components/Chip/ChipStatusComponent.vue");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3038,6 +3051,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       mock: _mock__WEBPACK_IMPORTED_MODULE_0__["default"],
+      Rules: {
+        numberRule: [],
+        textRule: [],
+        selectRule: []
+      },
       HeadersName: ['Description', 'QTY', 'UOM', 'Unit Price', 'Discount (%)', 'GST/VAT (%)', 'Currency', 'VAT Amount', 'Sub Total', 'Total', 'Charge To'],
       vendor_name: '',
       attention_of: '',
@@ -3050,8 +3068,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       quantity: '0',
       UOM: 'SHP',
       UnitPrice: '0',
-      discount: 0,
-      GSTVAT: 0,
+      discount: '0',
+      GSTVAT: '0',
       Currency: '',
       ChargeTo: '',
       LinkTo: '',
@@ -3123,46 +3141,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$router.push('/instruction');
     },
     submit: function submit() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var formData;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                formData = new FormData();
-                formData.append('instruction_type', _this.TypeInstruction);
-                formData.append('associates_vendor_name', _this.vendor_name);
-                formData.append('associates_vendor_address', _this.vendor_address);
-                formData.append('attention_of', _this.attention_of);
-                formData.append('quatation_no', _this.quotation_no);
-                formData.append('invoice_name', _this.invoice_to);
-                formData.append('associates_customer_contract', _this.customer_contract);
-                formData.append('associates_customer_po_no', _this.customer_po_no);
-                formData.append('desc', _this.description);
-                formData.append('qty', _this.quantity);
-                formData.append('uom', _this.UOM);
-                formData.append('unit_price', _this.UnitPrice);
-                formData.append('disc', _this.discount);
-                formData.append('tax', _this.GSTVAT);
-                formData.append('curenncy', _this.Currency);
-                formData.append('link', _this.LinkTo);
-                formData.append('charge', _this.ChargeTo);
-                formData.append('invoice_total', _this.Total);
-                formData.append('notes', _this.notes);
-                formData.append('attachment', _this.attachment);
-                console.log(_this.attachment);
-                _context.next = 24;
-                return _this.AddDataInstruction(formData);
-
-              case 24:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      this.Rules = {
+        numberRule: [function (v) {
+          return !!v || 'Field is required';
+        }, function (v) {
+          return /^\d+$/.test(v) || 'Must be a number';
+        }],
+        textRule: [function (v) {
+          return !!v || 'Field is required';
+        }],
+        selectRule: [function (v) {
+          return !!v || 'Select Option is required';
+        }]
+      };
+      var self = this;
+      setTimeout(function () {
+        if (self.$refs.InstructionForm.validate()) {
+          var formData = new FormData();
+          formData.append('instruction_type', self.TypeInstruction);
+          formData.append('associates_vendor_name', self.vendor_name);
+          formData.append('associates_vendor_address', self.vendor_address);
+          formData.append('attention_of', self.attention_of);
+          formData.append('quatation_no', self.quotation_no);
+          formData.append('invoice_name', self.invoice_to);
+          formData.append('associates_customer_contract', self.customer_contract);
+          formData.append('associates_customer_po_no', self.customer_po_no);
+          formData.append('desc', self.description);
+          formData.append('qty', self.quantity);
+          formData.append('uom', self.UOM);
+          formData.append('unit_price', self.UnitPrice);
+          formData.append('disc', self.discount);
+          formData.append('tax', self.GSTVAT);
+          formData.append('curenncy', self.Currency);
+          formData.append('link', self.LinkTo);
+          formData.append('charge', self.ChargeTo);
+          formData.append('invoice_total', self.Total);
+          formData.append('notes', self.notes);
+          formData.append('attachment', self.attachment);
+          console.log(self.attachment);
+          self.AddDataInstruction(formData).then(function (response) {
+            console.log(response);
+            self.$router.push('/instruction');
+          }, function (error) {
+            console.error("Error");
+          });
+        }
+      });
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('instruction', ['AddDataInstruction']))
 });
@@ -3554,7 +3578,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         attachment: '',
         supporting_document: 0
       },
-      StatusChecker: ''
+      StatusChecker: '',
+      TerminatedForm: {
+        attachment: null,
+        description: ''
+      }
     };
   },
   mounted: function mounted() {
@@ -3594,7 +3622,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     'data.invoice_status': function dataInvoice_status(newValue) {
       var status = newValue.toUpperCase();
 
-      if (status == 'COMPLETED') {
+      if (status == 'COMPLETED' || status == 'CANCELLED') {
         this.StatusChecker = false;
       } else {
         this.StatusChecker = true;
@@ -3678,8 +3706,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.close();
     },
-    receiveInvoice: function receiveInvoice() {
+    SaveTerminated: function SaveTerminated() {
       var _this5 = this;
+
+      var formData = new FormData();
+      formData.append('attachment', this.TerminatedForm.attachment);
+      formData.append('cancel_reason', this.TerminatedForm.description);
+      _services_instruction_service__WEBPACK_IMPORTED_MODULE_0__["default"].terminatedInvoice(this.$route.params.id, formData).then(function (response) {
+        _this5.getData();
+
+        _this5.dialogTerminated = false;
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    receiveInvoice: function receiveInvoice() {
+      var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -3687,12 +3729,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this5.ReceiveInvoice(_this5.$route.params.id);
+                return _this6.ReceiveInvoice(_this6.$route.params.id);
 
               case 2:
                 _context2.next = 4;
-                return _this5.getData().then(function (response) {
-                  _this5.data = response.data.data[0];
+                return _this6.getData().then(function (response) {
+                  _this6.data = response.data.data[0];
                 }, function (error) {
                   console.log(error);
                 });
@@ -3786,21 +3828,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _mock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mock */ "./resources/js/layout/pages/ModifyInstruction/mock.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _services_instruction_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/instruction.service */ "./resources/js/services/instruction.service.js");
 /* harmony import */ var _components_Table_SimpleTable_SimpleTableComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Table/SimpleTable/SimpleTableComponent.vue */ "./resources/js/layout/components/Table/SimpleTable/SimpleTableComponent.vue");
 /* harmony import */ var _components_Chip_ChipStatusComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Chip/ChipStatusComponent.vue */ "./resources/js/layout/components/Chip/ChipStatusComponent.vue");
 /* harmony import */ var _components_Header_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Header/HeaderComponent.vue */ "./resources/js/layout/components/Header/HeaderComponent.vue");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -4197,6 +4234,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+
 
 
 
@@ -4269,7 +4307,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       return this.Subtotal + this.VATAmount;
     }
   },
-  methods: {
+  methods: _objectSpread({
     initializeData: function initializeData() {
       var _this = this;
 
@@ -4293,15 +4331,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     submit: function submit() {
       var formData = new FormData();
-      Object.entries(this.data).forEach(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            key = _ref2[0],
-            value = _ref2[1];
-
-        formData.append(key, value);
+      formData.append('associates_vendor_name', this.data.assigned_vendor);
+      formData.append('associates_vendor_address', this.data.vendor_address);
+      formData.append('attention_of', this.data.attention_of);
+      formData.append('quatation_no', this.data.quotation_no);
+      formData.append('invoice_name', this.data.invoice_to);
+      formData.append('associates_customer_contract', this.data.customer_contract);
+      formData.append('associates_customer_po_no', this.data.customer_po_no);
+      formData.append('desc', this.data.cost_detail.description);
+      formData.append('qty', this.data.cost_detail.quantity);
+      formData.append('uom', this.data.cost_detail.uom);
+      formData.append('unit_price', this.data.cost_detail.unit_price);
+      formData.append('disc', this.data.cost_detail.discount);
+      formData.append('tax', this.data.cost_detail.gst_vat);
+      formData.append('curenncy', this.data.cost_detail.currency);
+      formData.append('link', this.data.link);
+      formData.append('charge', this.data.cost_detail.charge_to);
+      formData.append('invoice_total', this.Total);
+      formData.append('notes', this.data.notes);
+      formData.append('attachment', this.data.attachment);
+      this.EditDataInstruction({
+        id: this.$route.params.id,
+        data: formData
       });
     }
-  }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapActions)('instruction', ['EditDataInstruction']))
 });
 
 /***/ }),
@@ -4778,22 +4832,32 @@ var InstructionService = /*#__PURE__*/function () {
   _createClass(InstructionService, [{
     key: "getAll",
     value: function getAll() {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default().get(API_URL + 'instruction');
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().get(API_URL + 'getall_instruction');
     }
   }, {
     key: "Store",
     value: function Store(data) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default().post(API_URL + 'instruction', data);
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post(API_URL + 'create_instruction', data);
+    }
+  }, {
+    key: "UpdateInvoice",
+    value: function UpdateInvoice(id, data) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post(API_URL + 'update_instruction/' + id, data);
     }
   }, {
     key: "getDetail",
     value: function getDetail(id) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default().get(API_URL + 'instruction/' + id);
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().get(API_URL + 'getdetail_instruction/' + id);
     }
   }, {
     key: "receiveInvoice",
     value: function receiveInvoice(id) {
-      return axios__WEBPACK_IMPORTED_MODULE_0___default().put(API_URL + 'reciveInvocie/' + id);
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post(API_URL + 'receieve_invoice/' + id);
+    }
+  }, {
+    key: "terminatedInvoice",
+    value: function terminatedInvoice(id, data) {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post(API_URL + 'cancel-instruction/' + id, data);
     }
   }]);
 
@@ -4862,17 +4926,31 @@ var actions = {
   },
   AddDataInstruction: function AddDataInstruction(_ref2, data) {
     var dispatch = _ref2.dispatch;
-    _services_instruction_service__WEBPACK_IMPORTED_MODULE_0__["default"].Store(data).then(function (response) {
-      console.log(response);
-    }, function (error) {
-      console.log(error);
+    return new Promise(function (resolve, reject) {
+      _services_instruction_service__WEBPACK_IMPORTED_MODULE_0__["default"].Store(data).then(function (response) {
+        resolve(response);
+        dispatch('getAllInstruction');
+      }, function (error) {
+        reject(error);
+      });
     });
-    dispatch('getAllInstruction');
   },
   ReceiveInvoice: function ReceiveInvoice(_ref3, data) {
     var dispatch = _ref3.dispatch;
     _services_instruction_service__WEBPACK_IMPORTED_MODULE_0__["default"].receiveInvoice(data).then(function (response) {
       console.log(response);
+    }, function (error) {
+      console.log(error);
+    });
+  },
+  EditDataInstruction: function EditDataInstruction(_ref4, _ref5) {
+    var dispatch = _ref4.dispatch;
+    var id = _ref5.id,
+        data = _ref5.data;
+    _services_instruction_service__WEBPACK_IMPORTED_MODULE_0__["default"].UpdateInvoice(id, data).then(function (response) {
+      console.log(response);
+      console.log('Update Berhasil');
+      dispatch('getAllInstruction');
     }, function (error) {
       console.log(error);
     });
@@ -10050,494 +10128,534 @@ var render = function () {
       }),
       _vm._v(" "),
       _c(
-        "v-card",
-        { staticClass: "pa-3" },
+        "v-form",
+        { ref: "InstructionForm" },
         [
           _c(
-            "v-container",
-            { staticClass: "container-custom" },
+            "v-card",
+            { staticClass: "pa-3" },
             [
               _c(
-                "v-row",
-                { staticClass: "pa-1", attrs: { "no-gutters": "" } },
+                "v-container",
+                { staticClass: "container-custom" },
                 [
                   _c(
-                    "v-col",
-                    { attrs: { cols: "2" } },
-                    [
-                      _c("v-select", {
-                        staticClass: "select",
-                        attrs: {
-                          items: _vm.mock.InvoiceInstruction.TypeInstruction,
-                          "item-text": "name",
-                          "item-value": "id",
-                          dense: "",
-                          outlined: "",
-                          "item-color": "black",
-                          color: "black",
-                          "background-color": "grey lighten-4",
-                        },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "selection",
-                            fn: function (data) {
-                              return [
-                                _c(
-                                  "v-icon",
-                                  {
-                                    attrs: {
-                                      left: "",
-                                      size: "20",
-                                      color: "primary",
-                                    },
-                                  },
-                                  [_vm._v(_vm._s(data.item.icon))]
-                                ),
-                                _vm._v(
-                                  "\n              " +
-                                    _vm._s(data.item.name) +
-                                    "\n            "
-                                ),
-                              ]
-                            },
-                          },
-                          {
-                            key: "item",
-                            fn: function (data) {
-                              return [
-                                _c(
-                                  "v-list-item-icon",
-                                  { staticStyle: { "margin-right": "0" } },
-                                  [
-                                    _c(
-                                      "v-icon",
-                                      { attrs: { left: "", color: "primary" } },
-                                      [_vm._v(_vm._s(data.item.icon))]
-                                    ),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item-content",
-                                  [
-                                    _c("v-list-item-title", {
-                                      domProps: {
-                                        textContent: _vm._s(data.item.name),
-                                      },
-                                    }),
-                                  ],
-                                  1
-                                ),
-                              ]
-                            },
-                          },
-                        ]),
-                        model: {
-                          value: _vm.TypeInstruction,
-                          callback: function ($$v) {
-                            _vm.TypeInstruction = $$v
-                          },
-                          expression: "TypeInstruction",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "10" } },
+                    "v-row",
+                    { staticClass: "pa-1", attrs: { "no-gutters": "" } },
                     [
                       _c(
-                        "v-row",
-                        { attrs: { "no-gutters": "" } },
+                        "v-col",
+                        { attrs: { cols: "2" } },
+                        [
+                          _c("v-select", {
+                            staticClass: "select",
+                            attrs: {
+                              items:
+                                _vm.mock.InvoiceInstruction.TypeInstruction,
+                              "item-text": "name",
+                              "item-value": "id",
+                              rules: _vm.Rules.selectRule,
+                              dense: "",
+                              outlined: "",
+                              "item-color": "black",
+                              color: "black",
+                              "background-color": "grey lighten-4",
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "selection",
+                                fn: function (data) {
+                                  return [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        attrs: {
+                                          left: "",
+                                          size: "20",
+                                          color: "primary",
+                                        },
+                                      },
+                                      [_vm._v(_vm._s(data.item.icon))]
+                                    ),
+                                    _vm._v(
+                                      "\n                " +
+                                        _vm._s(data.item.name) +
+                                        "\n              "
+                                    ),
+                                  ]
+                                },
+                              },
+                              {
+                                key: "item",
+                                fn: function (data) {
+                                  return [
+                                    _c(
+                                      "v-list-item-icon",
+                                      { staticStyle: { "margin-right": "0" } },
+                                      [
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            attrs: {
+                                              left: "",
+                                              color: "primary",
+                                            },
+                                          },
+                                          [_vm._v(_vm._s(data.item.icon))]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-list-item-content",
+                                      [
+                                        _c("v-list-item-title", {
+                                          domProps: {
+                                            textContent: _vm._s(data.item.name),
+                                          },
+                                        }),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                            model: {
+                              value: _vm.TypeInstruction,
+                              callback: function ($$v) {
+                                _vm.TypeInstruction = $$v
+                              },
+                              expression: "TypeInstruction",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "10" } },
                         [
                           _c(
-                            "v-col",
-                            {
-                              staticClass: "text-right pb-3",
-                              attrs: { cols: "12" },
-                            },
-                            [_c("ChipStatus", { attrs: { status: "Draft" } })],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
+                            "v-row",
+                            { attrs: { "no-gutters": "" } },
                             [
                               _c(
-                                "v-row",
-                                { attrs: { "no-gutters": "" } },
+                                "v-col",
+                                {
+                                  staticClass: "text-right pb-3",
+                                  attrs: { cols: "12" },
+                                },
+                                [
+                                  _c("ChipStatus", {
+                                    attrs: { status: "Draft" },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-col",
+                                { attrs: { cols: "12" } },
                                 [
                                   _c(
-                                    "v-col",
-                                    { attrs: { cols: "9" } },
+                                    "v-row",
+                                    { attrs: { "no-gutters": "" } },
                                     [
                                       _c(
-                                        "v-row",
-                                        { attrs: { "no-gutters": "" } },
+                                        "v-col",
+                                        { attrs: { cols: "9" } },
                                         [
                                           _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "3" },
-                                            },
+                                            "v-row",
+                                            { attrs: { "no-gutters": "" } },
                                             [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "3" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Assigned Vendor\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Assigned Vendor\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-select", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Select Vendor",
+                                                      items:
+                                                        _vm.mock
+                                                          .InvoiceInstruction
+                                                          .vendor_name,
+                                                      rules:
+                                                        _vm.Rules.selectRule,
+                                                      dense: "",
+                                                      outlined: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value: _vm.vendor_name,
+                                                      callback: function ($$v) {
+                                                        _vm.vendor_name = $$v
+                                                      },
+                                                      expression: "vendor_name",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
                                               _vm._v(" "),
-                                              _c("v-select", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder: "Select Vendor",
-                                                  items:
-                                                    _vm.mock.InvoiceInstruction
-                                                      .vendor_name,
-                                                  dense: "",
-                                                  outlined: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.vendor_name,
-                                                  callback: function ($$v) {
-                                                    _vm.vendor_name = $$v
-                                                  },
-                                                  expression: "vendor_name",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "3" },
-                                            },
-                                            [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "3" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Attention Of\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Attention Of\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-text-field", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Enter Attention Of",
+                                                      outlined: "",
+                                                      rules: _vm.Rules.textRule,
+                                                      dense: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value: _vm.attention_of,
+                                                      callback: function ($$v) {
+                                                        _vm.attention_of = $$v
+                                                      },
+                                                      expression:
+                                                        "attention_of",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
                                               _vm._v(" "),
-                                              _c("v-text-field", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder:
-                                                    "Enter Attention Of",
-                                                  outlined: "",
-                                                  dense: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.attention_of,
-                                                  callback: function ($$v) {
-                                                    _vm.attention_of = $$v
-                                                  },
-                                                  expression: "attention_of",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "3" },
-                                            },
-                                            [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "3" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Quotation No.\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Quotation No.\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-text-field", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Enter Quotation",
+                                                      outlined: "",
+                                                      rules: _vm.Rules.textRule,
+                                                      dense: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value: _vm.quotation_no,
+                                                      callback: function ($$v) {
+                                                        _vm.quotation_no = $$v
+                                                      },
+                                                      expression:
+                                                        "quotation_no",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
                                               _vm._v(" "),
-                                              _c("v-text-field", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder:
-                                                    "Enter Quotation",
-                                                  outlined: "",
-                                                  dense: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.quotation_no,
-                                                  callback: function ($$v) {
-                                                    _vm.quotation_no = $$v
-                                                  },
-                                                  expression: "quotation_no",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "3" },
-                                            },
-                                            [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "3" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Invoice To\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Invoice To\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-select", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Select an Option",
+                                                      items:
+                                                        _vm.mock
+                                                          .InvoiceInstruction
+                                                          .invoice_to,
+                                                      "item-text": "text",
+                                                      rules:
+                                                        _vm.Rules.selectRule,
+                                                      dense: "",
+                                                      outlined: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value: _vm.invoice_to,
+                                                      callback: function ($$v) {
+                                                        _vm.invoice_to = $$v
+                                                      },
+                                                      expression: "invoice_to",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
                                               _vm._v(" "),
-                                              _c("v-select", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder:
-                                                    "Select an Option",
-                                                  items:
-                                                    _vm.mock.InvoiceInstruction
-                                                      .invoice_to,
-                                                  "item-text": "text",
-                                                  dense: "",
-                                                  outlined: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.invoice_to,
-                                                  callback: function ($$v) {
-                                                    _vm.invoice_to = $$v
-                                                  },
-                                                  expression: "invoice_to",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "12" },
-                                            },
-                                            [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "12" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Vendor Address\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Vendor Address\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-select", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Select Vendor Address",
+                                                      items:
+                                                        _vm.mock
+                                                          .InvoiceInstruction
+                                                          .vendor_address,
+                                                      dense: "",
+                                                      rules:
+                                                        _vm.Rules.selectRule,
+                                                      outlined: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value: _vm.vendor_address,
+                                                      callback: function ($$v) {
+                                                        _vm.vendor_address = $$v
+                                                      },
+                                                      expression:
+                                                        "vendor_address",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
-                                              _vm._v(" "),
-                                              _c("v-select", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder:
-                                                    "Select Vendor Address",
-                                                  items:
-                                                    _vm.mock.InvoiceInstruction
-                                                      .vendor_address,
-                                                  dense: "",
-                                                  outlined: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.vendor_address,
-                                                  callback: function ($$v) {
-                                                    _vm.vendor_address = $$v
-                                                  },
-                                                  expression: "vendor_address",
-                                                },
-                                              }),
                                             ],
                                             1
                                           ),
                                         ],
                                         1
                                       ),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-divider", {
-                                    staticStyle: {
-                                      border: "1px dashed #bdbdbd",
-                                    },
-                                    attrs: { vertical: "" },
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-col",
-                                    { attrs: { cols: "3" } },
-                                    [
+                                      _vm._v(" "),
+                                      _c("v-divider", {
+                                        staticStyle: {
+                                          border: "1px dashed #bdbdbd",
+                                        },
+                                        attrs: { vertical: "" },
+                                      }),
+                                      _vm._v(" "),
                                       _c(
-                                        "v-row",
-                                        { attrs: { "no-gutters": "" } },
+                                        "v-col",
+                                        { attrs: { cols: "3" } },
                                         [
                                           _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "12" },
-                                            },
+                                            "v-row",
+                                            { attrs: { "no-gutters": "" } },
                                             [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "12" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Customer - Contract\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Customer - Contract\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-select", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      rules:
+                                                        _vm.Rules.selectRule,
+                                                      placeholder:
+                                                        "Select Customer",
+                                                      items:
+                                                        _vm.mock
+                                                          .InvoiceInstruction
+                                                          .customer_contract,
+                                                      dense: "",
+                                                      outlined: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.customer_contract,
+                                                      callback: function ($$v) {
+                                                        _vm.customer_contract =
+                                                          $$v
+                                                      },
+                                                      expression:
+                                                        "customer_contract",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
                                               _vm._v(" "),
-                                              _c("v-select", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder:
-                                                    "Select Customer",
-                                                  items:
-                                                    _vm.mock.InvoiceInstruction
-                                                      .customer_contract,
-                                                  dense: "",
-                                                  outlined: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.customer_contract,
-                                                  callback: function ($$v) {
-                                                    _vm.customer_contract = $$v
-                                                  },
-                                                  expression:
-                                                    "customer_contract",
-                                                },
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { cols: "12" },
-                                            },
-                                            [
                                               _c(
-                                                "v-subheader",
+                                                "v-col",
                                                 {
-                                                  staticStyle: {
-                                                    height: "20px",
-                                                    "font-size": "0.75rem",
-                                                    padding: "0",
-                                                  },
+                                                  staticClass: "pa-2",
+                                                  attrs: { cols: "12" },
                                                 },
                                                 [
-                                                  _vm._v(
-                                                    "\n                        Customer PO No.\n                      "
+                                                  _c(
+                                                    "v-subheader",
+                                                    {
+                                                      staticStyle: {
+                                                        height: "20px",
+                                                        "font-size": "0.75rem",
+                                                        padding: "0",
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                          Customer PO No.\n                        "
+                                                      ),
+                                                    ]
                                                   ),
-                                                ]
+                                                  _vm._v(" "),
+                                                  _c("v-text-field", {
+                                                    staticClass: "select",
+                                                    attrs: {
+                                                      rules: _vm.Rules.textRule,
+                                                      placeholder:
+                                                        "Enter Customer PO No.",
+                                                      outlined: "",
+                                                      dense: "",
+                                                      "item-color": "black",
+                                                      color: "black",
+                                                      "background-color":
+                                                        "grey lighten-4",
+                                                    },
+                                                    model: {
+                                                      value: _vm.customer_po_no,
+                                                      callback: function ($$v) {
+                                                        _vm.customer_po_no = $$v
+                                                      },
+                                                      expression:
+                                                        "customer_po_no",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
                                               ),
-                                              _vm._v(" "),
-                                              _c("v-text-field", {
-                                                staticClass: "select",
-                                                attrs: {
-                                                  placeholder:
-                                                    "Enter Customer PO No.",
-                                                  outlined: "",
-                                                  dense: "",
-                                                  "item-color": "black",
-                                                  color: "black",
-                                                  "background-color":
-                                                    "grey lighten-4",
-                                                },
-                                                model: {
-                                                  value: _vm.customer_po_no,
-                                                  callback: function ($$v) {
-                                                    _vm.customer_po_no = $$v
-                                                  },
-                                                  expression: "customer_po_no",
-                                                },
-                                              }),
                                             ],
                                             1
                                           ),
@@ -10562,356 +10680,372 @@ var render = function () {
                 ],
                 1
               ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-container",
-            { staticClass: "container-custom" },
-            [
-              _c("h2", [_vm._v("Cost Detail")]),
               _vm._v(" "),
-              _c("SimpleTable", {
-                attrs: { headertable: _vm.HeadersName },
-                scopedSlots: _vm._u([
-                  {
-                    key: "body",
-                    fn: function () {
-                      return [
-                        _c("tbody", [
-                          _c("tr", { staticClass: "text-2rem" }, [
-                            _c(
-                              "td",
-                              { staticClass: "pa-2" },
-                              [
-                                _c("v-text-field", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    placeholder: "Enter Description",
-                                    outlined: "",
-                                    dense: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.description,
-                                    callback: function ($$v) {
-                                      _vm.description = $$v
-                                    },
-                                    expression: "description",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-text-field", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    placeholder: "Enter QTY",
-                                    outlined: "",
-                                    dense: "",
-                                    type: "number",
-                                    "item-color": "black",
-                                    color: "black",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.quantity,
-                                    callback: function ($$v) {
-                                      _vm.quantity = $$v
-                                    },
-                                    expression: "quantity",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-select", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    "full-width": "",
-                                    "item-text": "text",
-                                    "item-value": "text",
-                                    items: _vm.mock.InvoiceInstruction.ItemsUOM,
-                                    dense: "",
-                                    outlined: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.UOM,
-                                    callback: function ($$v) {
-                                      _vm.UOM = $$v
-                                    },
-                                    expression: "UOM",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-text-field", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    placeholder: "Enter Unit Price",
-                                    outlined: "",
-                                    dense: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.UnitPrice,
-                                    callback: function ($$v) {
-                                      _vm.UnitPrice = $$v
-                                    },
-                                    expression: "UnitPrice",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-text-field", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    outlined: "",
-                                    dense: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    type: "number",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.discount,
-                                    callback: function ($$v) {
-                                      _vm.discount = $$v
-                                    },
-                                    expression: "discount",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-text-field", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    outlined: "",
-                                    dense: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    type: "number",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.GSTVAT,
-                                    callback: function ($$v) {
-                                      _vm.GSTVAT = $$v
-                                    },
-                                    expression: "GSTVAT",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-select", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    placeholder: "Enter Customer PO",
-                                    items:
-                                      _vm.mock.InvoiceInstruction.ItemsCurrency,
-                                    "item-text": "text",
-                                    "item-value": "text",
-                                    dense: "",
-                                    outlined: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.Currency,
-                                    callback: function ($$v) {
-                                      _vm.Currency = $$v
-                                    },
-                                    expression: "Currency",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.VATAmount))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.Subtotal))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.Total))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("v-select", {
-                                  staticClass: "select mt-5",
-                                  attrs: {
-                                    placeholder: "Enter Customer PO",
-                                    items:
-                                      _vm.mock.InvoiceInstruction.ItemsCharge,
-                                    "item-text": "text",
-                                    "item-value": "text",
-                                    dense: "",
-                                    outlined: "",
-                                    "item-color": "black",
-                                    color: "black",
-                                    "background-color": "grey lighten-4",
-                                  },
-                                  model: {
-                                    value: _vm.ChargeTo,
-                                    callback: function ($$v) {
-                                      _vm.ChargeTo = $$v
-                                    },
-                                    expression: "ChargeTo",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c(
-                              "td",
-                              {
-                                staticClass: "text-left",
-                                attrs: { colspan: "6" },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                Exchange Rate 1 USD = 3.6725 AED\n              "
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("td", [_c("div", [_vm._v("AED (Total)")])]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.CurrencyTotal.AED.tax)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.CurrencyTotal.AED.subtotal)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.CurrencyTotal.AED.total)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td"),
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", {
-                              staticClass: "text-left",
-                              attrs: { colspan: "6" },
-                            }),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("USD (Total)")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.CurrencyTotal.USD.tax)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.CurrencyTotal.USD.subtotal)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.CurrencyTotal.USD.total)),
-                            ]),
-                            _vm._v(" "),
-                            _c("td"),
-                          ]),
-                        ]),
-                      ]
-                    },
-                    proxy: true,
-                  },
-                ]),
-              }),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-container",
-            [
               _c(
-                "v-row",
-                { staticClass: "pt-10", attrs: { "no-gutters": "" } },
+                "v-container",
+                { staticClass: "container-custom" },
+                [
+                  _c("h2", [_vm._v("Cost Detail")]),
+                  _vm._v(" "),
+                  _c("SimpleTable", {
+                    attrs: { headertable: _vm.HeadersName },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "body",
+                        fn: function () {
+                          return [
+                            _c("tbody", [
+                              _c("tr", { staticClass: "text-2rem" }, [
+                                _c(
+                                  "td",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        placeholder: "Enter Description",
+                                        outlined: "",
+                                        rules: _vm.Rules.textRule,
+                                        dense: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.description,
+                                        callback: function ($$v) {
+                                          _vm.description = $$v
+                                        },
+                                        expression: "description",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        rules: _vm.Rules.numberRule,
+                                        placeholder: "Enter QTY",
+                                        outlined: "",
+                                        dense: "",
+                                        type: "number",
+                                        "item-color": "black",
+                                        color: "black",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.quantity,
+                                        callback: function ($$v) {
+                                          _vm.quantity = $$v
+                                        },
+                                        expression: "quantity",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-select", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        "full-width": "",
+                                        "item-text": "text",
+                                        "item-value": "text",
+                                        rules: _vm.Rules.selectRule,
+                                        items:
+                                          _vm.mock.InvoiceInstruction.ItemsUOM,
+                                        dense: "",
+                                        outlined: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.UOM,
+                                        callback: function ($$v) {
+                                          _vm.UOM = $$v
+                                        },
+                                        expression: "UOM",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        rules: _vm.Rules.numberRule,
+                                        placeholder: "Enter Unit Price",
+                                        outlined: "",
+                                        dense: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.UnitPrice,
+                                        callback: function ($$v) {
+                                          _vm.UnitPrice = $$v
+                                        },
+                                        expression: "UnitPrice",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        rules: _vm.Rules.numberRule,
+                                        outlined: "",
+                                        dense: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        type: "number",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.discount,
+                                        callback: function ($$v) {
+                                          _vm.discount = $$v
+                                        },
+                                        expression: "discount",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        outlined: "",
+                                        rules: _vm.Rules.numberRule,
+                                        dense: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        type: "number",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.GSTVAT,
+                                        callback: function ($$v) {
+                                          _vm.GSTVAT = $$v
+                                        },
+                                        expression: "GSTVAT",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-select", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        placeholder: "Enter Customer PO",
+                                        rules: _vm.Rules.selectRule,
+                                        items:
+                                          _vm.mock.InvoiceInstruction
+                                            .ItemsCurrency,
+                                        "item-text": "text",
+                                        "item-value": "text",
+                                        dense: "",
+                                        outlined: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.Currency,
+                                        callback: function ($$v) {
+                                          _vm.Currency = $$v
+                                        },
+                                        expression: "Currency",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.VATAmount))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.Subtotal))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.Total))]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-select", {
+                                      staticClass: "select mt-5",
+                                      attrs: {
+                                        placeholder: "Enter Customer PO",
+                                        items:
+                                          _vm.mock.InvoiceInstruction
+                                            .ItemsCharge,
+                                        "item-text": "text",
+                                        "item-value": "text",
+                                        rules: _vm.Rules.selectRule,
+                                        dense: "",
+                                        outlined: "",
+                                        "item-color": "black",
+                                        color: "black",
+                                        "background-color": "grey lighten-4",
+                                      },
+                                      model: {
+                                        value: _vm.ChargeTo,
+                                        callback: function ($$v) {
+                                          _vm.ChargeTo = $$v
+                                        },
+                                        expression: "ChargeTo",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "text-left",
+                                    attrs: { colspan: "6" },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                  Exchange Rate 1 USD = 3.6725 AED\n                "
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("td", [_c("div", [_vm._v("AED (Total)")])]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.CurrencyTotal.AED.tax)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.CurrencyTotal.AED.subtotal)
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.CurrencyTotal.AED.total)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td"),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", {
+                                  staticClass: "text-left",
+                                  attrs: { colspan: "6" },
+                                }),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("USD (Total)")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.CurrencyTotal.USD.tax)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.CurrencyTotal.USD.subtotal)
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.CurrencyTotal.USD.total)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td"),
+                              ]),
+                            ]),
+                          ]
+                        },
+                        proxy: true,
+                      },
+                    ]),
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-container",
                 [
                   _c(
-                    "v-col",
-                    { staticClass: "pr-7", attrs: { cols: "5" } },
+                    "v-row",
+                    { staticClass: "pt-10", attrs: { "no-gutters": "" } },
                     [
-                      _c("h3", [_vm._v("Attachment")]),
+                      _c(
+                        "v-col",
+                        { staticClass: "pr-7", attrs: { cols: "5" } },
+                        [
+                          _c("h3", [_vm._v("Attachment")]),
+                          _vm._v(" "),
+                          _c("v-file-input", {
+                            attrs: { label: "File input" },
+                            model: {
+                              value: _vm.attachment,
+                              callback: function ($$v) {
+                                _vm.attachment = $$v
+                              },
+                              expression: "attachment",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
-                      _c("v-file-input", {
-                        attrs: { label: "File input" },
-                        model: {
-                          value: _vm.attachment,
-                          callback: function ($$v) {
-                            _vm.attachment = $$v
-                          },
-                          expression: "attachment",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "7" } },
-                    [
-                      _c("h3", { staticClass: "pb-2" }, [_vm._v("Notes")]),
-                      _vm._v(" "),
-                      _c("v-textarea", {
-                        attrs: {
-                          outlined: "",
-                          name: "input-7-4",
-                          "background-color": "grey lighten-5",
-                        },
-                        model: {
-                          value: _vm.notes,
-                          callback: function ($$v) {
-                            _vm.notes = $$v
-                          },
-                          expression: "notes",
-                        },
-                      }),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "7" } },
+                        [
+                          _c("h3", { staticClass: "pb-2" }, [_vm._v("Notes")]),
+                          _vm._v(" "),
+                          _c("v-textarea", {
+                            attrs: {
+                              rules: _vm.Rules.textRule,
+                              outlined: "",
+                              name: "input-7-4",
+                              "background-color": "grey lighten-5",
+                            },
+                            model: {
+                              value: _vm.notes,
+                              callback: function ($$v) {
+                                _vm.notes = $$v
+                              },
+                              expression: "notes",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
                     ],
                     1
                   ),
@@ -10921,115 +11055,122 @@ var render = function () {
             ],
             1
           ),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("v-card", { staticClass: "pa-3 mt-5" }, [
-        _c(
-          "div",
-          { staticStyle: { width: "50%" } },
-          [
+          _vm._v(" "),
+          _c("v-card", { staticClass: "pa-3 mt-5" }, [
             _c(
-              "v-subheader",
-              {
-                staticStyle: {
-                  height: "20px",
-                  "font-size": "0.75rem",
-                  padding: "0",
-                },
-              },
-              [_vm._v("\n        Link To\n      ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "v-row",
-              { attrs: { "no-gutters": "" } },
+              "div",
+              { staticStyle: { width: "50%" } },
               [
                 _c(
-                  "v-col",
-                  { attrs: { cols: "9" } },
-                  [
-                    _c("v-select", {
-                      staticClass: "select",
-                      attrs: {
-                        placeholder: "Select Item",
-                        items: _vm.mock.InvoiceInstruction.ItemsLink,
-                        "item-text": "text",
-                        "item-value": "text",
-                        dense: "",
-                        outlined: "",
-                        "item-color": "black",
-                        color: "black",
-                        "background-color": "grey lighten-4",
-                      },
-                      model: {
-                        value: _vm.LinkTo,
-                        callback: function ($$v) {
-                          _vm.LinkTo = $$v
-                        },
-                        expression: "LinkTo",
-                      },
-                    }),
-                  ],
-                  1
+                  "v-subheader",
+                  {
+                    staticStyle: {
+                      height: "20px",
+                      "font-size": "0.75rem",
+                      padding: "0",
+                    },
+                  },
+                  [_vm._v("\n          Link To\n        ")]
                 ),
                 _vm._v(" "),
                 _c(
-                  "v-col",
-                  { staticClass: "pl-2", attrs: { cols: "3" } },
+                  "v-row",
+                  { attrs: { "no-gutters": "" } },
                   [
-                    (_vm.LinkTo !== "" ? true : false)
-                      ? _c(
-                          "v-btn",
-                          {
-                            attrs: { depressed: "", color: "error" },
-                            on: { click: _vm.removeLink },
+                    _c(
+                      "v-col",
+                      { attrs: { cols: "9" } },
+                      [
+                        _c("v-select", {
+                          staticClass: "select",
+                          attrs: {
+                            rules: _vm.Rules.selectRule,
+                            placeholder: "Select Item",
+                            items: _vm.mock.InvoiceInstruction.ItemsLink,
+                            "item-text": "text",
+                            "item-value": "text",
+                            dense: "",
+                            outlined: "",
+                            "item-color": "black",
+                            color: "black",
+                            "background-color": "grey lighten-4",
                           },
-                          [_vm._v("\n            Remove Link\n          ")]
-                        )
-                      : _vm._e(),
+                          model: {
+                            value: _vm.LinkTo,
+                            callback: function ($$v) {
+                              _vm.LinkTo = $$v
+                            },
+                            expression: "LinkTo",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-col",
+                      { staticClass: "pl-2", attrs: { cols: "3" } },
+                      [
+                        (_vm.LinkTo !== "" ? true : false)
+                          ? _c(
+                              "v-btn",
+                              {
+                                attrs: { depressed: "", color: "error" },
+                                on: { click: _vm.removeLink },
+                              },
+                              [
+                                _vm._v(
+                                  "\n              Remove Link\n            "
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                      ],
+                      1
+                    ),
                   ],
                   1
                 ),
               ],
               1
             ),
-          ],
-          1
-        ),
-      ]),
-      _vm._v(" "),
-      _c("v-card", { staticClass: "pa-5 mt-5" }, [
-        _c(
-          "div",
-          { staticStyle: { width: "100%", "text-align": "right" } },
-          [
-            _c("v-btn", { attrs: { text: "" }, on: { click: _vm.cancel } }, [
-              _vm._v(" Cancel"),
-            ]),
-            _vm._v(" "),
+          ]),
+          _vm._v(" "),
+          _c("v-card", { staticClass: "pa-5 mt-5" }, [
             _c(
-              "v-btn",
-              {
-                staticClass: "ma-2",
-                attrs: { outlined: "", color: "grey darken-2" },
-              },
-              [_vm._v("\n        Save as Draft\n      ")]
+              "div",
+              { staticStyle: { width: "100%", "text-align": "right" } },
+              [
+                _c(
+                  "v-btn",
+                  { attrs: { text: "" }, on: { click: _vm.cancel } },
+                  [_vm._v(" Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    staticClass: "ma-2",
+                    attrs: { outlined: "", color: "grey darken-2" },
+                  },
+                  [_vm._v("\n          Save as Draft\n        ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { depressed: "", color: "primary" },
+                    on: { click: _vm.submit },
+                  },
+                  [_vm._v(" Submit ")]
+                ),
+              ],
+              1
             ),
-            _vm._v(" "),
-            _c(
-              "v-btn",
-              {
-                attrs: { depressed: "", color: "primary" },
-                on: { click: _vm.submit },
-              },
-              [_vm._v(" Submit ")]
-            ),
-          ],
-          1
-        ),
-      ]),
+          ]),
+        ],
+        1
+      ),
     ],
     1
   )
@@ -11268,11 +11409,24 @@ var render = function () {
                                               _vm._v(" "),
                                               _c("v-textarea", {
                                                 attrs: {
-                                                  readonly: "",
                                                   outlined: "",
                                                   name: "input-7-4",
                                                   "background-color":
                                                     "grey lighten-5",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.TerminatedForm
+                                                      .description,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.TerminatedForm,
+                                                      "description",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "TerminatedForm.description",
                                                 },
                                               }),
                                             ],
@@ -11301,6 +11455,20 @@ var render = function () {
                                               _vm._v(" "),
                                               _c("v-file-input", {
                                                 attrs: { label: "File input" },
+                                                model: {
+                                                  value:
+                                                    _vm.TerminatedForm
+                                                      .attachment,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.TerminatedForm,
+                                                      "attachment",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "TerminatedForm.attachment",
+                                                },
                                               }),
                                             ],
                                             1
@@ -11349,7 +11517,7 @@ var render = function () {
                                       },
                                       on: {
                                         click: function ($event) {
-                                          _vm.dialogTerminated = false
+                                          return _vm.SaveTerminated()
                                         },
                                       },
                                     },
@@ -13157,11 +13325,11 @@ var render = function () {
                       _c("v-file-input", {
                         attrs: { label: "File input" },
                         model: {
-                          value: _vm.data.attachtment,
+                          value: _vm.data.attachment,
                           callback: function ($$v) {
-                            _vm.$set(_vm.data, "attachtment", $$v)
+                            _vm.$set(_vm.data, "attachment", $$v)
                           },
-                          expression: "data.attachtment",
+                          expression: "data.attachment",
                         },
                       }),
                     ],
@@ -28533,14 +28701,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VContainer.js");
 /* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/VDivider.js");
 /* harmony import */ var vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VFileInput */ "./node_modules/vuetify/lib/components/VFileInput/VFileInput.js");
-/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/VIcon.js");
-/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
-/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/VListItemIcon.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VRow.js");
-/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/VSelect.js");
-/* harmony import */ var vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuetify/lib/components/VSubheader */ "./node_modules/vuetify/lib/components/VSubheader/VSubheader.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/VTextField.js");
-/* harmony import */ var vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vuetify/lib/components/VTextarea */ "./node_modules/vuetify/lib/components/VTextarea/VTextarea.js");
+/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/VForm.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/VIcon.js");
+/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
+/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/VListItemIcon.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VRow.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/VSelect.js");
+/* harmony import */ var vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuetify/lib/components/VSubheader */ "./node_modules/vuetify/lib/components/VSubheader/VSubheader.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/VTextField.js");
+/* harmony import */ var vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vuetify/lib/components/VTextarea */ "./node_modules/vuetify/lib/components/VTextarea/VTextarea.js");
 
 
 
@@ -28577,7 +28746,8 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__["default"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["default"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["default"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["default"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["default"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["default"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["default"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__.VListItemContent,VListItemIcon: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_13__["default"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_12__.VListItemTitle,VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_14__["default"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_15__["default"],VSubheader: vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_16__["default"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_17__["default"],VTextarea: vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_18__["default"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_4___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_5__["default"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["default"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["default"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["default"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["default"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["default"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_11__["default"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_12__["default"],VListItemContent: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_13__.VListItemContent,VListItemIcon: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_14__["default"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_13__.VListItemTitle,VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_15__["default"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_16__["default"],VSubheader: vuetify_lib_components_VSubheader__WEBPACK_IMPORTED_MODULE_17__["default"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_18__["default"],VTextarea: vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_19__["default"]})
 
 
 /* hot reload */
@@ -33258,6 +33428,157 @@ __webpack_require__.r(__webpack_exports__);
   }
 }));
 //# sourceMappingURL=VFileInput.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuetify/lib/components/VForm/VForm.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuetify/lib/components/VForm/VForm.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/mixins */ "./node_modules/vuetify/lib/util/mixins.js");
+/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/binds-attrs */ "./node_modules/vuetify/lib/mixins/binds-attrs/index.js");
+/* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/registrable */ "./node_modules/vuetify/lib/mixins/registrable/index.js");
+// Mixins
+
+
+
+/* @vue/component */
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_util_mixins__WEBPACK_IMPORTED_MODULE_0__["default"])(_mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__["default"], (0,_mixins_registrable__WEBPACK_IMPORTED_MODULE_2__.provide)('form')
+/* @vue/component */
+).extend({
+  name: 'v-form',
+
+  provide() {
+    return {
+      form: this
+    };
+  },
+
+  inheritAttrs: false,
+  props: {
+    disabled: Boolean,
+    lazyValidation: Boolean,
+    readonly: Boolean,
+    value: Boolean
+  },
+  data: () => ({
+    inputs: [],
+    watchers: [],
+    errorBag: {}
+  }),
+  watch: {
+    errorBag: {
+      handler(val) {
+        const errors = Object.values(val).includes(true);
+        this.$emit('input', !errors);
+      },
+
+      deep: true,
+      immediate: true
+    }
+  },
+  methods: {
+    watchInput(input) {
+      const watcher = input => {
+        return input.$watch('hasError', val => {
+          this.$set(this.errorBag, input._uid, val);
+        }, {
+          immediate: true
+        });
+      };
+
+      const watchers = {
+        _uid: input._uid,
+        valid: () => {},
+        shouldValidate: () => {}
+      };
+
+      if (this.lazyValidation) {
+        // Only start watching inputs if we need to
+        watchers.shouldValidate = input.$watch('shouldValidate', val => {
+          if (!val) return; // Only watch if we're not already doing it
+
+          if (this.errorBag.hasOwnProperty(input._uid)) return;
+          watchers.valid = watcher(input);
+        });
+      } else {
+        watchers.valid = watcher(input);
+      }
+
+      return watchers;
+    },
+
+    /** @public */
+    validate() {
+      return this.inputs.filter(input => !input.validate(true)).length === 0;
+    },
+
+    /** @public */
+    reset() {
+      this.inputs.forEach(input => input.reset());
+      this.resetErrorBag();
+    },
+
+    resetErrorBag() {
+      if (this.lazyValidation) {
+        // Account for timeout in validatable
+        setTimeout(() => {
+          this.errorBag = {};
+        }, 0);
+      }
+    },
+
+    /** @public */
+    resetValidation() {
+      this.inputs.forEach(input => input.resetValidation());
+      this.resetErrorBag();
+    },
+
+    register(input) {
+      this.inputs.push(input);
+      this.watchers.push(this.watchInput(input));
+    },
+
+    unregister(input) {
+      const found = this.inputs.find(i => i._uid === input._uid);
+      if (!found) return;
+      const unwatch = this.watchers.find(i => i._uid === found._uid);
+
+      if (unwatch) {
+        unwatch.valid();
+        unwatch.shouldValidate();
+      }
+
+      this.watchers = this.watchers.filter(i => i._uid !== found._uid);
+      this.inputs = this.inputs.filter(i => i._uid !== found._uid);
+      this.$delete(this.errorBag, found._uid);
+    }
+
+  },
+
+  render(h) {
+    return h('form', {
+      staticClass: 'v-form',
+      attrs: {
+        novalidate: true,
+        ...this.attrs$
+      },
+      on: {
+        submit: e => this.$emit('submit', e)
+      }
+    }, this.$slots.default);
+  }
+
+}));
+//# sourceMappingURL=VForm.js.map
 
 /***/ }),
 
