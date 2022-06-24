@@ -41,7 +41,7 @@ export default {
     computed: {
         ...mapGetters('instruction',['FilteredDataInstruction']),
         dataInstructions(){
-          return this.FilteredDataInstruction('Completed');
+          return this.FilteredDataInstruction('Completed','Cancelled');
         }
     },
     mounted(){

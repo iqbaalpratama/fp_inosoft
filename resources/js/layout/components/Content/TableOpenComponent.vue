@@ -80,7 +80,7 @@ export default {
     computed: {
         ...mapGetters('instruction',['FilteredDataInstruction']),
         dataInstructions(){
-          return this.FilteredDataInstruction('draft','in progress');
+          return this.FilteredDataInstruction('Draft','In Progress');
         },
 
     },

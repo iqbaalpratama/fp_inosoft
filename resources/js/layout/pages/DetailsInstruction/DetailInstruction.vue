@@ -371,7 +371,7 @@ export default {
       },
       'data.invoice_status'(newValue){
           let status = newValue.toUpperCase()
-          if(status == 'COMPLETED'){
+          if(status == 'COMPLETED' || status == 'CANCELLED'){
             this.StatusChecker = false
           }else{
             this.StatusChecker = true
